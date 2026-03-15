@@ -197,6 +197,26 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2re
 
 /* NEW BADGE */
 .new-badge{background:var(--accent3);color:#000;font-family:'DM Mono',monospace;font-size:.6rem;font-weight:500;padding:1px 6px;border-radius:4px;vertical-align:middle;margin-left:6px;}
+
+/* EXPANDABLE TOPIC CARDS */
+.topic-card{cursor:pointer;user-select:none;}
+.topic-card:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(0,229,255,.08);}
+.topic-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;}
+.topic-expand-icon{color:var(--accent);font-size:.85rem;flex-shrink:0;margin-top:2px;transition:transform .3s;font-family:'DM Mono',monospace;}
+.topic-card.expanded .topic-expand-icon{transform:rotate(45deg);}
+.topic-card.expanded{border-color:var(--accent);background:rgba(0,229,255,.03);}
+.topic-details{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);animation:expandIn .25s ease;}
+.topic-card.expanded .topic-details{display:block;}
+@keyframes expandIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+.detail-section{margin-bottom:.85rem;}
+.detail-section:last-child{margin-bottom:0;}
+.detail-label{font-family:'DM Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.35rem;}
+.detail-points{list-style:none;padding:0;}
+.detail-points li{font-size:.83rem;color:var(--text2);line-height:1.6;padding:.2rem 0 .2rem 1rem;position:relative;}
+.detail-points li::before{content:'›';position:absolute;left:0;color:var(--accent);font-weight:700;}
+.detail-points li strong{color:var(--text);}
+.exam-tip{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:.65rem .85rem;font-size:.82rem;color:var(--accent3);line-height:1.55;margin-top:.75rem;}
+.exam-tip::before{content:'🎯 Exam Tip: ';font-weight:600;}
 </style>
 </head>
 <body>
@@ -211,7 +231,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2re
       <li><a href="#domains">Study Guide</a></li>
       <li><a href="#cheatsheet">Cheat Sheet</a></li>
       <li><a href="#practice">Practice Tests</a></li>
-      <li><a href="cissp-flashcards.html">🃏 Flashcards</a></li>
     </ul>
     <div><span class="nav-badge">2024 Updated</span></div>
   </div>
@@ -398,65 +417,127 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2re
         </div>
       </div>
       <div class="topics-grid">
-        <div class="topic-card">
-          <h4>🔒 CIA Triad & Security Concepts</h4>
-          <p>Confidentiality (prevent unauthorized disclosure), Integrity (prevent unauthorized modification), Availability (ensure authorized access). Also: Authenticity, Non-repudiation, Privacy.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔒 CIA Triad & Security Concepts</h4><span class="topic-expand-icon">+</span></div>
+          <p>Confidentiality, Integrity, Availability — the three pillars of information security.</p>
           <div class="topic-tags"><span class="topic-tag">Foundational</span><span class="topic-tag">Always Tested</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Points</div><ul class="detail-points"><li><strong>Confidentiality</strong> — prevent unauthorized disclosure. Controls: encryption, access control, classification.</li><li><strong>Integrity</strong> — prevent unauthorized modification. Controls: hashing, digital signatures, version control.</li><li><strong>Availability</strong> — ensure authorized access when needed. Controls: redundancy, backups, DDoS protection.</li><li><strong>Non-repudiation</strong> — cannot deny performing an action. Achieved via digital signatures.</li><li><strong>Authenticity</strong> — verifying identity is genuine. Beyond just authentication.</li></ul></div>
+            <div class="exam-tip">CISSP questions often ask which CIA component is violated. Disclosure = Confidentiality. Modification = Integrity. Denial of access = Availability.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>⚖️ Security Governance</h4>
-          <p>Aligning security with business strategy. Policies → Standards → Guidelines → Procedures hierarchy. Security function must support mission/goals. Board-level oversight, due care vs due diligence.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>⚖️ Security Governance</h4><span class="topic-expand-icon">+</span></div>
+          <p>Aligning security with business strategy through policies, standards, and oversight.</p>
           <div class="topic-tags"><span class="topic-tag">Management</span><span class="topic-tag">High Priority</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Policy Hierarchy</div><ul class="detail-points"><li><strong>Policy</strong> — high-level management statements of intent. Mandatory.</li><li><strong>Standards</strong> — specific mandatory requirements supporting policies.</li><li><strong>Guidelines</strong> — recommended but optional best practices.</li><li><strong>Procedures</strong> — step-by-step instructions to implement policies.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Key Concepts</div><ul class="detail-points"><li><strong>Due Care</strong> — doing what a reasonable person would do (minimum standard).</li><li><strong>Due Diligence</strong> — ongoing research to maintain due care.</li><li><strong>Board oversight</strong> — security must align with business mission and goals.</li></ul></div>
+            <div class="exam-tip">Security function exists to SUPPORT the business — not the other way around. Always choose the answer that aligns security with business objectives.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>📊 Risk Management</h4>
-          <p>Risk = Threat × Vulnerability × Asset Value. Risk responses: Accept, Transfer, Avoid, Mitigate. Qualitative (subjective) vs Quantitative (ALE=ARO×SLE). Risk appetite vs risk tolerance.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📊 Risk Management</h4><span class="topic-expand-icon">+</span></div>
+          <p>Identifying, assessing and responding to risks using qualitative or quantitative methods.</p>
           <div class="topic-tags"><span class="topic-tag">Quantitative</span><span class="topic-tag">Core Topic</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Risk Formula</div><ul class="detail-points"><li><strong>Risk = Threat × Vulnerability × Asset Value</strong></li><li><strong>Threat</strong> — anything that can exploit a vulnerability (attacker, fire, flood).</li><li><strong>Vulnerability</strong> — weakness that can be exploited.</li><li><strong>Risk Appetite</strong> — how much risk the org is willing to accept.</li><li><strong>Risk Tolerance</strong> — acceptable variation around risk appetite.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Risk Responses</div><ul class="detail-points"><li><strong>Accept</strong> — acknowledge and live with the risk.</li><li><strong>Transfer</strong> — shift to third party (insurance, contracts).</li><li><strong>Avoid</strong> — eliminate the activity causing the risk.</li><li><strong>Mitigate</strong> — reduce likelihood or impact with controls.</li></ul></div>
+            <div class="exam-tip">Qualitative = subjective (High/Med/Low). Quantitative = dollar values (ALE, SLE). Most orgs use hybrid. Know when to use each.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🧮 Risk Calculations (Quantitative)</h4>
-          <p>SLE = Asset Value × EF. ARO = times per year. ALE = SLE × ARO. Countermeasure value: ALE(before) – ALE(after) – Annual Cost. Essential formulas for the exam.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🧮 Risk Calculations (Quantitative)</h4><span class="topic-expand-icon">+</span></div>
+          <p>Mathematical formulas to calculate financial impact of risks. Must memorize for exam.</p>
           <div class="topic-tags"><span class="topic-tag">Math</span><span class="topic-tag">Memorize</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Core Formulas</div><ul class="detail-points"><li><strong>SLE = Asset Value × Exposure Factor (EF)</strong> — loss from single event.</li><li><strong>ALE = SLE × ARO</strong> — annual expected loss.</li><li><strong>ARO</strong> — Annual Rate of Occurrence (0.5 = once every 2 years).</li><li><strong>EF</strong> — % of asset destroyed in one event (expressed as 0–1).</li><li><strong>Countermeasure Value = ALE(before) – ALE(after) – Annual Cost</strong></li></ul></div>
+            <div class="detail-section"><div class="detail-label">Example</div><ul class="detail-points"><li>Server value: $500K. Fire destroys 40% (EF=0.4). Occurs 0.5×/yr.</li><li>SLE = $500K × 0.4 = <strong>$200,000</strong></li><li>ALE = $200K × 0.5 = <strong>$100,000/year</strong></li></ul></div>
+            <div class="exam-tip">If a control costs less than ALE(before) – ALE(after), it's worth implementing. This is the ROI justification for security spending.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>📜 Legal, Regulations & Compliance</h4>
-          <p>GDPR, HIPAA, SOX, PCI-DSS, FERPA. Types of laws: Criminal, Civil, Administrative. Intellectual property: Patent, Copyright, Trademark, Trade Secret. Jurisdiction and transborder data flow.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📜 Legal, Regulations & Compliance</h4><span class="topic-expand-icon">+</span></div>
+          <p>Laws, regulations, and IP frameworks that govern information security globally.</p>
           <div class="topic-tags"><span class="topic-tag">Regulatory</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Regulations</div><ul class="detail-points"><li><strong>GDPR</strong> — EU privacy law. 72-hr breach notification. Fines up to 4% global revenue.</li><li><strong>HIPAA</strong> — US healthcare data (PHI). Privacy + Security Rules.</li><li><strong>SOX</strong> — Public companies, financial reporting integrity.</li><li><strong>PCI-DSS</strong> — Payment card data. 12 requirements. Any org processing cards.</li><li><strong>FERPA</strong> — Student education records (US).</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Types of Laws</div><ul class="detail-points"><li><strong>Criminal</strong> — government prosecutes, beyond reasonable doubt, imprisonment.</li><li><strong>Civil (Tort)</strong> — private disputes, preponderance of evidence, monetary damages.</li><li><strong>Administrative</strong> — government agencies, compliance fines.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Intellectual Property</div><ul class="detail-points"><li><strong>Patent</strong> — inventions, 20 years protection.</li><li><strong>Copyright</strong> — creative works, life + 70 years.</li><li><strong>Trademark</strong> — brand identity, renewable indefinitely.</li><li><strong>Trade Secret</strong> — protected indefinitely as long as kept secret.</li></ul></div>
+            <div class="exam-tip">Know which regulation applies to which industry. Healthcare = HIPAA. Finance = GLBA. Public companies = SOX. Any payment card = PCI-DSS.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🏗️ Security Frameworks</h4>
-          <p>NIST CSF (Identify, Protect, Detect, Respond, Recover), ISO 27001/27002, COBIT, ITIL, TOGAF. Know when to apply each. Frameworks provide structure; standards are mandatory.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🏗️ Security Frameworks</h4><span class="topic-expand-icon">+</span></div>
+          <p>Structured approaches to organizing and implementing security programs.</p>
           <div class="topic-tags"><span class="topic-tag">Framework</span><span class="topic-tag">High Priority</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Frameworks</div><ul class="detail-points"><li><strong>NIST CSF</strong> — Identify, Protect, Detect, Respond, Recover. Risk-based, voluntary.</li><li><strong>ISO 27001</strong> — ISMS certification standard (requirements). Auditable.</li><li><strong>ISO 27002</strong> — Code of practice / implementation guide for 27001.</li><li><strong>COBIT</strong> — IT governance and management framework.</li><li><strong>ITIL</strong> — IT service management best practices.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Framework vs Standard</div><ul class="detail-points"><li><strong>Framework</strong> — flexible guidance, adaptable (NIST CSF). Voluntary.</li><li><strong>Standard</strong> — specific mandatory requirements (ISO 27001, PCI-DSS).</li></ul></div>
+            <div class="exam-tip">NIST CSF is the most commonly referenced in CISSP scenarios. Know the 5 functions in order: Identify → Protect → Detect → Respond → Recover.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>👥 Personnel Security</h4>
-          <p>Background checks, NDA, separation of duties, least privilege, mandatory vacation, job rotation. Termination procedures (hostile vs friendly). Employee monitoring and privacy issues.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>👥 Personnel Security</h4><span class="topic-expand-icon">+</span></div>
+          <p>People-focused controls from hiring through termination to reduce insider threats.</p>
           <div class="topic-tags"><span class="topic-tag">HR</span><span class="topic-tag">Operational</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Pre-Employment</div><ul class="detail-points"><li><strong>Background checks</strong> — criminal, credit, employment verification.</li><li><strong>NDA (Non-Disclosure Agreement)</strong> — signed before access granted.</li><li><strong>Employment agreements</strong> — AUP, security responsibilities.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">During Employment</div><ul class="detail-points"><li><strong>Separation of Duties</strong> — no single person controls entire process.</li><li><strong>Least Privilege</strong> — minimum access needed for job function.</li><li><strong>Mandatory Vacation</strong> — detects fraud (someone must cover your role).</li><li><strong>Job Rotation</strong> — cross-training and fraud detection.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Termination</div><ul class="detail-points"><li><strong>Friendly</strong> — exit interview, return assets, disable accounts.</li><li><strong>Hostile</strong> — HR present, escort out, disable access BEFORE notification.</li></ul></div>
+            <div class="exam-tip">For hostile terminations: disable access FIRST, then inform the employee. Sequence matters in exam questions.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🏢 Business Continuity (BCP)</h4>
-          <p>BCP = long-term recovery. BIA identifies critical functions, MTD (Maximum Tolerable Downtime), RTO (Recovery Time Objective), RPO (Recovery Point Objective). Difference: BCP vs DRP.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🏢 Business Continuity (BCP)</h4><span class="topic-expand-icon">+</span></div>
+          <p>Planning to maintain business operations during and after a significant disruption.</p>
           <div class="topic-tags"><span class="topic-tag">BCP/DR</span><span class="topic-tag">High Priority</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">BCP vs DRP</div><ul class="detail-points"><li><strong>BCP</strong> — maintains business operations. Long-term, business-wide scope.</li><li><strong>DRP</strong> — restores IT systems. Tactical, IT-focused. Subset of BCP.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Key Terms</div><ul class="detail-points"><li><strong>BIA (Business Impact Analysis)</strong> — identifies critical functions and their dependencies.</li><li><strong>MTD</strong> — Maximum Tolerable Downtime. Business limit before unacceptable damage.</li><li><strong>RTO</strong> — Recovery Time Objective. How fast must systems be restored. Must be &lt; MTD.</li><li><strong>RPO</strong> — Recovery Point Objective. How much data loss is acceptable (backup frequency).</li><li><strong>WRT</strong> — Work Recovery Time = MTD – RTO.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Recovery Sites</div><ul class="detail-points"><li><strong>Hot Site</strong> — ready immediately, most expensive.</li><li><strong>Warm Site</strong> — hours to activate, medium cost.</li><li><strong>Cold Site</strong> — days/weeks to activate, cheapest.</li></ul></div>
+            <div class="exam-tip">RTO must always be less than MTD. If RTO &gt; MTD, the business cannot survive. BIA is always performed FIRST before writing BCP.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔑 Security Awareness Training</h4>
-          <p>Training vs Education vs Awareness. Social engineering awareness (phishing, pretexting, vishing). Security culture vs compliance culture. Role-based training requirements.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔑 Security Awareness Training</h4><span class="topic-expand-icon">+</span></div>
+          <p>Building a security-conscious workforce through education, training, and awareness.</p>
           <div class="topic-tags"><span class="topic-tag">People</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Awareness vs Training vs Education</div><ul class="detail-points"><li><strong>Awareness</strong> — general security mindset. Posters, reminders. For all employees.</li><li><strong>Training</strong> — specific skills for a role. Hands-on. For practitioners.</li><li><strong>Education</strong> — deep theoretical knowledge. Degrees, certifications. For specialists.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Social Engineering Attacks</div><ul class="detail-points"><li><strong>Phishing</strong> — fraudulent email to steal credentials.</li><li><strong>Vishing</strong> — voice/phone-based phishing.</li><li><strong>Pretexting</strong> — fabricated scenario to manipulate victim.</li><li><strong>Tailgating/Piggybacking</strong> — physical access by following authorized person.</li></ul></div>
+            <div class="exam-tip">Awareness training is the most cost-effective security control. People are always the weakest link. Training programs need regular updates and testing (e.g. simulated phishing).</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🤝 Third-Party Risk</h4>
-          <p>Vendor due diligence, SLAs, right-to-audit clauses, supply chain risk. SCRM (Supply Chain Risk Management). On-site assessments, document reviews, process/policy review.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🤝 Third-Party Risk</h4><span class="topic-expand-icon">+</span></div>
+          <p>Managing security risks from vendors, suppliers, and service providers.</p>
           <div class="topic-tags"><span class="topic-tag">Supply Chain</span><span class="topic-tag">2024 Added</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Controls</div><ul class="detail-points"><li><strong>Vendor due diligence</strong> — security assessments before onboarding.</li><li><strong>SLAs</strong> — Service Level Agreements define security expectations.</li><li><strong>Right-to-audit clause</strong> — contractual right to audit vendor security.</li><li><strong>SCRM</strong> — Supply Chain Risk Management program.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Assessment Methods</div><ul class="detail-points"><li><strong>On-site assessment</strong> — visit vendor facilities.</li><li><strong>Document review</strong> — policies, procedures, certifications (SOC 2, ISO 27001).</li><li><strong>Process/policy review</strong> — examine vendor security practices.</li></ul></div>
+            <div class="exam-tip">Your organization is responsible for data even when a third party handles it. You can transfer risk via contracts but cannot transfer accountability.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔬 Threat Intelligence</h4>
-          <p>Threat actors: Nation-state, hacktivists, insiders, organized crime. STIX/TAXII for sharing. APT characteristics. Threat modeling (STRIDE, PASTA, DREAD). Attack trees.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔬 Threat Intelligence</h4><span class="topic-expand-icon">+</span></div>
+          <p>Understanding threat actors, their capabilities, and how to model and share threat data.</p>
           <div class="topic-tags"><span class="topic-tag">Threat</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Threat Actor Types</div><ul class="detail-points"><li><strong>Nation-state</strong> — most sophisticated, well-funded, long-term campaigns (APT).</li><li><strong>Organized crime</strong> — financially motivated, ransomware, fraud.</li><li><strong>Hacktivists</strong> — ideologically motivated, DDoS, defacement.</li><li><strong>Insider threats</strong> — most dangerous, already have access.</li><li><strong>Script kiddies</strong> — low skill, use existing tools.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Threat Modeling</div><ul class="detail-points"><li><strong>STRIDE</strong> — Spoofing, Tampering, Repudiation, Info Disclosure, DoS, Elevation of Privilege.</li><li><strong>PASTA</strong> — Process for Attack Simulation and Threat Analysis.</li><li><strong>STIX/TAXII</strong> — standards for sharing threat intelligence.</li></ul></div>
+            <div class="exam-tip">APT (Advanced Persistent Threat) = nation-state level. Characteristics: stealthy, long-term, targeted, well-resourced. Insider threats cause the most financial damage per incident.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🛡️ Ethics</h4>
-          <p>ISC² Code of Ethics: Protect society → Act honorably → Provide competent service → Advance the profession. Ethical reasoning in gray-area scenarios. Computer ethics frameworks.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🛡️ Ethics</h4><span class="topic-expand-icon">+</span></div>
+          <p>ISC² Code of Ethics — the ethical framework every CISSP must follow.</p>
           <div class="topic-tags"><span class="topic-tag">Ethics</span><span class="topic-tag">Always Tested</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Code of Ethics Canons (in priority order)</div><ul class="detail-points"><li><strong>1. Protect society</strong> — common good, public trust and confidence.</li><li><strong>2. Act honorably</strong> — honestly, justly, responsibly, and legally.</li><li><strong>3. Provide competent service</strong> — to principals (employers, clients).</li><li><strong>4. Advance the profession</strong> — through education, sharing knowledge.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Application</div><ul class="detail-points"><li>When canons conflict, higher-numbered items yield to lower-numbered ones.</li><li>Society always comes before employer interest.</li><li>Must report illegal activity even if employer disagrees.</li></ul></div>
+            <div class="exam-tip">Classic exam scenario: your employer asks you to cover up a breach. Ethics Canon 1 (protect society) overrides Canon 3 (serve employer). Always choose to protect the public.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -472,45 +553,82 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2re
         </div>
       </div>
       <div class="topics-grid">
-        <div class="topic-card">
-          <h4>🏷️ Data Classification</h4>
-          <p>Government: Top Secret → Secret → Confidential → Unclassified. Commercial: Confidential/Proprietary → Private → Sensitive → Public. Owner sets classification; custodian implements controls.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🏷️ Data Classification</h4><span class="topic-expand-icon">+</span></div>
+          <p>Labeling data based on its sensitivity to determine appropriate protection levels.</p>
           <div class="topic-tags"><span class="topic-tag">Classification</span><span class="topic-tag">Core</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Government Levels</div><ul class="detail-points"><li><strong>Top Secret</strong> — grave damage to national security if disclosed.</li><li><strong>Secret</strong> — serious damage to national security.</li><li><strong>Confidential</strong> — damage to national security.</li><li><strong>Unclassified</strong> — no damage expected.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Commercial Levels</div><ul class="detail-points"><li><strong>Confidential/Proprietary</strong> — most sensitive business data.</li><li><strong>Private</strong> — personal employee/customer data.</li><li><strong>Sensitive</strong> — requires extra precautions.</li><li><strong>Public</strong> — freely shareable.</li></ul></div>
+            <div class="exam-tip">The Data Owner sets the classification. The Data Custodian implements the controls. Never confuse these two roles.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>👤 Data Ownership</h4>
-          <p>Data Owner: accountable for classification and protection decisions. Data Custodian: implements controls (IT dept). Data Processor (GDPR): processes on behalf of controller. User: accesses per policy.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>👤 Data Ownership</h4><span class="topic-expand-icon">+</span></div>
+          <p>Roles and responsibilities for managing data throughout its lifecycle.</p>
           <div class="topic-tags"><span class="topic-tag">Roles</span><span class="topic-tag">Always Tested</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Roles</div><ul class="detail-points"><li><strong>Data Owner</strong> — senior business manager. Accountable. Sets classification and requirements.</li><li><strong>Data Custodian</strong> — IT department. Implements technical controls. Not accountable.</li><li><strong>Data Processor (GDPR)</strong> — processes data on behalf of the controller.</li><li><strong>Data Controller (GDPR)</strong> — determines purpose and means of processing.</li><li><strong>User</strong> — accesses data per approved policy.</li></ul></div>
+            <div class="exam-tip">Owner = accountability. Custodian = responsibility for implementation. A manager who owns a database is the owner; the DBA who manages backups is the custodian.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>♻️ Data Lifecycle</h4>
-          <p>Create → Store → Use → Share → Archive → Destroy. Data remanence concerns during destruction. NIST SP 800-88: Clear, Purge, Destroy. Degaussing for magnetic media.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>♻️ Data Lifecycle</h4><span class="topic-expand-icon">+</span></div>
+          <p>The stages data passes through from creation to permanent destruction.</p>
           <div class="topic-tags"><span class="topic-tag">Lifecycle</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Lifecycle Stages</div><ul class="detail-points"><li><strong>Create</strong> — data is originated or received.</li><li><strong>Store</strong> — data is saved (encryption at rest required).</li><li><strong>Use</strong> — data is accessed and processed.</li><li><strong>Share</strong> — data is transmitted (encryption in transit required).</li><li><strong>Archive</strong> — long-term storage with retention policies.</li><li><strong>Destroy</strong> — permanent, verifiable deletion.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Destruction Methods (NIST SP 800-88)</div><ul class="detail-points"><li><strong>Clear</strong> — overwrite with new data. Protects against simple recovery.</li><li><strong>Purge</strong> — degaussing or secure erase. Protects against lab attacks.</li><li><strong>Destroy</strong> — physical destruction (shred, incinerate). Highest assurance.</li></ul></div>
+            <div class="exam-tip">Data remanence = residual data after deletion. Degaussing only works on magnetic media, NOT SSDs. For SSDs use crypto-shredding or physical destruction.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔒 Data States</h4>
-          <p>Data at Rest: stored data (encryption at rest, access controls). Data in Transit: moving across networks (TLS, VPN). Data in Use/Processing: in RAM/CPU (DRM, access controls, trusted execution).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔒 Data States</h4><span class="topic-expand-icon">+</span></div>
+          <p>The three states data exists in and the appropriate protection for each.</p>
           <div class="topic-tags"><span class="topic-tag">Data States</span><span class="topic-tag">Core</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Three States</div><ul class="detail-points"><li><strong>Data at Rest</strong> — stored on disk, database, backup. Controls: AES encryption, access controls, full disk encryption.</li><li><strong>Data in Transit</strong> — moving across a network. Controls: TLS 1.3, VPN/IPSec, HTTPS, SFTP.</li><li><strong>Data in Use</strong> — actively in RAM/CPU. Controls: DRM, trusted execution environments, memory encryption.</li></ul></div>
+            <div class="exam-tip">Data in Use is the hardest to protect. This is why cold boot attacks (dumping RAM) are so dangerous — they target data in use.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🗑️ Data Retention & Destruction</h4>
-          <p>Retention policies based on legal/business requirements. Overwriting (1× to 7×), degaussing (magnetic), physical destruction (shredding, incineration). Crypto-shredding for cloud.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🗑️ Data Retention & Destruction</h4><span class="topic-expand-icon">+</span></div>
+          <p>Policies for how long data must be kept and how it must be destroyed.</p>
           <div class="topic-tags"><span class="topic-tag">Destruction</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Retention Drivers</div><ul class="detail-points"><li><strong>Legal requirements</strong> — regulations mandate minimum retention periods.</li><li><strong>Business requirements</strong> — operational and historical needs.</li><li><strong>eDiscovery / Legal Hold</strong> — preserve data relevant to litigation.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Destruction Methods</div><ul class="detail-points"><li><strong>Overwriting</strong> — DoD 5220.22-M (7 passes for HDDs). Not effective for SSDs.</li><li><strong>Degaussing</strong> — magnetic field erasure. Only for magnetic media.</li><li><strong>Physical destruction</strong> — shredding, incineration. Highest assurance.</li><li><strong>Crypto-shredding</strong> — delete encryption keys. Best for cloud/SSD.</li></ul></div>
+            <div class="exam-tip">Crypto-shredding is the recommended method for cloud-hosted data since physical destruction isn't possible. Destroy the keys = destroy the data.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔐 Privacy Protection</h4>
-          <p>PII (Personally Identifiable Information) vs PHI (Protected Health Info). Privacy by design, data minimization, purpose limitation. GDPR right to erasure, data portability, consent requirements.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔐 Privacy Protection</h4><span class="topic-expand-icon">+</span></div>
+          <p>Protecting personal information in compliance with privacy regulations globally.</p>
           <div class="topic-tags"><span class="topic-tag">Privacy</span><span class="topic-tag">GDPR</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Definitions</div><ul class="detail-points"><li><strong>PII</strong> — Personally Identifiable Information (name, SSN, email, IP address).</li><li><strong>PHI</strong> — Protected Health Information (medical records, diagnoses).</li><li><strong>NPI</strong> — Non-Public Personal Information (financial data — GLBA).</li></ul></div>
+            <div class="detail-section"><div class="detail-label">GDPR Key Principles</div><ul class="detail-points"><li><strong>Data minimization</strong> — collect only what's necessary.</li><li><strong>Purpose limitation</strong> — use only for stated purpose.</li><li><strong>Right to erasure</strong> — "right to be forgotten".</li><li><strong>Data portability</strong> — users can export their data.</li><li><strong>Privacy by design</strong> — build privacy in from the start.</li></ul></div>
+            <div class="exam-tip">GDPR applies to ANY organization processing EU residents' data, regardless of where the org is located. Fines: up to €20M or 4% of global annual revenue.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>📦 Asset Management</h4>
-          <p>Hardware/software inventory, asset valuation. Tangible vs intangible assets. Configuration Management Database (CMDB). Lifecycle management from procurement to disposal.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📦 Asset Management</h4><span class="topic-expand-icon">+</span></div>
+          <p>Tracking and managing hardware, software, and data assets throughout their lifecycle.</p>
           <div class="topic-tags"><span class="topic-tag">Assets</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Concepts</div><ul class="detail-points"><li><strong>Asset inventory</strong> — complete list of all hardware, software, data assets.</li><li><strong>CMDB</strong> — Configuration Management Database. Central register of all IT assets and relationships.</li><li><strong>Asset valuation</strong> — quantify value for risk calculations (used in SLE/ALE).</li><li><strong>Tangible assets</strong> — servers, laptops, cables.</li><li><strong>Intangible assets</strong> — IP, data, reputation, brand.</li></ul></div>
+            <div class="exam-tip">You cannot protect what you don't know you have. Asset inventory is the foundation of all security programs. NIST CSF starts with "Identify" for this reason.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>☁️ Cloud Data Security</h4>
-          <p>Data sovereignty concerns, cloud provider shared responsibility model. Data Loss Prevention (DLP) in cloud. CASB (Cloud Access Security Broker) for visibility and control.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>☁️ Cloud Data Security</h4><span class="topic-expand-icon">+</span></div>
+          <p>Securing data in cloud environments using appropriate tools and shared responsibility.</p>
           <div class="topic-tags"><span class="topic-tag">Cloud</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Controls</div><ul class="detail-points"><li><strong>Shared Responsibility Model</strong> — cloud provider secures infrastructure; customer secures data and access.</li><li><strong>CASB</strong> — Cloud Access Security Broker. Visibility and control over cloud usage.</li><li><strong>DLP</strong> — Data Loss Prevention. Prevents sensitive data leaving the org.</li><li><strong>Data sovereignty</strong> — data subject to laws of country where it's stored.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Cloud Service Models</div><ul class="detail-points"><li><strong>IaaS</strong> — customer responsible for OS, apps, data.</li><li><strong>PaaS</strong> — customer responsible for apps and data.</li><li><strong>SaaS</strong> — customer responsible for data and access only.</li></ul></div>
+            <div class="exam-tip">In SaaS, the provider handles almost everything — but YOU are still responsible for who has access and what data you put in. Shared responsibility never disappears.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -526,55 +644,105 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2re
         </div>
       </div>
       <div class="topics-grid">
-        <div class="topic-card">
-          <h4>🏛️ Secure Design Principles</h4>
-          <p>Least Privilege, Defense in Depth, Fail Secure/Safe, Economy of Mechanism, Complete Mediation, Open Design, Separation of Privilege, Least Common Mechanism, Psychological Acceptability, Zero Trust.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🏛️ Secure Design Principles</h4><span class="topic-expand-icon">+</span></div>
+          <p>Core principles every security architect must apply when designing systems.</p>
           <div class="topic-tags"><span class="topic-tag">Principles</span><span class="topic-tag">Core</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Principles</div><ul class="detail-points"><li><strong>Least Privilege</strong> — minimum access needed. Reduce blast radius of compromise.</li><li><strong>Defense in Depth</strong> — multiple layers of security controls.</li><li><strong>Fail Secure</strong> — default to denied state on failure.</li><li><strong>Separation of Privilege</strong> — require multiple conditions to grant access.</li><li><strong>Economy of Mechanism</strong> — keep security simple; complexity = risk.</li><li><strong>Open Design</strong> — security shouldn't depend on secrecy of design (Kerckhoffs's principle).</li><li><strong>Zero Trust</strong> — never trust, always verify. Assume breach mentality.</li></ul></div>
+            <div class="exam-tip">Defense in Depth = multiple independent layers. If one fails, others remain. Like an onion — not a single wall.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔐 Security Models</h4>
-          <p>Bell-LaPadula (confidentiality: no read up, no write down). Biba (integrity: no read down, no write up). Clark-Wilson (integrity via transactions). Brewer-Nash (Chinese Wall — conflict of interest).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔐 Security Models</h4><span class="topic-expand-icon">+</span></div>
+          <p>Formal frameworks defining rules for access control and data protection.</p>
           <div class="topic-tags"><span class="topic-tag">Models</span><span class="topic-tag">Always Tested</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Confidentiality Models</div><ul class="detail-points"><li><strong>Bell-LaPadula</strong> — No Read Up, No Write Down. Protects confidentiality. Military use.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Integrity Models</div><ul class="detail-points"><li><strong>Biba</strong> — No Read Down, No Write Up. Protects integrity. Opposite of BLP.</li><li><strong>Clark-Wilson</strong> — Integrity via well-formed transactions (CDI, TP, IVP). Commercial use.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Other Models</div><ul class="detail-points"><li><strong>Brewer-Nash (Chinese Wall)</strong> — prevents conflict of interest. Legal/financial use.</li><li><strong>State Machine</strong> — must be secure in all possible states. Foundation for others.</li></ul></div>
+            <div class="exam-tip">BLP = Confidentiality. Biba = Integrity. Remember: they are opposite in their rules. Bell-LaPadula prevents leaks DOWN; Biba prevents corruption from BELOW.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🖥️ Security Evaluation Criteria</h4>
-          <p>Common Criteria (ISO 15408): EAL1–EAL7 levels. Protection Profile vs Security Target. TCSEC (Orange Book): D, C1, C2, B1, B2, B3, A1. ITSEC European equivalent.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🖥️ Security Evaluation Criteria</h4><span class="topic-expand-icon">+</span></div>
+          <p>Standards for evaluating and certifying the security of IT products.</p>
           <div class="topic-tags"><span class="topic-tag">Evaluation</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Common Criteria (ISO 15408)</div><ul class="detail-points"><li><strong>EAL1</strong> — Functionally tested (lowest assurance).</li><li><strong>EAL2</strong> — Structurally tested.</li><li><strong>EAL3</strong> — Methodically tested and checked.</li><li><strong>EAL4</strong> — Highest commercially feasible. Most common target.</li><li><strong>EAL5–6</strong> — Semiformally designed and verified.</li><li><strong>EAL7</strong> — Formally verified (mathematical proof). Highest assurance.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Other Standards</div><ul class="detail-points"><li><strong>TCSEC (Orange Book)</strong> — US DoD. D (minimal) → C1/C2 → B1/B2/B3 → A1.</li><li><strong>Protection Profile</strong> — security requirements for a product category.</li><li><strong>Security Target</strong> — vendor's claim of how their product meets a PP.</li></ul></div>
+            <div class="exam-tip">EAL4 is the highest level routinely achieved commercially. EAL7 is theoretical — almost nothing achieves it in practice.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔑 Cryptography Fundamentals</h4>
-          <p>Symmetric (AES, 3DES, Blowfish) — fast, same key. Asymmetric (RSA, ECC, Diffie-Hellman) — key pairs, slow. Hybrid: symmetric for data, asymmetric for key exchange. Hash: MD5(broken), SHA-1(weak), SHA-256/512.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔑 Cryptography Fundamentals</h4><span class="topic-expand-icon">+</span></div>
+          <p>Symmetric, asymmetric, and hashing algorithms — the backbone of security.</p>
           <div class="topic-tags"><span class="topic-tag">Crypto</span><span class="topic-tag">Core</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Symmetric (same key)</div><ul class="detail-points"><li><strong>AES</strong> — 128/192/256-bit. Block cipher. Current gold standard. FIPS 197.</li><li><strong>3DES</strong> — 112–168-bit. Being phased out. Slow.</li><li><strong>Blowfish/Twofish</strong> — variable key up to 448-bit.</li><li><strong>RC4</strong> — stream cipher. BROKEN. Used in WEP (why WEP is broken).</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Asymmetric (key pairs)</div><ul class="detail-points"><li><strong>RSA</strong> — based on prime factorization. 2048+ bits recommended.</li><li><strong>ECC</strong> — smaller keys, same security. 256-bit ECC ≈ 3072-bit RSA.</li><li><strong>Diffie-Hellman</strong> — key EXCHANGE only, not encryption.</li><li><strong>DSA</strong> — digital signatures only, NOT encryption.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Hash Functions</div><ul class="detail-points"><li><strong>MD5</strong> — 128-bit. BROKEN. Never use for security.</li><li><strong>SHA-1</strong> — 160-bit. WEAK. Deprecated.</li><li><strong>SHA-256/512</strong> — Current standard. Use these.</li><li><strong>HMAC</strong> — Hash + secret key = integrity AND authentication.</li></ul></div>
+            <div class="exam-tip">Hybrid systems = asymmetric for key exchange, symmetric for bulk data. This is how TLS works. RSA for the handshake, AES for the session.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>📜 PKI & Digital Certificates</h4>
-          <p>CA (Certificate Authority) hierarchy. X.509 certificates. CRL (Certificate Revocation List) vs OCSP (Online Certificate Status Protocol). Key escrow, key recovery. Trust models: hierarchical, web of trust, bridge.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📜 PKI & Digital Certificates</h4><span class="topic-expand-icon">+</span></div>
+          <p>Infrastructure for managing digital certificates and public/private key pairs.</p>
           <div class="topic-tags"><span class="topic-tag">PKI</span><span class="topic-tag">High Priority</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">PKI Components</div><ul class="detail-points"><li><strong>CA (Certificate Authority)</strong> — issues and signs certificates. Root of trust.</li><li><strong>RA (Registration Authority)</strong> — verifies identity before CA issues cert.</li><li><strong>X.509</strong> — certificate format standard used in TLS/HTTPS.</li><li><strong>CRL</strong> — Certificate Revocation List. Batch, periodic. Latency issue.</li><li><strong>OCSP</strong> — Online Certificate Status Protocol. Real-time revocation check.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Digital Signatures</div><ul class="detail-points"><li><strong>Signing</strong> — sender encrypts hash with PRIVATE key.</li><li><strong>Verification</strong> — receiver decrypts with sender's PUBLIC key.</li><li><strong>Encryption</strong> — encrypt with recipient's PUBLIC key; decrypt with PRIVATE.</li><li><strong>Key Escrow</strong> — copy of private key held by third party for recovery.</li></ul></div>
+            <div class="exam-tip">Signatures use your PRIVATE key (only you can sign). Encryption uses recipient's PUBLIC key (anyone can encrypt to them). Memorize this — it's always tested.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🏗️ System Security Architecture</h4>
-          <p>TCB (Trusted Computing Base), security perimeter, reference monitor, security kernel. Modes: Dedicated, System High, Compartmented, Multi-level. Ring architecture (0=kernel → 3=user).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🏗️ System Security Architecture</h4><span class="topic-expand-icon">+</span></div>
+          <p>The technical design of secure computing environments and protection mechanisms.</p>
           <div class="topic-tags"><span class="topic-tag">Architecture</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Concepts</div><ul class="detail-points"><li><strong>TCB (Trusted Computing Base)</strong> — all hardware/software/firmware providing security. Smaller = more secure.</li><li><strong>Reference Monitor</strong> — abstract concept; mediates all access between subjects and objects.</li><li><strong>Security Kernel</strong> — hardware/software implementing the reference monitor.</li><li><strong>Ring Architecture</strong> — Ring 0 (kernel/most trusted) → Ring 3 (user apps/least trusted).</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Processing Modes</div><ul class="detail-points"><li><strong>Dedicated</strong> — all users have same clearance, same need-to-know.</li><li><strong>System High</strong> — all users cleared but not all need-to-know.</li><li><strong>Compartmented</strong> — formal access approval required for each compartment.</li><li><strong>Multi-level</strong> — different users have different clearance levels simultaneously.</li></ul></div>
+            <div class="exam-tip">The TCB is like the security boundary of a system. Everything inside TCB is trusted. The smaller the TCB, the smaller the attack surface.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🛡️ Physical Security</h4>
-          <p>Crime Prevention Through Environmental Design (CPTED). Layers: perimeter, outer, inner, target. Controls: fences, bollards, mantraps, biometrics, guards. Data center: raised floors, fire suppression (FM-200).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🛡️ Physical Security</h4><span class="topic-expand-icon">+</span></div>
+          <p>Protecting physical assets, facilities, and personnel from physical threats.</p>
           <div class="topic-tags"><span class="topic-tag">Physical</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Defense Layers (outside in)</div><ul class="detail-points"><li><strong>Perimeter</strong> — fences, walls, lighting, CCTV, guards.</li><li><strong>Outer</strong> — building exterior, badge readers, reception.</li><li><strong>Inner</strong> — internal zones, mantraps, biometrics.</li><li><strong>Target</strong> — server room, vault, data center.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Key Controls</div><ul class="detail-points"><li><strong>Mantrap</strong> — two-door entry, only one opens at a time. Prevents tailgating.</li><li><strong>CPTED</strong> — Crime Prevention Through Environmental Design. Design spaces to deter crime.</li><li><strong>Bollards</strong> — concrete posts to stop vehicles.</li><li><strong>FM-200 / Halon</strong> — clean agent fire suppression for data centers (won't damage equipment).</li></ul></div>
+            <div class="exam-tip">Physical security is the first and last line of defense. No technical control matters if an attacker has physical access to your servers.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>☁️ Cloud Security Architecture</h4>
-          <p>IaaS/PaaS/SaaS responsibility models. Virtualization security (hypervisor attacks, VM escape). Container security (Docker, Kubernetes). Serverless security. Zero Trust Architecture (ZTA).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>☁️ Cloud Security Architecture</h4><span class="topic-expand-icon">+</span></div>
+          <p>Security considerations for cloud deployments, virtualization, and containers.</p>
           <div class="topic-tags"><span class="topic-tag">Cloud</span><span class="topic-tag">2024 Focus</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Virtualization Threats</div><ul class="detail-points"><li><strong>VM Escape</strong> — attacker breaks out of VM to access hypervisor or other VMs.</li><li><strong>Hypervisor attack</strong> — compromise of the hypervisor = access to all VMs.</li><li><strong>VM sprawl</strong> — uncontrolled proliferation of VMs.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Cloud-Native Security</div><ul class="detail-points"><li><strong>Container security</strong> — image scanning, least-privilege containers, read-only filesystems.</li><li><strong>Zero Trust Architecture</strong> — verify every request; no implicit trust based on network location.</li><li><strong>Serverless</strong> — no persistent server to patch; risk shifts to function code and permissions.</li></ul></div>
+            <div class="exam-tip">Zero Trust = "never trust, always verify." Every access request must be authenticated and authorized regardless of network location. Key for modern cloud environments.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔌 IoT & Embedded Systems</h4>
-          <p>Constrained devices, firmware security, OTA updates. ICS/SCADA security (Purdue Model). CAN bus vulnerabilities. Embedded system isolation, air gaps. RTOS security considerations.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔌 IoT & Embedded Systems</h4><span class="topic-expand-icon">+</span></div>
+          <p>Security challenges for constrained devices, industrial systems, and embedded hardware.</p>
           <div class="topic-tags"><span class="topic-tag">IoT</span><span class="topic-tag">ICS/SCADA</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">IoT Challenges</div><ul class="detail-points"><li><strong>Constrained resources</strong> — limited CPU/RAM makes full encryption difficult.</li><li><strong>Firmware security</strong> — signed firmware, OTA update integrity verification.</li><li><strong>Default credentials</strong> — major risk; always change default passwords.</li><li><strong>Physical access</strong> — devices often deployed in unsecured locations.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">ICS/SCADA</div><ul class="detail-points"><li><strong>Purdue Model</strong> — hierarchical model for ICS network segmentation.</li><li><strong>Air gap</strong> — physical separation between OT and IT networks.</li><li><strong>Availability priority</strong> — ICS prioritizes availability over confidentiality (opposite of traditional IT).</li></ul></div>
+            <div class="exam-tip">In ICS/SCADA environments, AVAILABILITY is the top priority — a power plant can't go offline for patching. This flips the CIA triad priority order.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>⚠️ Common Vulnerabilities</h4>
-          <p>Buffer overflow, race conditions, covert channels (storage/timing), TOC/TOU attacks, rootkits, firmware exploits. Vulnerability in cryptographic implementations (side-channel attacks).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>⚠️ Common Vulnerabilities</h4><span class="topic-expand-icon">+</span></div>
+          <p>Software and hardware vulnerabilities that attackers commonly exploit.</p>
           <div class="topic-tags"><span class="topic-tag">Vulnerabilities</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Vulnerability Types</div><ul class="detail-points"><li><strong>Buffer overflow</strong> — writing beyond allocated memory. Can execute arbitrary code.</li><li><strong>Race condition / TOC/TOU</strong> — Time of Check vs Time of Use. Exploit timing gap.</li><li><strong>Covert channel</strong> — unintended communication path. Storage (data) or Timing (behavior).</li><li><strong>Side-channel attack</strong> — exploit physical characteristics (power, timing, EM emissions).</li><li><strong>Rootkit</strong> — hides malware by subverting the OS kernel.</li></ul></div>
+            <div class="exam-tip">TOC/TOU (Time of Check / Time of Use) = attacker changes a resource AFTER it's been validated but BEFORE it's used. Classic race condition exploit.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -590,15 +758,24 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2re
         </div>
       </div>
       <div class="topics-grid">
-        <div class="topic-card">
-          <h4>🌐 OSI & TCP/IP Models</h4>
-          <p>OSI 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application. TCP/IP: Network Access, Internet, Transport, Application. Know protocols at each layer (ARP=2, IP=3, TCP/UDP=4, HTTP=7).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🌐 OSI & TCP/IP Models</h4><span class="topic-expand-icon">+</span></div>
+          <p>Layered networking models that define how data moves across networks.</p>
           <div class="topic-tags"><span class="topic-tag">Models</span><span class="topic-tag">Always Tested</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">OSI 7 Layers (top to bottom)</div><ul class="detail-points"><li><strong>7 Application</strong> — HTTP, DNS, SMTP, FTP. User-facing.</li><li><strong>6 Presentation</strong> — Encryption, compression, format conversion.</li><li><strong>5 Session</strong> — Session establishment, NetBIOS.</li><li><strong>4 Transport</strong> — TCP (reliable), UDP (fast). Ports live here.</li><li><strong>3 Network</strong> — IP, ICMP, routing. Logical addressing.</li><li><strong>2 Data Link</strong> — MAC addresses, ARP, switches, frames.</li><li><strong>1 Physical</strong> — Cables, hubs, bits.</li></ul></div>
+            <div class="exam-tip">Mnemonic (top to bottom): All People Seem To Need Data Processing. Firewalls typically operate at Layer 3–4. WAFs at Layer 7. IDS/IPS at Layer 3–7.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔒 Network Security Protocols</h4>
-          <p>TLS 1.3 (replaces SSL), IPSec (AH + ESP), SSH (replaces Telnet/rsh), SFTP/SCP, HTTPS, DNSSEC, S/MIME for email. Know which protocols are secure vs deprecated (SSLv3, TLS 1.0/1.1 deprecated).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔒 Network Security Protocols</h4><span class="topic-expand-icon">+</span></div>
+          <p>Protocols that provide security for network communications.</p>
           <div class="topic-tags"><span class="topic-tag">Protocols</span><span class="topic-tag">Core</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Secure Protocols</div><ul class="detail-points"><li><strong>TLS 1.3</strong> — current standard. Replaced SSL. Eliminated weak ciphers.</li><li><strong>SSH</strong> — replaces Telnet. Encrypted shell access. Port 22.</li><li><strong>HTTPS</strong> — HTTP over TLS. Port 443.</li><li><strong>SFTP/SCP</strong> — secure file transfer over SSH.</li><li><strong>DNSSEC</strong> — signs DNS records. Prevents spoofing. Does NOT encrypt DNS.</li><li><strong>S/MIME</strong> — email encryption + signing. Uses X.509 certificates.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Deprecated/Insecure</div><ul class="detail-points"><li><strong>SSL, TLS 1.0/1.1</strong> — deprecated. Do not use.</li><li><strong>Telnet</strong> — plaintext. Replace with SSH.</li><li><strong>FTP</strong> — plaintext. Replace with SFTP.</li><li><strong>HTTP</strong> — no encryption. Replace with HTTPS.</li></ul></div>
+            <div class="exam-tip">Always choose the encrypted alternative. TLS 1.2 is acceptable but TLS 1.3 is preferred. Anything older than TLS 1.2 is considered broken.</div>
+          </div>
         </div>
         <div class="topic-card">
           <h4>🏗️ Network Architecture</h4>
@@ -620,20 +797,33 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2re
           <p>Site-to-site vs remote access VPN. IPSec (tunnel vs transport mode). SSL/TLS VPN. Split tunneling risks. Always-on VPN. SD-WAN security implications. Zero Trust vs traditional VPN.</p>
           <div class="topic-tags"><span class="topic-tag">VPN</span></div>
         </div>
-        <div class="topic-card">
-          <h4>🛡️ IDS/IPS</h4>
-          <p>IDS (detects only) vs IPS (blocks). NIDS (network) vs HIDS (host). Signature-based vs anomaly-based vs behavioral. False positives vs false negatives trade-offs. Inline vs passive deployment.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🛡️ IDS/IPS</h4><span class="topic-expand-icon">+</span></div>
+          <p>Systems that monitor network traffic to detect and optionally block attacks.</p>
           <div class="topic-tags"><span class="topic-tag">IDS/IPS</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">IDS vs IPS</div><ul class="detail-points"><li><strong>IDS</strong> — detects and alerts only. Passive. Out-of-band (no impact on traffic).</li><li><strong>IPS</strong> — detects and blocks. Active. Inline deployment (can impact traffic).</li><li><strong>NIDS</strong> — monitors network traffic. <strong>HIDS</strong> — monitors a single host.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Detection Methods</div><ul class="detail-points"><li><strong>Signature-based</strong> — matches known attack patterns. Fast, low false positives. Can't detect zero-days.</li><li><strong>Anomaly-based</strong> — detects deviations from baseline. Can find new attacks. High false positives.</li><li><strong>Behavioral</strong> — monitors behavior patterns over time.</li></ul></div>
+            <div class="exam-tip">False positive = legitimate traffic flagged as attack (annoying). False negative = real attack missed (dangerous). IPS inline = can block but also can break legitimate traffic.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>⚡ Network Attacks</h4>
-          <p>DoS/DDoS (volumetric, protocol, application), ARP poisoning, DNS hijacking, BGP hijacking, MITM, session hijacking, replay attacks, sniffing. Know mitigation for each attack type.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>⚡ Network Attacks</h4><span class="topic-expand-icon">+</span></div>
+          <p>Common attacks targeting network infrastructure and communications.</p>
           <div class="topic-tags"><span class="topic-tag">Attacks</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Attack Types & Mitigations</div><ul class="detail-points"><li><strong>DoS/DDoS</strong> — overwhelm resources. Mitigate: rate limiting, CDN, scrubbing centers.</li><li><strong>ARP Poisoning</strong> — associate attacker MAC with legitimate IP. Mitigate: dynamic ARP inspection.</li><li><strong>DNS Hijacking</strong> — redirect DNS queries. Mitigate: DNSSEC.</li><li><strong>MITM</strong> — intercept communications. Mitigate: TLS, mutual authentication.</li><li><strong>Replay Attack</strong> — capture and resend auth data. Mitigate: timestamps, nonces.</li><li><strong>Session Hijacking</strong> — steal session token. Mitigate: HTTPS, secure cookies, re-auth.</li></ul></div>
+            <div class="exam-tip">For every attack on the exam, know the countermeasure. CISSP tests "what would you do" not just "what is this attack."</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>📞 Voice & Multimedia Security</h4>
-          <p>VoIP security: SRTP (encrypted RTP), SIP vulnerabilities. VLAN separation for voice traffic. Vishing attacks. Unified communications security. Video conferencing risks.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📞 Voice & Multimedia Security</h4><span class="topic-expand-icon">+</span></div>
+          <p>Security for VoIP and unified communications systems.</p>
           <div class="topic-tags"><span class="topic-tag">VoIP</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">VoIP Security</div><ul class="detail-points"><li><strong>SRTP</strong> — Secure Real-time Transport Protocol. Encrypts voice/video data.</li><li><strong>SIP vulnerabilities</strong> — toll fraud, call interception, DoS attacks.</li><li><strong>VLAN separation</strong> — put voice traffic on dedicated VLAN, separate from data.</li><li><strong>Vishing</strong> — voice phishing. Social engineering via phone calls.</li></ul></div>
+            <div class="exam-tip">Always separate voice and data VLANs. VoIP without SRTP = unencrypted calls that can be intercepted and replayed.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -649,46 +839,82 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2re
         </div>
       </div>
       <div class="topics-grid">
-        <div class="topic-card">
-          <h4>🪪 Identification vs Authentication vs Authorization</h4>
-          <p>Identification: claiming identity (username). Authentication: proving identity (password/MFA). Authorization: what you're allowed to do (ACL, roles). Accountability: logging actions (audit trail).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🪪 Identification vs Authentication vs Authorization</h4><span class="topic-expand-icon">+</span></div>
+          <p>The three fundamental steps of access control — claiming, proving, and granting.</p>
           <div class="topic-tags"><span class="topic-tag">Core Concepts</span><span class="topic-tag">Always Tested</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">The Four Steps</div><ul class="detail-points"><li><strong>Identification</strong> — claiming an identity. Typing a username. No proof yet.</li><li><strong>Authentication</strong> — proving the identity. Password, token, biometric.</li><li><strong>Authorization</strong> — what actions are permitted. ACLs, roles, policies.</li><li><strong>Accountability</strong> — logging all actions for audit trail. Non-repudiation.</li></ul></div>
+            <div class="exam-tip">All four must be present for a complete access control system. Missing accountability = no audit trail = inability to investigate incidents.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔐 Authentication Factors</h4>
-          <p>Something you Know (password, PIN, KBA). Something you Have (token, smart card, OTP). Something you Are (biometrics). Somewhere you Are (location). MFA = 2+ different factors. 2FA ≠ always MFA.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔐 Authentication Factors</h4><span class="topic-expand-icon">+</span></div>
+          <p>The categories of evidence used to prove identity.</p>
           <div class="topic-tags"><span class="topic-tag">Authentication</span><span class="topic-tag">Core</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Three Primary Factors</div><ul class="detail-points"><li><strong>Something you Know</strong> — password, PIN, passphrase, security question.</li><li><strong>Something you Have</strong> — hardware token, smart card, OTP device, phone (SMS/app).</li><li><strong>Something you Are</strong> — biometrics: fingerprint, iris, retina, facial, voice.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Additional Factors</div><ul class="detail-points"><li><strong>Somewhere you Are</strong> — geolocation, IP address restriction.</li><li><strong>Something you Do</strong> — behavioral biometrics (typing rhythm, mouse movement).</li></ul></div>
+            <div class="detail-section"><div class="detail-label">MFA Rules</div><ul class="detail-points"><li><strong>MFA</strong> = 2+ DIFFERENT factor types. Password + PIN = NOT MFA (both are "know").</li><li>Password + OTP app = MFA (know + have). ✅</li></ul></div>
+            <div class="exam-tip">Two passwords = Single Factor (both "something you know"). MFA requires factors from DIFFERENT categories. This is a common trick question.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>📏 Access Control Models</h4>
-          <p>DAC (Discretionary — owner controls), MAC (Mandatory — labels, government), RBAC (Role-Based — business roles), ABAC (Attribute-Based — dynamic policies), Rule-Based. RBAC most common in enterprise.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📏 Access Control Models</h4><span class="topic-expand-icon">+</span></div>
+          <p>Frameworks governing how access decisions are made and enforced.</p>
           <div class="topic-tags"><span class="topic-tag">Access Control</span><span class="topic-tag">High Priority</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Model Comparison</div><ul class="detail-points"><li><strong>DAC</strong> — Discretionary. Owner controls access. Most flexible. Windows file permissions. Least secure.</li><li><strong>MAC</strong> — Mandatory. System enforces via sensitivity labels. Most secure. Least flexible. Government.</li><li><strong>RBAC</strong> — Role-Based. Access by job role. Most common enterprise model.</li><li><strong>ABAC</strong> — Attribute-Based. Dynamic policies using user/resource/environment attributes. Most flexible.</li><li><strong>Rule-Based</strong> — System rules (firewall ACLs, time-of-day restrictions).</li></ul></div>
+            <div class="exam-tip">DAC = most flexible (owner decides). MAC = most secure (system decides via labels). RBAC = most common in business. Know which model fits which scenario.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🌐 Federation & SSO</h4>
-          <p>SAML 2.0 (XML-based, enterprise SSO). OAuth 2.0 (authorization delegation). OpenID Connect (authentication on top of OAuth). Kerberos (tickets, KDC). RADIUS/TACACS+ for network auth.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🌐 Federation & SSO</h4><span class="topic-expand-icon">+</span></div>
+          <p>Technologies enabling single sign-on and cross-organization identity trust.</p>
           <div class="topic-tags"><span class="topic-tag">Federation</span><span class="topic-tag">Core</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Protocols</div><ul class="detail-points"><li><strong>SAML 2.0</strong> — XML-based. Enterprise SSO between IdP and SP. Browser-based.</li><li><strong>OAuth 2.0</strong> — Authorization delegation framework. NOT authentication. "Login with Google."</li><li><strong>OpenID Connect</strong> — Authentication layer on top of OAuth 2.0. Adds identity (who you are).</li><li><strong>Kerberos</strong> — Ticket-based SSO. KDC issues TGT. Port 88. Active Directory uses it.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">AAA Protocols</div><ul class="detail-points"><li><strong>RADIUS</strong> — UDP 1812/1813. Encrypts only password. For network access.</li><li><strong>TACACS+</strong> — TCP 49. Encrypts entire payload. Separates A-A-A. Cisco networks.</li></ul></div>
+            <div class="exam-tip">OAuth = Authorization (what you can do). OpenID Connect = Authentication (who you are). They're often confused. SAML is the enterprise SSO standard.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>👤 Identity Lifecycle</html>
-          <h4>👤 Identity Lifecycle</h4>
-          <p>Provisioning (creating accounts), modification (role changes), review (recertification), de-provisioning (termination). Orphan accounts risk. Joiner-Mover-Leaver process. Role mining and SoD.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>👤 Identity Lifecycle</h4><span class="topic-expand-icon">+</span></div>
+          <p>Managing identities from creation through modification to termination.</p>
           <div class="topic-tags"><span class="topic-tag">Lifecycle</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Lifecycle Stages</div><ul class="detail-points"><li><strong>Provisioning</strong> — creating accounts when someone joins.</li><li><strong>Modification</strong> — updating access when role changes (transfers, promotions).</li><li><strong>Review/Recertification</strong> — periodic access reviews to remove unnecessary permissions.</li><li><strong>De-provisioning</strong> — disabling/deleting accounts on termination.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Key Risks</div><ul class="detail-points"><li><strong>Orphan accounts</strong> — active accounts with no owner. Major security risk.</li><li><strong>Privilege creep</strong> — accumulating excess permissions over time without removal.</li><li><strong>Joiner-Mover-Leaver</strong> — process for managing identity events.</li></ul></div>
+            <div class="exam-tip">Privilege creep = biggest insider threat risk. Regular access recertification (e.g. quarterly reviews) is the key control. Managers must approve or revoke access periodically.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🧬 Biometrics</h4>
-          <p>FRR (False Rejection Rate) vs FAR (False Acceptance Rate). CER/EER (Crossover Error Rate) — lower is better. Types: fingerprint, iris, retina, voice, facial, gait. Enrollment and template storage risks.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🧬 Biometrics</h4><span class="topic-expand-icon">+</span></div>
+          <p>Using physical or behavioral characteristics for authentication.</p>
           <div class="topic-tags"><span class="topic-tag">Biometrics</span><span class="topic-tag">Memorize Metrics</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Error Rates</div><ul class="detail-points"><li><strong>FAR (Type II)</strong> — False Acceptance Rate. Unauthorized user ACCEPTED. Security risk!</li><li><strong>FRR (Type I)</strong> — False Rejection Rate. Authorized user REJECTED. Usability issue.</li><li><strong>CER/EER</strong> — Crossover Error Rate. Point where FAR = FRR. Lower = better system.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Sensitivity Trade-off</div><ul class="detail-points"><li>Increase sensitivity → FAR decreases, FRR increases (more secure, less usable).</li><li>Decrease sensitivity → FAR increases, FRR decreases (more usable, less secure).</li></ul></div>
+            <div class="exam-tip">FAR is the security concern (wrong person gets in). FRR is the usability concern (right person locked out). CER is used to compare biometric systems — choose the lowest CER.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔑 Privileged Access Management</h4>
-          <p>PAM solutions for admin accounts. Just-In-Time (JIT) access. Privileged Identity Management (PIM). Session recording for privileged accounts. Principle of least privilege enforcement.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔑 Privileged Access Management</h4><span class="topic-expand-icon">+</span></div>
+          <p>Special controls for high-risk administrative and privileged accounts.</p>
           <div class="topic-tags"><span class="topic-tag">PAM</span><span class="topic-tag">2024 Focus</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">PAM Controls</div><ul class="detail-points"><li><strong>PAM solution</strong> — vaults credentials, controls and records privileged sessions.</li><li><strong>Just-In-Time (JIT)</strong> — grant admin access only when needed, automatically revoke.</li><li><strong>Session recording</strong> — all privileged sessions recorded for audit.</li><li><strong>Least privilege</strong> — even admins should not have more than necessary.</li></ul></div>
+            <div class="exam-tip">Privileged accounts are the crown jewels. Compromising an admin account = game over. PAM is now considered a critical security control in every mature org.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>📂 Directory Services</h4>
-          <p>LDAP (port 389, 636 for LDAPS), Active Directory structure (domains, forests, OUs). Group Policy. Azure AD/Entra ID for cloud. Attribute-based access control from directory attributes.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📂 Directory Services</h4><span class="topic-expand-icon">+</span></div>
+          <p>Centralized repositories for identity and access information.</p>
           <div class="topic-tags"><span class="topic-tag">Directory</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Technologies</div><ul class="detail-points"><li><strong>LDAP</strong> — Lightweight Directory Access Protocol. Port 389 (clear), 636 (LDAPS encrypted).</li><li><strong>Active Directory</strong> — Microsoft's directory. Domains, forests, OUs, Group Policy.</li><li><strong>Azure AD / Entra ID</strong> — Microsoft's cloud identity platform. Supports SAML, OIDC, OAuth.</li></ul></div>
+            <div class="exam-tip">Always use LDAPS (port 636) not LDAP (port 389). Plain LDAP sends credentials in cleartext over the network.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -704,45 +930,83 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2re
         </div>
       </div>
       <div class="topics-grid">
-        <div class="topic-card">
-          <h4>🔍 Vulnerability Assessment vs Pen Testing</h4>
-          <p>Vulnerability scan: identifies weaknesses, non-destructive. Pen test: exploits weaknesses, simulates attacker. VA = what's there; PT = what's exploitable. Both are needed. Scope and rules of engagement critical.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔍 Vulnerability Assessment vs Pen Testing</h4><span class="topic-expand-icon">+</span></div>
+          <p>Two complementary but distinct approaches to finding security weaknesses.</p>
           <div class="topic-tags"><span class="topic-tag">Testing Types</span><span class="topic-tag">Always Tested</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Differences</div><ul class="detail-points"><li><strong>Vulnerability Assessment</strong> — identifies and reports weaknesses. Non-destructive. Automated tools. No exploitation.</li><li><strong>Penetration Test</strong> — actively exploits weaknesses. Simulates real attacker. Demonstrates actual impact.</li><li><strong>Both require</strong> — written authorization and defined scope (Rules of Engagement) before starting.</li></ul></div>
+            <div class="exam-tip">VA = what vulnerabilities exist. PT = which ones are actually exploitable. A vuln scan finding doesn't mean it's exploitable — a pen test proves it. Both are needed.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🎭 Testing Knowledge Levels</h4>
-          <p>Black Box (no knowledge, simulates external attacker). White Box (full knowledge, most thorough). Gray Box (partial knowledge, balanced). Crystal Box = white box. Double-blind = tester and staff unaware.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🎭 Testing Knowledge Levels</h4><span class="topic-expand-icon">+</span></div>
+          <p>Categories of penetration testing based on tester's prior knowledge of target.</p>
           <div class="topic-tags"><span class="topic-tag">Testing</span><span class="topic-tag">Core</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Test Types</div><ul class="detail-points"><li><strong>Black Box</strong> — no prior knowledge. Simulates external attacker. Most realistic but time-consuming.</li><li><strong>White Box (Crystal Box)</strong> — full knowledge (source code, architecture). Most thorough. Most efficient.</li><li><strong>Gray Box</strong> — partial knowledge. Balanced approach. Most common in real engagements.</li><li><strong>Double-blind</strong> — tester AND security staff unaware. Tests detection and response capabilities.</li></ul></div>
+            <div class="exam-tip">Double-blind tests the ENTIRE security program including detection. Great for assessing SOC effectiveness. Most expensive and disruptive.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>📋 Security Audits & Reviews</h4>
-          <p>Internal vs external audits. Compliance audits (SOC 1, SOC 2, SOC 3). Code review (static/dynamic analysis, SAST/DAST). Log analysis and audit trail review. Configuration review against baselines.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📋 Security Audits & Reviews</h4><span class="topic-expand-icon">+</span></div>
+          <p>Formal evaluations of security controls, policies, and compliance.</p>
           <div class="topic-tags"><span class="topic-tag">Auditing</span><span class="topic-tag">High Priority</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Audit Types</div><ul class="detail-points"><li><strong>Internal audit</strong> — conducted by own staff. Less independent but more frequent.</li><li><strong>External audit</strong> — independent third party. More credible. Required for compliance certs.</li><li><strong>SOC 1</strong> — financial reporting controls.</li><li><strong>SOC 2 Type II</strong> — Trust Service Criteria over 6–12 months. Strongest assurance for cloud providers.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Code Review</div><ul class="detail-points"><li><strong>SAST</strong> — static analysis. Scans source code without running. Find early in SDLC.</li><li><strong>DAST</strong> — dynamic analysis. Tests running application. Finds runtime issues.</li></ul></div>
+            <div class="exam-tip">SOC 2 Type II is what customers ask cloud providers for. Type I = point in time (weak). Type II = sustained period (strong). Always prefer Type II.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>📊 Security Metrics & KPIs</h4>
-          <p>MTTD (Mean Time to Detect), MTTR (Mean Time to Repair/Respond), MTTF (Mean Time to Failure), MTBF (Mean Time Between Failures). Security scorecard. Patch compliance rate. Security posture dashboards.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📊 Security Metrics & KPIs</h4><span class="topic-expand-icon">+</span></div>
+          <p>Quantitative measures to track and communicate security program effectiveness.</p>
           <div class="topic-tags"><span class="topic-tag">Metrics</span><span class="topic-tag">Memorize</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Metrics</div><ul class="detail-points"><li><strong>MTTD</strong> — Mean Time To Detect. How fast incidents are found.</li><li><strong>MTTR</strong> — Mean Time To Repair/Restore. How fast issues are fixed.</li><li><strong>MTBF</strong> — Mean Time Between Failures. System reliability measure.</li><li><strong>MTTF</strong> — Mean Time To Failure. For non-repairable components.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Formula</div><ul class="detail-points"><li><strong>Availability = MTBF ÷ (MTBF + MTTR)</strong></li><li>Higher MTBF + Lower MTTR = Higher Availability.</li></ul></div>
+            <div class="exam-tip">Five 9s availability = 99.999% = ~5.26 minutes downtime/year. To improve availability: increase MTBF (better hardware) or decrease MTTR (faster recovery).</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>📝 Log Management & SIEM</h4>
-          <p>Centralized log aggregation. SIEM: correlation, normalization, alerting. Log integrity (write-once, hashing). NTP for time synchronization. Retention policies. What to log: success/failure, admin actions.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📝 Log Management & SIEM</h4><span class="topic-expand-icon">+</span></div>
+          <p>Collecting, correlating, and analyzing security event data for detection and investigation.</p>
           <div class="topic-tags"><span class="topic-tag">SIEM</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">SIEM Capabilities</div><ul class="detail-points"><li><strong>Log aggregation</strong> — collect logs from all sources centrally.</li><li><strong>Normalization</strong> — convert different log formats to common format.</li><li><strong>Correlation</strong> — find patterns across multiple events.</li><li><strong>Alerting</strong> — notify security team of suspicious patterns.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Log Integrity</div><ul class="detail-points"><li><strong>Write-once media</strong> — logs cannot be modified after written.</li><li><strong>NTP</strong> — time synchronization critical for log correlation.</li><li><strong>Hashing</strong> — hash logs to detect tampering.</li></ul></div>
+            <div class="exam-tip">Without NTP (synchronized time), correlating events across systems is unreliable. Time is critical in forensics and log analysis.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🧪 Software Testing</h4>
-          <p>Unit → Integration → System → Acceptance testing. Regression testing after patches. Fuzzing (mutation-based, generation-based). Interface testing. API security testing. Test environments vs production.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🧪 Software Testing</h4><span class="topic-expand-icon">+</span></div>
+          <p>Structured testing approaches across the software development lifecycle.</p>
           <div class="topic-tags"><span class="topic-tag">Software Testing</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Testing Stages</div><ul class="detail-points"><li><strong>Unit testing</strong> — test individual functions/modules.</li><li><strong>Integration testing</strong> — test how components work together.</li><li><strong>System testing</strong> — test the complete system.</li><li><strong>Acceptance testing (UAT)</strong> — user validates it meets requirements.</li><li><strong>Regression testing</strong> — re-test after changes to ensure nothing broke.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Specialized Testing</div><ul class="detail-points"><li><strong>Fuzzing</strong> — random/malformed input to find crashes and vulnerabilities.</li><li><strong>Mutation testing</strong> — modify code slightly to verify tests catch bugs.</li></ul></div>
+            <div class="exam-tip">Regression testing is critical after patches. Every code change could break something. Never deploy without regression testing in production environments.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔄 Continuous Monitoring</h4>
-          <p>Ongoing authorization (continuous ATO vs point-in-time). Automated scanning cadence. Threat intelligence feeds integration. Anomaly detection baselines. Purple teaming (red + blue combined).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔄 Continuous Monitoring</h4><span class="topic-expand-icon">+</span></div>
+          <p>Ongoing security monitoring rather than point-in-time assessments.</p>
           <div class="topic-tags"><span class="topic-tag">Continuous</span><span class="topic-tag">2024 Focus</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Concepts</div><ul class="detail-points"><li><strong>Continuous ATO</strong> — ongoing authorization vs periodic point-in-time reauthorization.</li><li><strong>Automated scanning</strong> — regular vulnerability scans without manual trigger.</li><li><strong>Threat intel feeds</strong> — integrate real-time threat data into monitoring.</li><li><strong>Anomaly detection</strong> — establish baselines, alert on deviations.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Team Models</div><ul class="detail-points"><li><strong>Red Team</strong> — offensive, simulates attackers.</li><li><strong>Blue Team</strong> — defensive, detects and responds.</li><li><strong>Purple Team</strong> — combines red and blue for continuous improvement.</li></ul></div>
+            <div class="exam-tip">Purple teaming is the modern approach — red and blue working together to continuously improve defenses rather than adversarial exercises with no knowledge transfer.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🎯 Red Team / Blue Team</h4>
-          <p>Red Team: offensive, simulates attackers. Blue Team: defensive, detects/responds. Purple Team: combines both for continuous improvement. Tabletop exercises (TTX). War gaming scenarios.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🎯 Red Team / Blue Team</h4><span class="topic-expand-icon">+</span></div>
+          <p>Structured adversarial exercises to test and improve security defenses.</p>
           <div class="topic-tags"><span class="topic-tag">Teams</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Team Roles</div><ul class="detail-points"><li><strong>Red Team</strong> — offensive security. Simulates real attackers. Tests detection and response.</li><li><strong>Blue Team</strong> — defensive security. Detects, responds, and recovers from attacks.</li><li><strong>Purple Team</strong> — hybrid. Red and blue work together. Maximizes learning.</li><li><strong>White Team</strong> — administrators and referees of the exercise.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Exercise Types</div><ul class="detail-points"><li><strong>Tabletop Exercise (TTX)</strong> — discussion-based. No live systems. Tests plans and communication.</li><li><strong>Live Fire Exercise</strong> — real systems, real attacks. Tests actual capabilities.</li></ul></div>
+            <div class="exam-tip">Tabletop exercises are the cheapest and safest way to test incident response. Live exercises are more realistic but carry risk of unintended damage.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -758,45 +1022,83 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2re
         </div>
       </div>
       <div class="topics-grid">
-        <div class="topic-card">
-          <h4>🚨 Incident Response Process</h4>
-          <p>NIST SP 800-61: Preparation → Detection/Analysis → Containment → Eradication → Recovery → Lessons Learned. PICERL mnemonic. IR plan vs IR procedure. Communication protocols (internal/external/legal).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🚨 Incident Response Process</h4><span class="topic-expand-icon">+</span></div>
+          <p>The structured 6-phase process for detecting, containing, and recovering from incidents.</p>
           <div class="topic-tags"><span class="topic-tag">IR</span><span class="topic-tag">Always Tested</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">NIST SP 800-61 Phases (PICERL)</div><ul class="detail-points"><li><strong>1. Preparation</strong> — IR plan, team, tools, training. Before anything happens.</li><li><strong>2. Identification/Detection</strong> — confirm incident, scope, severity.</li><li><strong>3. Containment</strong> — FIRST PRIORITY. Stop the spread. Short-term then long-term.</li><li><strong>4. Eradication</strong> — remove malware, close vulnerabilities, patch systems.</li><li><strong>5. Recovery</strong> — restore systems, verify normal operation, monitor.</li><li><strong>6. Lessons Learned</strong> — post-incident review, improve processes.</li></ul></div>
+            <div class="exam-tip">Containment is ALWAYS the first active step. Evidence collection is important but secondary to stopping the damage from spreading. "People In California Eat Real Lemons" = PICERL.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔬 Digital Forensics</h4>
-          <p>Chain of custody, order of volatility (RAM → swap → HDD). Locard's Exchange Principle. Write blockers, forensic copies (dd). Legal hold. eDiscovery. Anti-forensics awareness. Forensics vs incident response.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔬 Digital Forensics</h4><span class="topic-expand-icon">+</span></div>
+          <p>Scientifically collecting and analyzing digital evidence for legal proceedings.</p>
           <div class="topic-tags"><span class="topic-tag">Forensics</span><span class="topic-tag">High Priority</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Order of Volatility (collect first)</div><ul class="detail-points"><li><strong>1.</strong> CPU registers and cache (most volatile).</li><li><strong>2.</strong> RAM — running processes, network connections, encryption keys.</li><li><strong>3.</strong> Swap/page file.</li><li><strong>4.</strong> Disk storage.</li><li><strong>5.</strong> Remote/cloud logs (least volatile).</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Key Principles</div><ul class="detail-points"><li><strong>Chain of custody</strong> — document all evidence handling. Required for court admissibility.</li><li><strong>Write blocker</strong> — prevents accidental modification of evidence media.</li><li><strong>Forensic copy</strong> — bit-for-bit copy. Never work on originals.</li><li><strong>Locard's Principle</strong> — every contact leaves a trace.</li></ul></div>
+            <div class="exam-tip">NEVER work on original evidence. Always make a forensic copy (hash-verified), work on the copy, and preserve the original. Breaking chain of custody = inadmissible evidence.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>💾 Disaster Recovery</h4>
-          <p>DRP = IT recovery (tactical). Hot site (immediate), Warm site (hours), Cold site (days). Reciprocal agreement. MTD, RTO, RPO relationships. Data backup: full, incremental, differential. 3-2-1 rule.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>💾 Disaster Recovery</h4><span class="topic-expand-icon">+</span></div>
+          <p>Technical plans and procedures to restore IT systems after a disaster.</p>
           <div class="topic-tags"><span class="topic-tag">DR</span><span class="topic-tag">Core</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Recovery Sites</div><ul class="detail-points"><li><strong>Hot Site</strong> — fully operational mirror. Minutes to failover. Most expensive.</li><li><strong>Warm Site</strong> — partially configured. Hours to activate. Medium cost.</li><li><strong>Cold Site</strong> — empty space + power. Days to weeks. Cheapest.</li><li><strong>Reciprocal Agreement</strong> — two orgs agree to host each other. Low cost, low reliability.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Backup Types</div><ul class="detail-points"><li><strong>Full</strong> — all data. Slowest backup, fastest restore (1 set).</li><li><strong>Incremental</strong> — since last backup. Fastest backup, slowest restore (all sets).</li><li><strong>Differential</strong> — since last FULL. Medium backup, medium restore (full + 1).</li><li><strong>3-2-1 Rule</strong> — 3 copies, 2 media types, 1 offsite.</li></ul></div>
+            <div class="exam-tip">RTO must be less than MTD or the business cannot survive. RPO determines backup frequency. If RPO = 4 hours, you must back up at least every 4 hours.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔄 Change Management</h4>
-          <p>RFC (Request for Change) process. CAB (Change Advisory Board). Emergency changes. Rollback procedures. Configuration baselines. Patch management lifecycle. CMDB maintenance.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔄 Change Management</h4><span class="topic-expand-icon">+</span></div>
+          <p>Controlled process for managing changes to IT systems to minimize risk.</p>
           <div class="topic-tags"><span class="topic-tag">Change Mgmt</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Change Process</div><ul class="detail-points"><li><strong>RFC (Request for Change)</strong> — formal request documenting what and why.</li><li><strong>CAB (Change Advisory Board)</strong> — approves or rejects changes. Risk assessment.</li><li><strong>Testing</strong> — test in non-production environment first.</li><li><strong>Rollback plan</strong> — must have undo procedure before deploying.</li><li><strong>Post-implementation review</strong> — verify change achieved goals, no issues.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Change Types</div><ul class="detail-points"><li><strong>Standard change</strong> — pre-approved, low-risk, routine.</li><li><strong>Emergency change</strong> — expedited approval for urgent issues (e.g. zero-day patch).</li></ul></div>
+            <div class="exam-tip">Most security incidents are caused by unauthorized or poorly managed changes. Change management prevents unintended consequences and provides accountability.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🛡️ Security Operations Center (SOC)</h4>
-          <p>Tier 1 (triage/alert) → Tier 2 (investigation) → Tier 3 (threat hunting/advanced analysis). SOAR (Security Orchestration, Automation, Response). Playbooks and runbooks. 24/7 monitoring requirements.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🛡️ Security Operations Center (SOC)</h4><span class="topic-expand-icon">+</span></div>
+          <p>Centralized team monitoring and responding to security events 24/7.</p>
           <div class="topic-tags"><span class="topic-tag">SOC</span><span class="topic-tag">2024 Focus</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">SOC Tiers</div><ul class="detail-points"><li><strong>Tier 1</strong> — alert triage, initial investigation, escalation. High volume, lower complexity.</li><li><strong>Tier 2</strong> — deeper investigation, incident handling.</li><li><strong>Tier 3</strong> — threat hunting, malware analysis, advanced analysis. Highest skill.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Key Tools</div><ul class="detail-points"><li><strong>SIEM</strong> — centralized logging and correlation.</li><li><strong>SOAR</strong> — Security Orchestration Automation and Response. Automates playbooks.</li><li><strong>Playbook</strong> — documented step-by-step response procedure for specific scenarios.</li></ul></div>
+            <div class="exam-tip">SOAR automates repetitive SOC tasks (e.g. block IP, create ticket, notify team). Reduces analyst fatigue and response time. Key for scaling SOC operations.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>⚙️ Patch & Vulnerability Management</h4>
-          <p>Patch management lifecycle: identify → test → deploy → verify. Zero-day handling. CVSS scoring for prioritization. Virtual patching (WAF/IPS rules). EOL/EOS systems risk management.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>⚙️ Patch & Vulnerability Management</h4><span class="topic-expand-icon">+</span></div>
+          <p>Systematic identification, prioritization, and remediation of security vulnerabilities.</p>
           <div class="topic-tags"><span class="topic-tag">Patching</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Patch Lifecycle</div><ul class="detail-points"><li><strong>Identify</strong> — vulnerability scanning, vendor advisories, threat intel.</li><li><strong>Prioritize</strong> — CVSS score, asset criticality, exploitability.</li><li><strong>Test</strong> — validate patch in non-production environment.</li><li><strong>Deploy</strong> — roll out using change management process.</li><li><strong>Verify</strong> — confirm patch applied and vulnerability resolved.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Special Cases</div><ul class="detail-points"><li><strong>Zero-day</strong> — no patch exists yet. Use virtual patching (WAF/IPS rules) as interim.</li><li><strong>EOL/EOS systems</strong> — no more vendor patches. Isolate, compensating controls, or replace.</li></ul></div>
+            <div class="exam-tip">CVSS (Common Vulnerability Scoring System) scores 0–10. Critical = 9–10, patch immediately. Patching without testing first can break production systems — always test first.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔐 Configuration & Asset Management</h4>
-          <p>CIS Benchmarks, DISA STIGs for hardening. Baselining. Whitelisting vs blacklisting. Secure baseline images. Automated configuration compliance scanning (Nessus, OpenSCAP).</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔐 Configuration & Asset Management</h4><span class="topic-expand-icon">+</span></div>
+          <p>Maintaining secure configurations and complete asset inventory.</p>
           <div class="topic-tags"><span class="topic-tag">Config</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Hardening Standards</div><ul class="detail-points"><li><strong>CIS Benchmarks</strong> — community consensus security configuration guidelines.</li><li><strong>DISA STIGs</strong> — US DoD hardening requirements. Very strict.</li><li><strong>Secure baseline</strong> — approved hardened build applied to all systems.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Key Concepts</div><ul class="detail-points"><li><strong>Configuration drift</strong> — systems diverging from baseline over time. Risk increases.</li><li><strong>Application whitelisting</strong> — only approved software can run. Most restrictive.</li><li><strong>Application blacklisting</strong> — block known bad software. Less restrictive, easier to bypass.</li></ul></div>
+            <div class="exam-tip">Whitelisting is more secure (only approved apps run) but harder to maintain. Blacklisting is easier but attackers can always create new malware not on the list.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>☁️ Cloud Operations Security</h4>
-          <p>Cloud-native incident response challenges (ephemeral resources). Shared responsibility in incidents. Cloud trail logs. Immutable infrastructure. Container forensics. Serverless monitoring.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>☁️ Cloud Operations Security</h4><span class="topic-expand-icon">+</span></div>
+          <p>Unique security challenges when operating in cloud environments.</p>
           <div class="topic-tags"><span class="topic-tag">Cloud Ops</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Cloud-Specific Challenges</div><ul class="detail-points"><li><strong>Ephemeral resources</strong> — servers spin up and down, making forensics harder.</li><li><strong>Immutable infrastructure</strong> — replace rather than patch. Reduces config drift.</li><li><strong>CloudTrail/Audit logs</strong> — cloud provider logs all API calls. Critical for investigation.</li><li><strong>Shared responsibility</strong> — provider handles infrastructure security; customer handles data and access.</li></ul></div>
+            <div class="exam-tip">Cloud forensics challenge: by the time you investigate, the VM may be gone. Enable logging BEFORE incidents happen. CloudTrail logs must be enabled proactively.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -812,45 +1114,80 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2re
         </div>
       </div>
       <div class="topics-grid">
-        <div class="topic-card">
-          <h4>🔄 Secure SDLC</h4>
-          <p>Waterfall, Agile, DevOps/DevSecOps models. Security gates at each phase: requirements → design → coding → testing → deployment → maintenance. Shift-left security principle. Security in Agile sprints.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔄 Secure SDLC</h4><span class="topic-expand-icon">+</span></div>
+          <p>Embedding security at every phase of the software development lifecycle.</p>
           <div class="topic-tags"><span class="topic-tag">SDLC</span><span class="topic-tag">Core</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">SDLC Phases + Security</div><ul class="detail-points"><li><strong>Requirements</strong> — define security requirements early.</li><li><strong>Design</strong> — threat modeling (STRIDE), secure architecture review.</li><li><strong>Coding</strong> — secure coding practices, code review.</li><li><strong>Testing</strong> — SAST, DAST, pen testing.</li><li><strong>Deployment</strong> — hardened configs, secrets management.</li><li><strong>Maintenance</strong> — patch management, vulnerability monitoring.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Development Models</div><ul class="detail-points"><li><strong>Waterfall</strong> — sequential. Security often added at end (bad).</li><li><strong>Agile</strong> — iterative sprints. Security must be in every sprint.</li><li><strong>DevSecOps</strong> — security integrated into CI/CD pipeline. Shift-left.</li></ul></div>
+            <div class="exam-tip">Shift-left = fix security earlier = cheaper. A bug found in requirements costs 1x to fix. The same bug found in production costs 100x. Always integrate security early.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🐛 Common Software Vulnerabilities</h4>
-          <p>OWASP Top 10: Injection (SQLi, XSS, XXE), Broken Authentication, IDOR, Security Misconfiguration, Cryptographic Failures, SSRF, Insecure Deserialization. Buffer overflow, format string, race conditions.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🐛 Common Software Vulnerabilities</h4><span class="topic-expand-icon">+</span></div>
+          <p>The most prevalent and dangerous software security weaknesses.</p>
           <div class="topic-tags"><span class="topic-tag">OWASP</span><span class="topic-tag">Always Tested</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">OWASP Top 10 Highlights</div><ul class="detail-points"><li><strong>Injection (A03)</strong> — SQL, XSS, command injection. Input treated as code. Fix: parameterized queries.</li><li><strong>Broken Access Control (A01)</strong> — users can act beyond their permissions. Fix: deny by default.</li><li><strong>Cryptographic Failures (A02)</strong> — weak/no encryption. Fix: TLS, strong algorithms.</li><li><strong>Security Misconfiguration (A05)</strong> — default credentials, open cloud buckets. Fix: hardening.</li><li><strong>SSRF (A10)</strong> — server-side request forgery. Server makes requests attacker controls.</li></ul></div>
+            <div class="exam-tip">Injection is the classic OWASP vulnerability. SQL injection is the most common. Parameterized queries (prepared statements) are the primary defense. Input validation is secondary.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>💻 Secure Coding Practices</h4>
-          <p>Input validation (whitelist preferred), parameterized queries, output encoding, error handling (don't leak info), secure session management, least privilege for DB accounts. Code review process.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>💻 Secure Coding Practices</h4><span class="topic-expand-icon">+</span></div>
+          <p>Developer-level security practices that prevent common vulnerabilities.</p>
           <div class="topic-tags"><span class="topic-tag">Coding</span><span class="topic-tag">High Priority</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Core Practices</div><ul class="detail-points"><li><strong>Input validation</strong> — whitelist (allow known good) preferred over blacklist.</li><li><strong>Parameterized queries</strong> — prevent SQL injection. Never concatenate user input into SQL.</li><li><strong>Output encoding</strong> — encode output to prevent XSS.</li><li><strong>Error handling</strong> — generic error messages. Don't expose stack traces or system details.</li><li><strong>Least privilege for DB</strong> — app's DB account should only have needed permissions.</li></ul></div>
+            <div class="exam-tip">Never trust user input. Ever. Validate on the server side — client-side validation is easily bypassed. Whitelist (allow only known good) is always stronger than blacklist.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🧪 Software Testing Methods</h4>
-          <p>SAST (Static Analysis — code review without running). DAST (Dynamic Analysis — running application). IAST (Interactive). Fuzzing. Penetration testing of applications. Bug bounty programs.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🧪 Software Testing Methods</h4><span class="topic-expand-icon">+</span></div>
+          <p>Techniques for finding security vulnerabilities in software applications.</p>
           <div class="topic-tags"><span class="topic-tag">Testing</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Testing Types</div><ul class="detail-points"><li><strong>SAST</strong> — static analysis. No execution needed. Find early. False positive prone.</li><li><strong>DAST</strong> — dynamic analysis. Test running app. Finds runtime issues. Black-box approach.</li><li><strong>IAST</strong> — interactive. Agent inside running app. Best coverage.</li><li><strong>Fuzzing</strong> — random input to find crashes. Great for finding memory issues.</li><li><strong>Bug bounty</strong> — external researchers find and report vulnerabilities for rewards.</li></ul></div>
+            <div class="exam-tip">SAST = finds issues in code before running. DAST = finds issues in the running app. Both are needed. SAST catches more but has more false positives.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔗 API Security</h4>
-          <p>REST vs SOAP security. API keys vs OAuth tokens. Rate limiting, input validation, authentication for every endpoint. OWASP API Security Top 10. API gateway security. Version management.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔗 API Security</h4><span class="topic-expand-icon">+</span></div>
+          <p>Security considerations for application programming interfaces.</p>
           <div class="topic-tags"><span class="topic-tag">API</span><span class="topic-tag">2024 Added</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">API Security Controls</div><ul class="detail-points"><li><strong>Authentication</strong> — every endpoint must require auth. No anonymous access to sensitive data.</li><li><strong>Rate limiting</strong> — prevent abuse and brute force attacks.</li><li><strong>Input validation</strong> — validate all parameters, not just body.</li><li><strong>API gateway</strong> — centralized auth, rate limiting, logging for all APIs.</li><li><strong>HTTPS only</strong> — never expose APIs over plain HTTP.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">OWASP API Security Top 10</div><ul class="detail-points"><li><strong>Broken Object Level Auth (BOLA)</strong> — most common. Access other users' data via their IDs.</li><li><strong>Broken Auth</strong> — weak authentication mechanisms.</li><li><strong>Excessive Data Exposure</strong> — returning more data than needed.</li></ul></div>
+            <div class="exam-tip">BOLA (also called IDOR — Insecure Direct Object Reference) is the #1 API vulnerability. Attacker changes user ID in URL/request to access other users' data.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🏗️ Software Acquisition Security</h4>
-          <p>COTS (Commercial Off-The-Shelf) vs custom development. Third-party library risk (dependency confusion, typosquatting). Software Bill of Materials (SBOM). Vendor security assessments. License compliance.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🏗️ Software Acquisition Security</h4><span class="topic-expand-icon">+</span></div>
+          <p>Security risks when buying or using third-party software components.</p>
           <div class="topic-tags"><span class="topic-tag">Supply Chain</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Risks</div><ul class="detail-points"><li><strong>Dependency confusion</strong> — attacker publishes malicious package with same name as internal package.</li><li><strong>Typosquatting</strong> — malicious package with near-identical name to popular package.</li><li><strong>SBOM</strong> — Software Bill of Materials. Inventory of all components and dependencies.</li><li><strong>COTS</strong> — Commercial Off-The-Shelf. Must vet vendor security practices.</li></ul></div>
+            <div class="exam-tip">Log4Shell showed the world why SBOMs matter. One popular library with a vulnerability affected thousands of products. Know what's in your software supply chain.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🚀 DevSecOps</h4>
-          <p>CI/CD pipeline security: secrets management, SAST in pipeline, container scanning, IaC security (Terraform, CloudFormation). Infrastructure as Code security. GitOps security practices.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🚀 DevSecOps</h4><span class="topic-expand-icon">+</span></div>
+          <p>Integrating security into DevOps CI/CD pipelines for continuous security.</p>
           <div class="topic-tags"><span class="topic-tag">DevSecOps</span><span class="topic-tag">2024 Focus</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Pipeline Security</div><ul class="detail-points"><li><strong>Secrets management</strong> — never hardcode credentials. Use vaults (HashiCorp Vault, AWS Secrets Manager).</li><li><strong>SAST in pipeline</strong> — automated code scanning on every commit.</li><li><strong>Container scanning</strong> — check container images for vulnerabilities before deployment.</li><li><strong>IaC security</strong> — scan Terraform/CloudFormation templates for misconfigurations.</li></ul></div>
+            <div class="exam-tip">The biggest DevSecOps mistake is hardcoded secrets in code repositories. Scanning git history for secrets is a common attack technique. Use secrets vaults, not environment variables in code.</div>
+          </div>
         </div>
-        <div class="topic-card">
-          <h4>🔒 Database Security</h4>
-          <p>Database activity monitoring, polyinstantiation (security levels in DB). Aggregation and inference attacks. DB encryption (TDE). Stored procedures vs dynamic SQL. NoSQL security considerations.</p>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔒 Database Security</h4><span class="topic-expand-icon">+</span></div>
+          <p>Protecting data stored in databases from unauthorized access and manipulation.</p>
           <div class="topic-tags"><span class="topic-tag">Database</span></div>
+          <div class="topic-details">
+            <div class="detail-section"><div class="detail-label">Key Concepts</div><ul class="detail-points"><li><strong>Polyinstantiation</strong> — same data stored at multiple security levels to prevent inference.</li><li><strong>Aggregation attack</strong> — combining low-sensitivity data to infer high-sensitivity data.</li><li><strong>Inference attack</strong> — deducing sensitive info from query responses.</li><li><strong>TDE (Transparent Data Encryption)</strong> — encrypts entire database at rest.</li></ul></div>
+            <div class="detail-section"><div class="detail-label">Best Practices</div><ul class="detail-points"><li>Use stored procedures, not dynamic SQL.</li><li>Principle of least privilege for database accounts.</li><li>Database activity monitoring (DAM) for audit logging.</li></ul></div>
+            <div class="exam-tip">Aggregation and inference attacks are unique database threats. Example: knowing someone's zip code + job + age might reveal their identity even if name is hidden.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1319,6 +1656,16 @@ function restartQuiz() {
 
 // Init quiz
 loadQuiz('all');
+
+// EXPAND/COLLAPSE TOPIC CARDS
+function toggleTopic(card) {
+  const isOpen = card.classList.contains('expanded');
+  // Close all others in same grid
+  card.closest('.topics-grid').querySelectorAll('.topic-card.expanded').forEach(c => {
+    c.classList.remove('expanded');
+  });
+  if (!isOpen) card.classList.add('expanded');
+}
 
 // Animate weight bars on scroll
 const observer = new IntersectionObserver((entries) => {
