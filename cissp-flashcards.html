@@ -3,536 +3,415 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CISSP Flashcards — Master Every Domain</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>CISSP Flashcards — MasterGuide</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0d0f14;
-  --bg2: #13161e;
-  --bg3: #1a1e28;
-  --card-bg: #1e2232;
-  --border: #272d3f;
-  --accent: #6ee7b7;
-  --accent2: #818cf8;
-  --gold: #fbbf24;
-  --red: #f87171;
-  --green: #6ee7b7;
-  --text: #f0f2f8;
-  --text2: #8892a8;
-  --text3: #4a5268;
-  --shadow: 0 25px 60px rgba(0,0,0,.5);
+:root{
+  --bg:#ffffff;--bg-subtle:#f6f8fa;--bg-inset:#f0f4f8;
+  --border:#d0d7de;--border-muted:#e6eaef;
+  --text:#1f2328;--text-muted:#656d76;--text-light:#9198a1;
+  --blue:#0969da;--blue-light:#ddf4ff;--blue-border:#54aeff;--blue-dark:#0550ae;
+  --green:#1a7f37;--green-light:#dafbe1;
+  --red:#cf222e;--red-light:#ffebe9;
+  --gold:#9a6700;--gold-light:#fef9c3;
+  --shadow-sm:0 1px 3px rgba(31,35,40,.12),0 1px 2px rgba(31,35,40,.06);
+  --shadow:0 3px 6px rgba(31,35,40,.12),0 1px 4px rgba(31,35,40,.08);
+  --radius:6px;--radius-lg:12px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'Lora',serif;min-height:100vh;overflow-x:hidden;}
-
-/* BG EFFECT */
-body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(110,231,183,.06),transparent),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(129,140,248,.04),transparent);pointer-events:none;z-index:0;}
+body{background:var(--bg-subtle);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:1.5;min-height:100vh;}
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:var(--bg-subtle);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,15,20,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 2rem;}
-.nav-inner{max-width:1100px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--accent);letter-spacing:-.02em;}
-.logo span{color:var(--text3);font-weight:400;}
-.nav-stats{display:flex;gap:1.5rem;align-items:center;}
-.nav-stat{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--text3);}
-.nav-stat strong{color:var(--text);}
-.nav-reset{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--text3);background:none;border:1px solid var(--border);padding:4px 12px;border-radius:100px;cursor:pointer;transition:all .2s;}
-.nav-reset:hover{border-color:var(--red);color:var(--red);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;padding:0 1.5rem;}
+.nav-inner{max-width:1100px;margin:0 auto;width:100%;display:flex;align-items:center;gap:1rem;}
+.logo{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.9rem;color:var(--text);display:flex;align-items:center;gap:.5rem;text-decoration:none;}
+.logo-icon{width:26px;height:26px;background:var(--blue);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;font-weight:700;}
+.nav-back{margin-left:auto;font-size:.82rem;font-weight:500;color:var(--text-muted);text-decoration:none;display:flex;align-items:center;gap:.3rem;padding:5px 10px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg);transition:all .15s;}
+.nav-back:hover{border-color:var(--blue-border);color:var(--blue);}
+.nav-stats{display:flex;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;}
+.ns{display:flex;align-items:center;gap:.3rem;padding:3px 8px;border-radius:20px;border:1px solid var(--border);background:var(--bg);}
+.ns.known{background:var(--green-light);border-color:#82cfaf;color:var(--green);}
+.ns.review{background:var(--gold-light);border-color:#e3b341;color:var(--gold);}
 
-/* MAIN LAYOUT */
-main{max-width:1100px;margin:0 auto;padding:80px 2rem 4rem;position:relative;z-index:1;}
+/* MAIN */
+main{max-width:1100px;margin:0 auto;padding:76px 1.5rem 3rem;}
 
-/* DOMAIN FILTER */
-.domain-filter{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--border);}
-.filter-label{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;margin-right:.5rem;}
-.domain-btn{font-family:'DM Mono',monospace;font-size:.7rem;padding:5px 13px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all .2s;letter-spacing:.04em;}
-.domain-btn:hover{border-color:var(--accent);color:var(--accent);}
-.domain-btn.active{background:var(--accent);color:#000;border-color:var(--accent);font-weight:500;}
+/* CONTROLS */
+.controls{display:flex;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center;}
+.mode-group,.domain-group{display:flex;gap:.3rem;flex-wrap:wrap;}
+.ctrl-label{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-light);text-transform:uppercase;letter-spacing:.06em;align-self:center;white-space:nowrap;}
+.ctrl-btn{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;padding:4px 10px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg);color:var(--text-muted);cursor:pointer;transition:all .15s;white-space:nowrap;}
+.ctrl-btn:hover{border-color:var(--blue-border);color:var(--blue);}
+.ctrl-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+.ctrl-reset{margin-left:auto;font-size:.78rem;font-weight:500;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);padding:4px 10px;border-radius:var(--radius);cursor:pointer;font-family:inherit;transition:all .15s;}
+.ctrl-reset:hover{border-color:var(--red);color:var(--red);}
 
-/* PROGRESS BAR */
-.progress-section{margin-bottom:2.5rem;}
-.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;}
-.progress-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;}
-.progress-counts{display:flex;gap:1.5rem;}
-.prog-count{font-family:'DM Mono',monospace;font-size:.72rem;display:flex;align-items:center;gap:.4rem;}
-.prog-dot{width:8px;height:8px;border-radius:50%;}
-.prog-bar-track{background:var(--bg3);border-radius:100px;height:6px;overflow:hidden;display:flex;gap:2px;}
-.prog-bar-known{background:var(--green);height:100%;border-radius:100px;transition:width .5s ease;}
-.prog-bar-review{background:var(--gold);height:100%;border-radius:100px;transition:width .5s ease;}
+/* PROGRESS */
+.progress-wrap{margin-bottom:1.25rem;}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
+.progress-title{font-size:.82rem;font-weight:500;color:var(--text);}
+.progress-counts{display:flex;gap:.75rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-muted);}
+.pc{display:flex;align-items:center;gap:.3rem;}
+.pc-dot{width:7px;height:7px;border-radius:50%;}
+.progress-track{background:var(--border-muted);border-radius:100px;height:5px;overflow:hidden;display:flex;}
+.pt-known{background:var(--green);height:100%;border-radius:100px;transition:width .4s;}
+.pt-review{background:var(--gold);height:100%;border-radius:100px;transition:width .4s;}
 
-/* CARD AREA */
-.card-area{display:flex;flex-direction:column;align-items:center;gap:2rem;}
+/* PIPS */
+.pip-row{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:1rem;max-width:680px;margin-left:auto;margin-right:auto;}
+.pip{width:9px;height:9px;border-radius:50%;background:var(--border-muted);cursor:pointer;transition:all .2s;border:1.5px solid transparent;}
+.pip.known{background:var(--green);}
+.pip.review{background:var(--gold);}
+.pip.current{background:var(--blue);border-color:var(--blue-dark);transform:scale(1.3);}
+.pip:hover{transform:scale(1.2);}
 
-/* COUNTER */
-.card-counter{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--text3);letter-spacing:.06em;}
-.card-counter span{color:var(--text);}
+/* CARD */
+.card-area{display:flex;flex-direction:column;align-items:center;}
+.card-counter{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text-muted);text-align:center;margin-bottom:.75rem;}
+.card-wrap{width:100%;max-width:680px;height:320px;perspective:1200px;cursor:pointer;margin-bottom:1rem;}
+.card-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+.card-inner.flipped{transform:rotateY(180deg);}
+.card-face{position:absolute;inset:0;border-radius:var(--radius-lg);padding:1.75rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:var(--shadow);}
+.card-front{background:var(--bg);border:1px solid var(--border);}
+.card-back{background:var(--bg);border:1px solid var(--blue-border);transform:rotateY(180deg);}
+.card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-light);margin-bottom:.75rem;display:flex;align-items:center;gap:.4rem;}
+.card-badge{background:var(--bg-subtle);border:1px solid var(--border);border-radius:20px;padding:1px 8px;font-size:.65rem;color:var(--text-muted);}
+.card-q{font-size:1rem;font-weight:600;line-height:1.5;color:var(--text);max-width:520px;}
+.card-hint{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-light);margin-top:1rem;}
+.card-a{font-size:.88rem;line-height:1.65;color:var(--text-muted);max-width:520px;}
+.card-a strong{color:var(--blue);font-weight:600;}
+.card-a em{color:var(--gold);font-style:normal;font-weight:500;}
 
-/* FLASHCARD */
-.flashcard-wrap{width:100%;max-width:680px;height:360px;perspective:1200px;cursor:pointer;}
-.flashcard{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1);border-radius:20px;}
-.flashcard.flipped{transform:rotateY(180deg);}
-.card-face{position:absolute;inset:0;border-radius:20px;padding:2.5rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
-.card-front{background:var(--card-bg);border:1px solid var(--border);box-shadow:var(--shadow);}
-.card-back{background:var(--bg3);border:1px solid var(--accent);box-shadow:0 25px 60px rgba(110,231,183,.08);transform:rotateY(180deg);}
+/* ACTIONS */
+.action-row{display:flex;gap:.75rem;width:100%;max-width:680px;margin-bottom:.75rem;}
+.action-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:.4rem;padding:.75rem;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg);cursor:pointer;font-size:.82rem;font-weight:600;font-family:inherit;transition:all .15s;}
+.action-btn:disabled{opacity:.4;cursor:not-allowed;}
+.btn-review{border-color:#e3b341;color:var(--gold);}
+.btn-review:hover:not(:disabled){background:var(--gold-light);}
+.btn-known{border-color:#82cfaf;color:var(--green);}
+.btn-known:hover:not(:disabled){background:var(--green-light);}
+.btn-skip{flex:0;padding:.75rem 1rem;color:var(--text-muted);}
+.btn-skip:hover{border-color:var(--text-light);color:var(--text);}
 
-/* CARD CONTENT */
-.card-domain-tag{font-family:'DM Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;padding:3px 10px;border-radius:100px;border:1px solid var(--border);color:var(--text3);margin-bottom:1.25rem;}
-.card-hint{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--text3);margin-bottom:1rem;display:flex;align-items:center;gap:.4rem;}
-.card-hint-icon{font-size:.85rem;}
-.card-question{font-family:'Syne',sans-serif;font-weight:600;font-size:1.15rem;line-height:1.5;color:var(--text);max-width:520px;}
-.card-answer{font-size:.95rem;line-height:1.7;color:var(--text2);max-width:520px;}
-.card-answer strong{color:var(--accent);font-style:normal;}
-.card-answer em{color:var(--gold);font-style:normal;}
-.card-tap-hint{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text3);margin-top:1.5rem;opacity:.6;}
+/* NAV ARROWS */
+.nav-row{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+.nav-arrow{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;transition:all .15s;color:var(--text-muted);}
+.nav-arrow:hover{border-color:var(--blue-border);color:var(--blue);}
+.nav-arrow:disabled{opacity:.3;cursor:not-allowed;}
+.kbd-hints{display:flex;gap:1rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-light);flex-wrap:wrap;justify-content:center;}
+.kbd{background:var(--bg-subtle);border:1px solid var(--border);border-radius:3px;padding:1px 6px;color:var(--text-muted);}
 
-/* ACTION BUTTONS */
-.action-btns{display:flex;gap:1rem;width:100%;max-width:680px;}
-.action-btn{flex:1;padding:1rem;border-radius:12px;border:none;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:all .2s;letter-spacing:-.01em;}
-.btn-review{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);color:var(--gold);}
-.btn-review:hover{background:rgba(251,191,36,.18);border-color:var(--gold);transform:translateY(-2px);}
-.btn-known{background:rgba(110,231,183,.1);border:1px solid rgba(110,231,183,.3);color:var(--green);}
-.btn-known:hover{background:rgba(110,231,183,.18);border-color:var(--green);transform:translateY(-2px);}
-.btn-skip{background:var(--bg3);border:1px solid var(--border);color:var(--text3);flex:0;padding:1rem 1.25rem;}
-.btn-skip:hover{border-color:var(--text3);color:var(--text);transform:translateY(-2px);}
-
-/* NAVIGATION */
-.card-nav{display:flex;align-items:center;gap:1rem;width:100%;max-width:680px;justify-content:center;}
-.nav-btn{background:var(--bg3);border:1px solid var(--border);color:var(--text2);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:all .2s;}
-.nav-btn:hover{border-color:var(--accent2);color:var(--accent2);}
-.nav-btn:disabled{opacity:.3;cursor:not-allowed;}
-.card-status-row{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;max-width:680px;}
-.status-pip{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;cursor:pointer;}
-.status-pip.known{background:var(--green);}
-.status-pip.review{background:var(--gold);}
-.status-pip.current{box-shadow:0 0 0 2px var(--accent2);background:var(--accent2);}
-
-/* MODE SELECTOR */
-.mode-bar{display:flex;gap:.5rem;margin-bottom:2rem;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:4px;}
-.mode-btn{font-family:'DM Mono',monospace;font-size:.72rem;padding:6px 16px;border-radius:7px;border:none;background:transparent;color:var(--text3);cursor:pointer;transition:all .2s;letter-spacing:.04em;text-transform:uppercase;}
-.mode-btn.active{background:var(--bg3);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.3);}
-
-/* COMPLETE SCREEN */
-.complete-screen{display:none;text-align:center;padding:3rem 2rem;max-width:500px;margin:0 auto;}
+/* COMPLETE */
+.complete-screen{display:none;max-width:480px;margin:0 auto;text-align:center;padding:3rem 2rem;}
 .complete-screen.show{display:block;}
-.complete-emoji{font-size:4rem;margin-bottom:1rem;}
-.complete-title{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;margin-bottom:.5rem;}
-.complete-sub{color:var(--text2);margin-bottom:2rem;line-height:1.6;}
-.complete-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2rem;}
-.cs-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.25rem;}
-.cs-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;}
-.cs-label{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text3);text-transform:uppercase;margin-top:.25rem;}
-.complete-btns{display:flex;flex-direction:column;gap:.75rem;}
+.complete-icon{font-size:3rem;margin-bottom:1rem;}
+.complete-title{font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:.4rem;}
+.complete-sub{font-size:.88rem;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.6;}
+.complete-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:1.5rem;}
+.cs-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem;}
+.cs-num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.5rem;}
+.cs-label{font-size:.72rem;color:var(--text-muted);margin-top:.2rem;}
+.complete-btns{display:flex;flex-direction:column;gap:.5rem;}
 
-/* KEYBOARD HINT */
-.keyboard-hint{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--text3);display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;}
-.key{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:2px 8px;color:var(--text2);}
-
-/* TOAST */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.75rem 1.5rem;font-family:'DM Mono',monospace;font-size:.8rem;z-index:999;transition:transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;}
-.toast.show{transform:translateX(-50%) translateY(0);}
-.toast.green{border-color:var(--green);color:var(--green);}
-.toast.gold{border-color:var(--gold);color:var(--gold);}
-
+/* RESPONSIVE */
 @media(max-width:600px){
-  .flashcard-wrap{height:300px;}
-  .card-question{font-size:1rem;}
-  .action-btns{flex-wrap:wrap;}
+  main{padding:70px 1rem 2.5rem;}
+  .card-wrap{height:260px;}
+  .card-q{font-size:.92rem;}
+  .action-row{flex-wrap:wrap;}
   .btn-skip{flex:1;}
+  .nav-stats{display:none;}
   .complete-stats{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-inner">
-    <div class="logo">CISSP<span>Flashcards</span></div>
+    <a class="logo" href="index.html">
+      <div class="logo-icon">C²</div>
+      CISSP Flashcards
+    </a>
     <div class="nav-stats">
-      <div class="nav-stat">Known: <strong id="navKnown">0</strong></div>
-      <div class="nav-stat">Review: <strong id="navReview">0</strong></div>
-      <div class="nav-stat">Total: <strong id="navTotal">0</strong></div>
-      <button class="nav-reset" onclick="resetAll()">Reset All</button>
+      <div class="ns known">✓ <span id="nsKnown">0</span> known</div>
+      <div class="ns review">↺ <span id="nsReview">0</span> review</div>
+      <div class="ns"><span id="nsTotal">0</span> total</div>
     </div>
+    <a class="nav-back" href="index.html">← Study guide</a>
   </div>
 </nav>
 
 <main>
-
-  <!-- MODE BAR -->
-  <div class="mode-bar">
-    <button class="mode-btn active" onclick="setMode('all',this)">All Cards</button>
-    <button class="mode-btn" onclick="setMode('review',this)">Review Again</button>
-    <button class="mode-btn" onclick="setMode('unknown',this)">Not Yet Seen</button>
-    <button class="mode-btn" onclick="setMode('known',this)">Known</button>
+  <div class="controls">
+    <span class="ctrl-label">Mode:</span>
+    <div class="mode-group">
+      <button class="ctrl-btn active" onclick="setMode('all',this)">All cards</button>
+      <button class="ctrl-btn" onclick="setMode('review',this)">Review again</button>
+      <button class="ctrl-btn" onclick="setMode('unknown',this)">Not yet seen</button>
+      <button class="ctrl-btn" onclick="setMode('known',this)">Known</button>
+    </div>
+    <button class="ctrl-reset" onclick="resetAll()">Reset progress</button>
+  </div>
+  <div class="controls" style="margin-top:-.5rem;">
+    <span class="ctrl-label">Domain:</span>
+    <div class="domain-group">
+      <button class="ctrl-btn active" onclick="filterDomain('all',this)">All</button>
+      <button class="ctrl-btn" onclick="filterDomain('D1',this)">D1</button>
+      <button class="ctrl-btn" onclick="filterDomain('D2',this)">D2</button>
+      <button class="ctrl-btn" onclick="filterDomain('D3',this)">D3</button>
+      <button class="ctrl-btn" onclick="filterDomain('D4',this)">D4</button>
+      <button class="ctrl-btn" onclick="filterDomain('D5',this)">D5</button>
+      <button class="ctrl-btn" onclick="filterDomain('D6',this)">D6</button>
+      <button class="ctrl-btn" onclick="filterDomain('D7',this)">D7</button>
+      <button class="ctrl-btn" onclick="filterDomain('D8',this)">D8</button>
+    </div>
   </div>
 
-  <!-- DOMAIN FILTER -->
-  <div class="domain-filter">
-    <span class="filter-label">Domain:</span>
-    <button class="domain-btn active" onclick="filterDomain('all',this)">All</button>
-    <button class="domain-btn" onclick="filterDomain('D1',this)">D1 · Risk</button>
-    <button class="domain-btn" onclick="filterDomain('D2',this)">D2 · Asset</button>
-    <button class="domain-btn" onclick="filterDomain('D3',this)">D3 · Architecture</button>
-    <button class="domain-btn" onclick="filterDomain('D4',this)">D4 · Network</button>
-    <button class="domain-btn" onclick="filterDomain('D5',this)">D5 · IAM</button>
-    <button class="domain-btn" onclick="filterDomain('D6',this)">D6 · Assessment</button>
-    <button class="domain-btn" onclick="filterDomain('D7',this)">D7 · Operations</button>
-    <button class="domain-btn" onclick="filterDomain('D8',this)">D8 · Software</button>
-  </div>
-
-  <!-- PROGRESS -->
-  <div class="progress-section">
+  <div class="progress-wrap">
     <div class="progress-header">
-      <div class="progress-title" id="progressTitle">Loading cards...</div>
+      <div class="progress-title" id="progressTitle">Loading...</div>
       <div class="progress-counts">
-        <div class="prog-count"><div class="prog-dot" style="background:var(--green)"></div><span id="countKnown">0</span> Known</div>
-        <div class="prog-count"><div class="prog-dot" style="background:var(--gold)"></div><span id="countReview">0</span> Review</div>
-        <div class="prog-count"><div class="prog-dot" style="background:var(--border)"></div><span id="countUnseen">0</span> Unseen</div>
+        <div class="pc"><div class="pc-dot" style="background:var(--green)"></div><span id="pcKnown">0</span> known</div>
+        <div class="pc"><div class="pc-dot" style="background:var(--gold)"></div><span id="pcReview">0</span> review</div>
+        <div class="pc"><div class="pc-dot" style="background:var(--border-muted)"></div><span id="pcUnseen">0</span> unseen</div>
       </div>
     </div>
-    <div class="prog-bar-track">
-      <div class="prog-bar-known" id="progKnown" style="width:0%"></div>
-      <div class="prog-bar-review" id="progReview" style="width:0%"></div>
+    <div class="progress-track">
+      <div class="pt-known" id="ptKnown" style="width:0%"></div>
+      <div class="pt-review" id="ptReview" style="width:0%"></div>
     </div>
   </div>
 
-  <!-- CARD AREA -->
   <div class="card-area" id="cardArea">
     <div class="card-counter"><span id="cardNum">1</span> of <span id="cardTotal">—</span></div>
-
-    <div class="flashcard-wrap" onclick="flipCard()">
-      <div class="flashcard" id="flashcard">
+    <div class="pip-row" id="pipRow"></div>
+    <div class="card-wrap" onclick="flipCard()">
+      <div class="card-inner" id="cardInner">
         <div class="card-face card-front">
-          <div class="card-domain-tag" id="cardDomain">D1 · Risk Management</div>
-          <div class="card-hint"><span class="card-hint-icon">❓</span> Question</div>
-          <div class="card-question" id="cardQuestion">Loading...</div>
-          <div class="card-tap-hint">tap to reveal answer</div>
+          <div class="card-eyebrow"><span id="cardBadgeFront" class="card-badge">D1</span><span>question</span></div>
+          <div class="card-q" id="cardQ">Loading...</div>
+          <div class="card-hint">click to reveal answer</div>
         </div>
         <div class="card-face card-back">
-          <div class="card-domain-tag" id="cardDomainBack">D1 · Risk Management</div>
-          <div class="card-hint"><span class="card-hint-icon">💡</span> Answer</div>
-          <div class="card-answer" id="cardAnswer">Loading...</div>
+          <div class="card-eyebrow"><span id="cardBadgeBack" class="card-badge">D1</span><span style="color:var(--blue)">answer</span></div>
+          <div class="card-a" id="cardA">Loading...</div>
         </div>
       </div>
     </div>
-
-    <!-- ACTION BUTTONS -->
-    <div class="action-btns" id="actionBtns" style="display:none;">
-      <button class="action-btn btn-review" onclick="markCard('review')">🔁 Review Again</button>
-      <button class="action-btn btn-known" onclick="markCard('known')">✅ Got It!</button>
-      <button class="action-btn btn-skip" onclick="nextCard()" title="Skip">→</button>
+    <div class="action-row" id="actionRow" style="display:none;">
+      <button class="action-btn btn-review" onclick="markCard('review')">↺ Review again</button>
+      <button class="action-btn btn-known" onclick="markCard('known')">✓ Got it</button>
+      <button class="action-btn btn-skip" onclick="nextCard()">→</button>
     </div>
-
-    <!-- NAV -->
-    <div class="card-nav">
-      <button class="nav-btn" id="prevBtn" onclick="prevCard()">←</button>
-      <div class="card-status-row" id="statusPips"></div>
-      <button class="nav-btn" id="nextBtn" onclick="nextCard()">→</button>
-    </div>
-
-    <!-- KEYBOARD HINTS -->
-    <div class="keyboard-hint">
-      <span><span class="key">Space</span> Flip</span>
-      <span><span class="key">←</span> Previous</span>
-      <span><span class="key">→</span> Next</span>
-      <span><span class="key">K</span> Known</span>
-      <span><span class="key">R</span> Review</span>
+    <div class="nav-row">
+      <button class="nav-arrow" id="prevBtn" onclick="prevCard()">←</button>
+      <div class="kbd-hints">
+        <span><span class="kbd">Space</span> flip</span>
+        <span><span class="kbd">← →</span> navigate</span>
+        <span><span class="kbd">K</span> known</span>
+        <span><span class="kbd">R</span> review</span>
+      </div>
+      <button class="nav-arrow" id="nextBtn" onclick="nextCard()">→</button>
     </div>
   </div>
 
-  <!-- COMPLETE SCREEN -->
   <div class="complete-screen" id="completeScreen">
-    <div class="complete-emoji" id="completeEmoji">🎉</div>
-    <h2 class="complete-title" id="completeTitle">Deck Complete!</h2>
-    <p class="complete-sub" id="completeSub">You've gone through all the cards in this set.</p>
+    <div class="complete-icon" id="completeIcon">🎉</div>
+    <div class="complete-title" id="completeTitle">Deck complete!</div>
+    <div class="complete-sub" id="completeSub"></div>
     <div class="complete-stats">
-      <div class="cs-card"><div class="cs-num" id="csKnown" style="color:var(--green)">0</div><div class="cs-label">Known</div></div>
-      <div class="cs-card"><div class="cs-num" id="csReview" style="color:var(--gold)">0</div><div class="cs-label">Review</div></div>
-      <div class="cs-card"><div class="cs-num" id="csPct" style="color:var(--accent2)">0%</div><div class="cs-label">Score</div></div>
+      <div class="cs-card"><div class="cs-num" style="color:var(--green)" id="csKnown">0</div><div class="cs-label">Known</div></div>
+      <div class="cs-card"><div class="cs-num" style="color:var(--gold)" id="csReview">0</div><div class="cs-label">Review</div></div>
+      <div class="cs-card"><div class="cs-num" style="color:var(--blue)" id="csPct">0%</div><div class="cs-label">Score</div></div>
     </div>
     <div class="complete-btns">
-      <button class="action-btn btn-known" style="flex:none;width:100%;justify-content:center;" onclick="setMode('review', document.querySelectorAll('.mode-btn')[1])">🔁 Study Review Cards</button>
-      <button class="action-btn btn-skip" style="flex:none;width:100%;justify-content:center;" onclick="setMode('all', document.querySelectorAll('.mode-btn')[0])">↩ Start Over</button>
+      <button class="action-btn btn-review" style="flex:none;width:100%;justify-content:center;" onclick="setMode('review',document.querySelectorAll('.mode-group .ctrl-btn')[1])">↺ Study review cards</button>
+      <button class="action-btn btn-skip" style="flex:none;width:100%;justify-content:center;" onclick="setMode('all',document.querySelectorAll('.mode-group .ctrl-btn')[0])">Start over</button>
     </div>
   </div>
-
 </main>
 
-<div class="toast" id="toast"></div>
-
 <script>
-// ─── FLASHCARD DATA ───────────────────────────────────────────────────────────
-const ALL_CARDS = [
-  // D1 - Security & Risk Management
-  {id:1,domain:"D1",domainName:"Security & Risk Management",q:"What does the CIA Triad stand for?",a:"<strong>Confidentiality</strong> — preventing unauthorized disclosure.<br><strong>Integrity</strong> — preventing unauthorized modification.<br><strong>Availability</strong> — ensuring authorized access when needed.<br><em>The three foundational pillars of information security.</em>"},
-  {id:2,domain:"D1",domainName:"Security & Risk Management",q:"What is the formula for Annual Loss Expectancy (ALE)?",a:"<strong>ALE = SLE × ARO</strong><br><em>SLE</em> = Single Loss Expectancy (Asset Value × Exposure Factor)<br><em>ARO</em> = Annual Rate of Occurrence<br>Example: $200K SLE × 0.5 ARO = <strong>$100K ALE/year</strong>"},
-  {id:3,domain:"D1",domainName:"Security & Risk Management",q:"What are the four risk responses (risk treatment options)?",a:"<strong>Accept</strong> — acknowledge and live with the risk<br><strong>Transfer</strong> — shift to third party (insurance, contracts)<br><strong>Avoid</strong> — eliminate the activity causing the risk<br><strong>Mitigate</strong> — reduce likelihood or impact<br><em>Mnemonic: ATAM</em>"},
-  {id:4,domain:"D1",domainName:"Security & Risk Management",q:"What is the difference between Due Care and Due Diligence?",a:"<strong>Due Care</strong> — doing what a reasonable person would do; the minimum standard of action taken.<br><strong>Due Diligence</strong> — the ongoing research and investigation to maintain due care.<br><em>Think: Due Care = doing it. Due Diligence = researching what to do.</em>"},
-  {id:5,domain:"D1",domainName:"Security & Risk Management",q:"What is the ISC² Code of Ethics priority order?",a:"<strong>1.</strong> Protect society, the common good<br><strong>2.</strong> Act honorably, honestly, justly<br><strong>3.</strong> Provide competent service<br><strong>4.</strong> Advance the profession<br><em>Society ALWAYS wins over employer interest in exam scenarios.</em>"},
-  {id:6,domain:"D1",domainName:"Security & Risk Management",q:"What is the difference between BCP and DRP?",a:"<strong>BCP</strong> (Business Continuity Plan) — maintains business operations during a disruption. Long-term, business-wide.<br><strong>DRP</strong> (Disaster Recovery Plan) — restores IT systems after a disaster. Tactical, IT-focused.<br><em>DRP is a subset of BCP.</em>"},
-  {id:7,domain:"D1",domainName:"Security & Risk Management",q:"What is the NIST Cybersecurity Framework's 5 core functions?",a:"<strong>Identify → Protect → Detect → Respond → Recover</strong><br><em>Identify:</em> Asset management, risk assessment<br><em>Protect:</em> Access control, training, data security<br><em>Detect:</em> Anomalies, monitoring<br><em>Respond:</em> IR planning, communications<br><em>Recover:</em> Recovery planning, improvements"},
-  {id:8,domain:"D1",domainName:"Security & Risk Management",q:"What is Separation of Duties and why is it important?",a:"<strong>Separation of Duties</strong> divides critical tasks among multiple people so no single person can commit fraud or error alone.<br><em>Example:</em> The person who approves payments shouldn't also process them.<br>Reduces insider threat and fraud risk. Related concept: <strong>Dual Control</strong> (two people required simultaneously)."},
-  {id:9,domain:"D1",domainName:"Security & Risk Management",q:"Define Qualitative vs Quantitative Risk Assessment",a:"<strong>Qualitative</strong> — subjective ratings (High/Medium/Low). Fast, no math. Good for prioritization.<br><strong>Quantitative</strong> — numeric values (ALE, SLE). Harder, requires data. Produces dollar figures for ROI.<br><em>Most real organizations use a hybrid approach.</em>"},
-  {id:10,domain:"D1",domainName:"Security & Risk Management",q:"What is a Threat, Vulnerability, and Risk?",a:"<strong>Threat</strong> — anything that can exploit a vulnerability (attacker, fire, flood)<br><strong>Vulnerability</strong> — weakness that can be exploited (unpatched system, weak password)<br><strong>Risk</strong> — probability that a threat exploits a vulnerability causing harm<br><em>Risk = Threat × Vulnerability × Asset Value</em>"},
-
-  // D2 - Asset Security
-  {id:11,domain:"D2",domainName:"Asset Security",q:"What is the difference between a Data Owner and Data Custodian?",a:"<strong>Data Owner</strong> — Business manager accountable for data. Sets classification and protection requirements.<br><strong>Data Custodian</strong> — IT department. Implements the technical controls required by the owner.<br><em>Owner decides policy. Custodian implements it.</em>"},
-  {id:12,domain:"D2",domainName:"Asset Security",q:"What are the government data classification levels (highest to lowest)?",a:"<strong>Top Secret</strong> — grave damage to national security<br><strong>Secret</strong> — serious damage<br><strong>Confidential</strong> — damage<br><strong>Unclassified</strong> — no damage<br><em>Commercial equivalent: Confidential/Proprietary → Private → Sensitive → Public</em>"},
-  {id:13,domain:"D2",domainName:"Asset Security",q:"What are the three states of data?",a:"<strong>Data at Rest</strong> — stored (database, hard drive, backup). Protect with: encryption at rest, access controls.<br><strong>Data in Transit</strong> — moving across network. Protect with: TLS, VPN, HTTPS.<br><strong>Data in Use</strong> — in RAM/CPU/processing. Protect with: DRM, trusted execution environments."},
-  {id:14,domain:"D2",domainName:"Asset Security",q:"What is crypto-shredding and when is it used?",a:"<strong>Crypto-shredding</strong> = destroying encryption keys to render encrypted data permanently unreadable.<br>Used when physical destruction isn't possible — especially in <em>cloud environments</em>.<br>Also called <em>cryptographic erasure</em>. NIST SP 800-88 approves this method."},
-  {id:15,domain:"D2",domainName:"Asset Security",q:"What is the 3-2-1 backup rule?",a:"<strong>3</strong> copies of data<br><strong>2</strong> different storage media types<br><strong>1</strong> copy stored offsite<br><em>Example: original data + external drive + cloud backup</em><br>Protects against hardware failure, fire, theft, and ransomware simultaneously."},
-  {id:16,domain:"D2",domainName:"Asset Security",q:"Under GDPR, what is the breach notification timeframe?",a:"<strong>72 hours</strong> from becoming aware of a personal data breach to notify the supervisory authority.<br>If 72 hours cannot be met, a reason must be provided.<br><em>Key GDPR rights:</em> right to erasure, data portability, purpose limitation, data minimization."},
-
-  // D3 - Security Architecture
-  {id:17,domain:"D3",domainName:"Security Architecture & Engineering",q:"Bell-LaPadula Model — what are its two main rules?",a:"<strong>No Read Up</strong> (Simple Security Property) — cannot read data above your clearance level<br><strong>No Write Down</strong> (Star Property *) — cannot write data to lower classification levels<br><em>Goal: Confidentiality. Used in military/government.</em><br>BLP = 'Be Leaking Prevention'"},
-  {id:18,domain:"D3",domainName:"Security Architecture & Engineering",q:"Biba Model — what are its two main rules?",a:"<strong>No Read Down</strong> (Simple Integrity Axiom) — don't read low-integrity data<br><strong>No Write Up</strong> (Star Integrity Property) — don't write to higher integrity levels<br><em>Goal: Integrity. Opposite of Bell-LaPadula.</em><br>Biba = 'Be Integrity, Bruh, Always'"},
-  {id:19,domain:"D3",domainName:"Security Architecture & Engineering",q:"What is the Clark-Wilson model used for?",a:"<strong>Clark-Wilson</strong> focuses on <em>Integrity</em> through well-formed transactions.<br><strong>CDI</strong> = Constrained Data Item (must maintain integrity)<br><strong>TP</strong> = Transformation Procedure (only authorized way to modify CDI)<br><strong>IVP</strong> = Integrity Verification Procedure<br><em>Used in commercial/banking environments. Has separation of duties built in.</em>"},
-  {id:20,domain:"D3",domainName:"Security Architecture & Engineering",q:"What is the Brewer-Nash (Chinese Wall) model?",a:"<strong>Brewer-Nash</strong> prevents conflicts of interest.<br>Once you access data from one company, you're blocked from accessing competing company's data.<br><em>Example:</em> A consultant who sees Coca-Cola's data cannot then access PepsiCo's data.<br>Used in financial and legal environments."},
-  {id:21,domain:"D3",domainName:"Security Architecture & Engineering",q:"What are the Common Criteria EAL levels?",a:"<strong>EAL1</strong> — Functionally tested (lowest)<br><strong>EAL2</strong> — Structurally tested<br><strong>EAL3</strong> — Methodically tested<br><strong>EAL4</strong> — Highest commercially feasible<br><strong>EAL5-6</strong> — Semiformally designed<br><strong>EAL7</strong> — Formally verified (highest, mathematical proof)<br><em>Most commercial products target EAL4.</em>"},
-  {id:22,domain:"D3",domainName:"Security Architecture & Engineering",q:"What is the difference between symmetric and asymmetric encryption?",a:"<strong>Symmetric</strong> — same key for encrypt/decrypt. Fast. Examples: AES, 3DES, Blowfish. Key distribution is the challenge.<br><strong>Asymmetric</strong> — key pair (public/private). Slow. Examples: RSA, ECC, DSA. Solves key distribution.<br><em>Hybrid systems use asymmetric to exchange a symmetric session key.</em>"},
-  {id:23,domain:"D3",domainName:"Security Architecture & Engineering",q:"What is the difference between AH and ESP in IPSec?",a:"<strong>AH</strong> (Authentication Header) — provides authentication + integrity only. <em>NO encryption.</em><br><strong>ESP</strong> (Encapsulating Security Payload) — provides encryption + authentication + integrity.<br><em>For most purposes, use ESP. AH alone won't protect confidentiality.</em><br>Both: Tunnel mode (gateway-to-gateway) vs Transport mode (host-to-host)."},
-  {id:24,domain:"D3",domainName:"Security Architecture & Engineering",q:"What is the principle of Fail Secure / Fail Safe?",a:"<strong>Fail Secure</strong> — when a system fails, it defaults to a <em>denied/locked</em> state.<br><em>Example:</em> Firewall crash = block all traffic (not allow all).<br><strong>Fail Safe</strong> — prioritizes safety over security when failing.<br><em>Example:</em> Fire door = unlocks on power failure (safety > security).<br>CISSP usually asks about Fail Secure."},
-
-  // D4 - Network Security
-  {id:25,domain:"D4",domainName:"Communication & Network Security",q:"Name the 7 OSI layers from top to bottom",a:"<strong>7</strong> Application — HTTP, DNS, SMTP<br><strong>6</strong> Presentation — Encryption, compression<br><strong>5</strong> Session — Sessions, NetBIOS<br><strong>4</strong> Transport — TCP, UDP<br><strong>3</strong> Network — IP, ICMP, routing<br><strong>2</strong> Data Link — MAC, ARP, switches<br><strong>1</strong> Physical — Cables, hubs<br><em>Mnemonic: All People Seem To Need Data Processing</em>"},
-  {id:26,domain:"D4",domainName:"Communication & Network Security",q:"WEP vs WPA vs WPA2 vs WPA3 — which is secure?",a:"<strong>WEP</strong> — BROKEN. RC4 misuse. Crack in minutes. Never use.<br><strong>WPA</strong> — TKIP. Weak. Deprecated.<br><strong>WPA2</strong> — AES/CCMP. Strong. Use Enterprise (802.1X) mode for corporate.<br><strong>WPA3</strong> — SAE handshake. Forward secrecy. Current gold standard.<br><em>Only WPA2 and WPA3 are acceptable.</em>"},
-  {id:27,domain:"D4",domainName:"Communication & Network Security",q:"What is the difference between IDS and IPS?",a:"<strong>IDS</strong> (Intrusion Detection System) — monitors and <em>alerts only</em>. Passive. Won't stop attack.<br><strong>IPS</strong> (Intrusion Prevention System) — monitors and <em>actively blocks</em>. Inline deployment.<br><em>Detection types:</em> Signature-based (known attacks) vs Anomaly-based (baseline deviation)<br>False positive = legitimate traffic flagged. False negative = attack missed."},
-  {id:28,domain:"D4",domainName:"Communication & Network Security",q:"What is a DMZ and why is it used?",a:"<strong>DMZ</strong> (Demilitarized Zone) — network segment between internet and internal network.<br>Contains public-facing servers (web, mail, DNS) isolated from the internal LAN.<br><em>Architecture:</em> Internet → Firewall → DMZ → Firewall → Internal Network<br>If DMZ server is compromised, attacker can't directly reach internal systems."},
-  {id:29,domain:"D4",domainName:"Communication & Network Security",q:"What ports should you know for the CISSP exam?",a:"<strong>22</strong> SSH/SFTP — <strong>23</strong> Telnet (insecure)<br><strong>25</strong> SMTP — <strong>53</strong> DNS<br><strong>80</strong> HTTP — <strong>443</strong> HTTPS<br><strong>389</strong> LDAP — <strong>636</strong> LDAPS<br><strong>3389</strong> RDP (high risk!) — <strong>88</strong> Kerberos<br><strong>1812/1813</strong> RADIUS — <strong>49</strong> TACACS+"},
-  {id:30,domain:"D4",domainName:"Communication & Network Security",q:"What is a replay attack and how is it prevented?",a:"<strong>Replay attack</strong> — attacker captures valid authentication data and replays it later to gain unauthorized access.<br><em>Prevention methods:</em><br>• Timestamps (reject old tokens)<br>• Nonces (one-time random values)<br>• Sequence numbers<br>• Challenge-response authentication<br>• Kerberos tickets (time-limited)"},
-
-  // D5 - IAM
-  {id:31,domain:"D5",domainName:"Identity & Access Management",q:"What is the difference between Identification, Authentication, and Authorization?",a:"<strong>Identification</strong> — claiming an identity (typing a username)<br><strong>Authentication</strong> — proving the identity (password, MFA)<br><strong>Authorization</strong> — what you're permitted to do (ACL, roles)<br><strong>Accountability</strong> — logging and auditing actions<br><em>All four are required for complete access control.</em>"},
-  {id:32,domain:"D5",domainName:"Identity & Access Management",q:"What are the three authentication factors?",a:"<strong>Something you Know</strong> — password, PIN, security question<br><strong>Something you Have</strong> — token, smart card, OTP device, phone<br><strong>Something you Are</strong> — biometrics (fingerprint, iris, facial)<br><em>Bonus factors:</em> Somewhere you Are (location), Something you Do (behavior)<br><strong>MFA requires 2+ DIFFERENT factor types.</strong>"},
-  {id:33,domain:"D5",domainName:"Identity & Access Management",q:"Compare DAC, MAC, and RBAC access control models",a:"<strong>DAC</strong> (Discretionary) — owner controls access. Most flexible. Windows file permissions.<br><strong>MAC</strong> (Mandatory) — system enforces via labels. Most secure. Government/military.<br><strong>RBAC</strong> (Role-Based) — access by job role. Most common in enterprise.<br><strong>ABAC</strong> (Attribute-Based) — dynamic policies based on attributes. Most flexible/complex."},
-  {id:34,domain:"D5",domainName:"Identity & Access Management",q:"What is FAR, FRR, and CER in biometrics?",a:"<strong>FAR</strong> (False Acceptance Rate) = Type II Error. Unauthorized user ACCEPTED. <em>Security risk!</em><br><strong>FRR</strong> (False Rejection Rate) = Type I Error. Authorized user REJECTED. Usability issue.<br><strong>CER/EER</strong> (Crossover Error Rate) = where FAR = FRR. <em>Lower CER = better biometric system.</em><br>Increase sensitivity → FAR↓ FRR↑. Decrease sensitivity → FAR↑ FRR↓"},
-  {id:35,domain:"D5",domainName:"Identity & Access Management",q:"What is Kerberos and how does it work?",a:"<strong>Kerberos</strong> — ticket-based SSO authentication protocol. Port <strong>88</strong>.<br><em>Steps:</em><br>1. User authenticates to <strong>AS</strong> (Authentication Server) → gets TGT<br>2. TGT presented to <strong>TGS</strong> (Ticket Granting Server) → gets service ticket<br>3. Service ticket used to access resource<br><em>Vulnerability:</em> Pass-the-Ticket, Golden Ticket attacks."},
-  {id:36,domain:"D5",domainName:"Identity & Access Management",q:"What is the difference between SAML, OAuth, and OpenID Connect?",a:"<strong>SAML 2.0</strong> — XML-based. Enterprise SSO/Federation between IdP and SP.<br><strong>OAuth 2.0</strong> — Authorization framework. Delegates access (e.g. 'Login with Google'). NOT authentication.<br><strong>OpenID Connect</strong> — Authentication layer on top of OAuth 2.0. Adds identity to OAuth.<br><em>SAML = enterprise. OIDC = modern web/mobile apps.</em>"},
-
-  // D6 - Assessment & Testing
-  {id:37,domain:"D6",domainName:"Security Assessment & Testing",q:"What is the difference between vulnerability assessment and penetration testing?",a:"<strong>Vulnerability Assessment</strong> — identifies and reports potential weaknesses. Non-destructive. Doesn't exploit.<br><strong>Penetration Testing</strong> — actively exploits vulnerabilities to demonstrate real impact. Simulates attacker.<br><em>VA = what's there. PT = what's exploitable.</em><br>Both require written authorization (Rules of Engagement) before starting."},
-  {id:38,domain:"D6",domainName:"Security Assessment & Testing",q:"What are the three types of penetration tests by knowledge level?",a:"<strong>Black Box</strong> — no prior knowledge. Simulates external attacker. Most realistic.<br><strong>White Box</strong> (Crystal Box) — full knowledge of systems. Most thorough. Efficient.<br><strong>Gray Box</strong> — partial knowledge. Balanced approach. Most common in real engagements.<br><em>Double-blind:</em> Tester AND security staff unaware. Tests detection capabilities."},
-  {id:39,domain:"D6",domainName:"Security Assessment & Testing",q:"What do MTTD, MTTR, MTBF, and MTTF stand for?",a:"<strong>MTTD</strong> — Mean Time To Detect (how fast we find incidents)<br><strong>MTTR</strong> — Mean Time To Repair/Restore (how fast we fix it)<br><strong>MTBF</strong> — Mean Time Between Failures (reliability of repairable systems)<br><strong>MTTF</strong> — Mean Time To Failure (non-repairable components)<br><em>Availability = MTBF ÷ (MTBF + MTTR)</em>"},
-  {id:40,domain:"D6",domainName:"Security Assessment & Testing",q:"What is SAST vs DAST vs IAST?",a:"<strong>SAST</strong> (Static) — analyzes source code without running. Finds issues early. 'White-box testing'.<br><strong>DAST</strong> (Dynamic) — tests the running application. Finds runtime issues. 'Black-box testing'.<br><strong>IAST</strong> (Interactive) — combination; agents inside running app. Best of both worlds.<br><em>Shift-left = add SAST early in development pipeline.</em>"},
-  {id:41,domain:"D6",domainName:"Security Assessment & Testing",q:"What is the difference between SOC 1, SOC 2, and SOC 3?",a:"<strong>SOC 1</strong> — financial reporting controls. For auditors.<br><strong>SOC 2</strong> — Trust Service Criteria (Security, Availability, Processing Integrity, Confidentiality, Privacy). For customers.<br><strong>SOC 3</strong> — Public version of SOC 2. Marketing use.<br><strong>Type I</strong> = design at a point in time. <strong>Type II</strong> = operating effectiveness over 6-12 months. <em>Type II is stronger assurance.</em>"},
-
-  // D7 - Operations
-  {id:42,domain:"D7",domainName:"Security Operations",q:"What are the NIST SP 800-61 Incident Response phases?",a:"<strong>1. Preparation</strong> — IR plan, tools, training<br><strong>2. Detection & Analysis</strong> — identify and confirm incident<br><strong>3. Containment</strong> — stop the spread (FIRST PRIORITY)<br><strong>4. Eradication</strong> — remove malware, close vulnerabilities<br><strong>5. Recovery</strong> — restore systems<br><strong>6. Lessons Learned</strong> — post-incident review<br><em>Mnemonic: PICERL</em>"},
-  {id:43,domain:"D7",domainName:"Security Operations",q:"What is the Order of Volatility in digital forensics?",a:"<em>Most volatile first:</em><br><strong>1.</strong> CPU registers & cache<br><strong>2.</strong> RAM (running processes, network connections)<br><strong>3.</strong> Swap / page file<br><strong>4.</strong> Network state<br><strong>5.</strong> Running processes<br><strong>6.</strong> Disk storage<br><strong>7.</strong> Remote/cloud logs<br><strong>8.</strong> Backup media (least volatile)<br><em>Always capture most volatile evidence FIRST.</em>"},
-  {id:44,domain:"D7",domainName:"Security Operations",q:"Hot Site vs Warm Site vs Cold Site — what's the difference?",a:"<strong>Hot Site</strong> — fully operational mirror. Minutes to failover. Most expensive 💰💰💰<br><strong>Warm Site</strong> — partially configured. Hours to days. Medium cost 💰💰<br><strong>Cold Site</strong> — just space and power. Days to weeks. Cheapest 💰<br><em>Reciprocal agreement:</em> Two orgs agree to host each other in disaster (low cost, low reliability).<br><em>'Hot price = Hot response'</em>"},
-  {id:45,domain:"D7",domainName:"Security Operations",q:"What is Chain of Custody in digital forensics?",a:"<strong>Chain of Custody</strong> — documented record of who handled evidence, when, and what was done with it.<br>Purpose: Maintains <em>integrity and admissibility</em> of evidence in legal proceedings.<br>Breaking the chain = evidence may be inadmissible in court.<br><em>Also:</em> Use write blockers, make forensic copies (never work on originals), document hash values."},
-  {id:46,domain:"D7",domainName:"Security Operations",q:"What is the difference between Incremental and Differential backups?",a:"<strong>Incremental</strong> — backs up changes since the <em>last backup</em> (any type). Smaller, faster backup. Slower restore (need full + ALL incrementals).<br><strong>Differential</strong> — backs up changes since the <em>last FULL backup</em>. Larger backup. Faster restore (need full + ONE differential).<br><em>Full backup:</em> Everything. Slowest backup, fastest restore (1 tape)."},
-
-  // D8 - Software Dev Security
-  {id:47,domain:"D8",domainName:"Software Development Security",q:"What is the OWASP Top 10? Name the key vulnerabilities.",a:"<strong>A01</strong> Broken Access Control<br><strong>A02</strong> Cryptographic Failures<br><strong>A03</strong> Injection (SQLi, XSS, Command)<br><strong>A04</strong> Insecure Design<br><strong>A05</strong> Security Misconfiguration<br><strong>A06</strong> Vulnerable Components<br><strong>A07</strong> Auth & Session Failures<br><strong>A08</strong> Integrity Failures<br><strong>A09</strong> Logging Failures<br><strong>A10</strong> SSRF"},
-  {id:48,domain:"D8",domainName:"Software Development Security",q:"What is 'Shift Left' in DevSecOps?",a:"<strong>Shift Left</strong> = integrating security <em>earlier</em> in the SDLC (to the left on the timeline).<br>Instead of testing security only at deployment, test during <em>design and coding</em>.<br>Benefits: cheaper to fix early, faster delivery, fewer late-stage surprises.<br><em>DevSecOps:</em> Security is everyone's responsibility, baked into CI/CD pipelines."},
-  {id:49,domain:"D8",domainName:"Software Development Security",q:"What is the difference between SQL Injection and Cross-Site Scripting (XSS)?",a:"<strong>SQL Injection</strong> — malicious SQL code injected into database queries. Attacker queries/modifies DB.<br><em>Prevention:</em> Parameterized queries, stored procedures, input validation.<br><strong>XSS</strong> — malicious scripts injected into web pages viewed by other users. Steals sessions/cookies.<br><em>Prevention:</em> Output encoding, Content Security Policy (CSP), input validation."},
-  {id:50,domain:"D8",domainName:"Software Development Security",q:"What is an SBOM and why is it important?",a:"<strong>SBOM</strong> (Software Bill of Materials) — a complete inventory of all components, libraries, and dependencies in a software product.<br><em>Why it matters:</em><br>• Quickly identifies vulnerable components (Log4Shell affected thousands overnight)<br>• Supply chain security visibility<br>• Regulatory compliance (US Executive Order 14028 requires SBOM for federal software)<br>• Dependency confusion attack detection"},
+const CARDS=[
+  {id:1,domain:"D1",dn:"Risk Management",q:"What does the CIA Triad stand for?",a:"<strong>Confidentiality</strong> — prevent unauthorized disclosure<br><strong>Integrity</strong> — prevent unauthorized modification<br><strong>Availability</strong> — ensure authorized access when needed<br><em>The three foundational pillars of information security.</em>"},
+  {id:2,domain:"D1",dn:"Risk Management",q:"What is the formula for ALE?",a:"<strong>ALE = SLE × ARO</strong><br>SLE = Asset Value × Exposure Factor<br>ARO = Annual Rate of Occurrence<br><em>Example: $200K SLE × 0.5 ARO = $100K/year</em>"},
+  {id:3,domain:"D1",dn:"Risk Management",q:"What are the four risk response options?",a:"<strong>Accept</strong> — live with the risk<br><strong>Transfer</strong> — shift to third party (insurance)<br><strong>Avoid</strong> — eliminate the activity<br><strong>Mitigate</strong> — reduce likelihood or impact<br><em>Mnemonic: ATAM</em>"},
+  {id:4,domain:"D1",dn:"Risk Management",q:"What is the difference between Due Care and Due Diligence?",a:"<strong>Due Care</strong> — doing what a reasonable person would do<br><strong>Due Diligence</strong> — ongoing research to maintain due care<br><em>Due Care = doing it. Due Diligence = researching what to do.</em>"},
+  {id:5,domain:"D1",dn:"Risk Management",q:"What is the highest priority canon of the ISC² Code of Ethics?",a:"<strong>Protect society, the common good, public trust and confidence.</strong><br><em>Priority: Society → Honorably → Competent → Advance profession</em><br>Society ALWAYS wins over employer interest."},
+  {id:6,domain:"D1",dn:"Risk Management",q:"What is the difference between BCP and DRP?",a:"<strong>BCP</strong> — maintains business operations (long-term, business-wide)<br><strong>DRP</strong> — restores IT systems (tactical, IT-focused)<br><em>DRP is a subset of BCP.</em>"},
+  {id:7,domain:"D1",dn:"Risk Management",q:"What are the NIST CSF 5 core functions?",a:"<strong>Identify → Protect → Detect → Respond → Recover</strong>"},
+  {id:8,domain:"D2",dn:"Asset Security",q:"What is the difference between a Data Owner and Data Custodian?",a:"<strong>Data Owner</strong> — business manager, accountable, sets classification<br><strong>Data Custodian</strong> — IT dept, implements controls, not accountable<br><em>Owner decides. Custodian implements.</em>"},
+  {id:9,domain:"D2",dn:"Asset Security",q:"What are the government data classification levels?",a:"<strong>Top Secret → Secret → Confidential → Unclassified</strong><br><em>Commercial: Confidential/Proprietary → Private → Sensitive → Public</em>"},
+  {id:10,domain:"D2",dn:"Asset Security",q:"What are the three states of data?",a:"<strong>Data at Rest</strong> — stored. Protect with: encryption, access controls<br><strong>Data in Transit</strong> — moving. Protect with: TLS, VPN, HTTPS<br><strong>Data in Use</strong> — in RAM/CPU. Hardest to protect."},
+  {id:11,domain:"D2",dn:"Asset Security",q:"What is crypto-shredding?",a:"<strong>Crypto-shredding</strong> = destroying encryption keys to render encrypted data permanently unreadable<br><em>Best method for cloud-hosted data where physical destruction isn't possible.</em>"},
+  {id:12,domain:"D2",dn:"Asset Security",q:"GDPR breach notification timeframe?",a:"<strong>72 hours</strong> from becoming aware of a personal data breach.<br><em>Key rights: erasure, data portability, minimization, purpose limitation.</em>"},
+  {id:13,domain:"D3",dn:"Architecture & Engineering",q:"Bell-LaPadula — two main rules?",a:"<strong>No Read Up</strong> — Simple Security Property<br><strong>No Write Down</strong> — Star Property (*)<br><em>Goal: Confidentiality. Military model.</em>"},
+  {id:14,domain:"D3",dn:"Architecture & Engineering",q:"Biba Model — two main rules?",a:"<strong>No Read Down</strong> — Simple Integrity Axiom<br><strong>No Write Up</strong> — Star Integrity Property (*)<br><em>Goal: Integrity. Opposite of Bell-LaPadula.</em>"},
+  {id:15,domain:"D3",dn:"Architecture & Engineering",q:"What is the Clark-Wilson model?",a:"<strong>Goal: Integrity</strong> through well-formed transactions<br><strong>CDI</strong> = Constrained Data Item<br><strong>TP</strong> = Transformation Procedure (only way to modify CDI)<br><strong>IVP</strong> = Integrity Verification Procedure<br><em>Commercial/banking environments.</em>"},
+  {id:16,domain:"D3",dn:"Architecture & Engineering",q:"Symmetric vs Asymmetric encryption — key difference?",a:"<strong>Symmetric</strong> — same key. Fast. AES, 3DES. Key distribution problem.<br><strong>Asymmetric</strong> — key pair. Slow. RSA, ECC. Solves key distribution.<br><em>Hybrid = asymmetric for key exchange, symmetric for data. How TLS works.</em>"},
+  {id:17,domain:"D3",dn:"Architecture & Engineering",q:"IPSec — AH vs ESP?",a:"<strong>AH</strong> — authentication + integrity ONLY. No encryption.<br><strong>ESP</strong> — encryption + authentication + integrity. ✅<br><em>Use ESP when you need confidentiality.</em>"},
+  {id:18,domain:"D3",dn:"Architecture & Engineering",q:"What is Fail Secure?",a:"<strong>Fail Secure</strong> — system defaults to denied/locked state on failure.<br>Example: Firewall crash → block all traffic.<br><em>Fail Safe = prioritizes human safety (e.g. fire door unlocks on power failure).</em>"},
+  {id:19,domain:"D4",dn:"Network Security",q:"OSI 7 layers top to bottom?",a:"<strong>7</strong> Application · <strong>6</strong> Presentation · <strong>5</strong> Session · <strong>4</strong> Transport · <strong>3</strong> Network · <strong>2</strong> Data Link · <strong>1</strong> Physical<br><em>All People Seem To Need Data Processing</em>"},
+  {id:20,domain:"D4",dn:"Network Security",q:"WEP vs WPA2 vs WPA3 — which are acceptable?",a:"<strong>WEP</strong> — BROKEN. ❌ Never use.<br><strong>WPA</strong> — TKIP. Deprecated. ❌<br><strong>WPA2</strong> — AES/CCMP. Strong. ✅<br><strong>WPA3</strong> — SAE. Forward secrecy. Current standard. ✅"},
+  {id:21,domain:"D4",dn:"Network Security",q:"IDS vs IPS — key difference?",a:"<strong>IDS</strong> — detects and alerts only. Passive. Out-of-band.<br><strong>IPS</strong> — detects and blocks. Active. Inline deployment.<br><em>Signature-based = known attacks. Anomaly-based = detects new attacks, more false positives.</em>"},
+  {id:22,domain:"D4",dn:"Network Security",q:"What is a replay attack and prevention?",a:"<strong>Replay attack</strong> — capturing valid auth data and resending it later.<br><em>Prevention:</em> Timestamps, nonces, sequence numbers, challenge-response auth."},
+  {id:23,domain:"D5",dn:"Identity & Access Management",q:"Identification vs Authentication vs Authorization?",a:"<strong>Identification</strong> — claiming identity (username)<br><strong>Authentication</strong> — proving identity (password, MFA)<br><strong>Authorization</strong> — what you're permitted to do<br><strong>Accountability</strong> — logging actions (audit trail)"},
+  {id:24,domain:"D5",dn:"Identity & Access Management",q:"What are the three authentication factors?",a:"<strong>Something you Know</strong> — password, PIN<br><strong>Something you Have</strong> — token, smart card, OTP<br><strong>Something you Are</strong> — biometrics<br><em>MFA = 2+ DIFFERENT factor types. Password + PIN = NOT MFA!</em>"},
+  {id:25,domain:"D5",dn:"Identity & Access Management",q:"DAC vs MAC vs RBAC?",a:"<strong>DAC</strong> — owner controls access. Most flexible. Least secure.<br><strong>MAC</strong> — system enforces via labels. Most secure. Government.<br><strong>RBAC</strong> — access by job role. Most common in enterprise."},
+  {id:26,domain:"D5",dn:"Identity & Access Management",q:"FAR, FRR, and CER in biometrics?",a:"<strong>FAR</strong> (Type II) = False Acceptance — unauthorized ACCEPTED. Security risk!<br><strong>FRR</strong> (Type I) = False Rejection — authorized REJECTED. Usability issue.<br><strong>CER/EER</strong> = where FAR = FRR. Lower = better system."},
+  {id:27,domain:"D5",dn:"Identity & Access Management",q:"How does Kerberos work?",a:"1. Authenticate to <strong>AS</strong> → get TGT<br>2. Present TGT to <strong>TGS</strong> → get service ticket<br>3. Use service ticket to access resource<br><em>Ticket-based SSO. Port 88. Used in Active Directory.</em>"},
+  {id:28,domain:"D6",dn:"Assessment & Testing",q:"Vulnerability Assessment vs Penetration Testing?",a:"<strong>VA</strong> — identifies weaknesses. Non-destructive. No exploitation.<br><strong>PT</strong> — actively exploits. Simulates attacker. Demonstrates impact.<br><em>Both require written authorization and Rules of Engagement.</em>"},
+  {id:29,domain:"D6",dn:"Assessment & Testing",q:"Black box vs White box vs Gray box testing?",a:"<strong>Black Box</strong> — no prior knowledge. Most realistic.<br><strong>White Box</strong> — full knowledge. Most thorough.<br><strong>Gray Box</strong> — partial knowledge. Most common in real engagements."},
+  {id:30,domain:"D6",dn:"Assessment & Testing",q:"MTTD, MTTR, MTBF — what do they mean?",a:"<strong>MTTD</strong> — Mean Time To Detect<br><strong>MTTR</strong> — Mean Time To Repair/Restore<br><strong>MTBF</strong> — Mean Time Between Failures<br><strong>Availability = MTBF ÷ (MTBF + MTTR)</strong>"},
+  {id:31,domain:"D7",dn:"Security Operations",q:"NIST SP 800-61 Incident Response phases?",a:"<strong>P</strong>reparation → <strong>I</strong>dentification → <strong>C</strong>ontainment → <strong>E</strong>radication → <strong>R</strong>ecovery → <strong>L</strong>essons Learned<br><em>Containment = FIRST active step. PICERL mnemonic.</em>"},
+  {id:32,domain:"D7",dn:"Security Operations",q:"Order of Volatility in digital forensics?",a:"<strong>1.</strong> CPU registers & cache (most volatile)<br><strong>2.</strong> RAM<br><strong>3.</strong> Swap/page file<br><strong>4.</strong> Disk storage<br><strong>5.</strong> Remote/cloud logs (least volatile)<br><em>Always collect most volatile FIRST.</em>"},
+  {id:33,domain:"D7",dn:"Security Operations",q:"Hot vs Warm vs Cold Site?",a:"<strong>Hot Site</strong> — ready immediately. Most expensive.<br><strong>Warm Site</strong> — hours to activate. Medium cost.<br><strong>Cold Site</strong> — days/weeks. Cheapest.<br><em>Hot price = Hot response</em>"},
+  {id:34,domain:"D7",dn:"Security Operations",q:"What is Chain of Custody?",a:"<strong>Chain of Custody</strong> — documented record of who handled evidence and when.<br>Required for admissibility in legal proceedings.<br><em>Breaking chain of custody = evidence may be inadmissible.</em>"},
+  {id:35,domain:"D7",dn:"Security Operations",q:"Incremental vs Differential backups?",a:"<strong>Incremental</strong> — since last backup. Fastest backup, slowest restore.<br><strong>Differential</strong> — since last FULL backup. Slower backup, faster restore.<br><em>Full = slowest backup, fastest restore (1 set only).</em>"},
+  {id:36,domain:"D8",dn:"Software Dev Security",q:"OWASP Top 10 — key vulnerabilities?",a:"<strong>A01</strong> Broken Access Control<br><strong>A02</strong> Cryptographic Failures<br><strong>A03</strong> Injection (SQLi, XSS)<br><strong>A05</strong> Security Misconfiguration<br><strong>A10</strong> SSRF"},
+  {id:37,domain:"D8",dn:"Software Dev Security",q:"What does 'Shift Left' mean in DevSecOps?",a:"<strong>Shift Left</strong> = integrate security earlier in the SDLC.<br>Test during design and coding, not just at deployment.<br><em>Bug in requirements = 1x cost to fix. In production = 100x cost.</em>"},
+  {id:38,domain:"D8",dn:"Software Dev Security",q:"SAST vs DAST?",a:"<strong>SAST</strong> — analyzes source code WITHOUT running it. Finds issues early. White-box.<br><strong>DAST</strong> — tests RUNNING application. Finds runtime issues. Black-box.<br><em>Both are needed.</em>"},
+  {id:39,domain:"D8",dn:"Software Dev Security",q:"What is SQL Injection and prevention?",a:"<strong>SQL Injection</strong> — malicious SQL inserted via user input to manipulate DB queries.<br><em>Prevention:</em> Parameterized queries (prepared statements), input validation, least-privilege DB accounts."},
+  {id:40,domain:"D8",dn:"Software Dev Security",q:"What is an SBOM?",a:"<strong>SBOM</strong> (Software Bill of Materials) — complete inventory of all components, libraries, and dependencies.<br><em>Log4Shell showed why SBOMs matter — one vulnerable library affected thousands of products.</em>"},
 ];
 
-// ─── STATE ────────────────────────────────────────────────────────────────────
-let cardStates = {}; // {cardId: 'known'|'review'|'unseen'}
-let currentDomain = 'all';
-let currentMode = 'all';
-let filteredCards = [];
-let currentIdx = 0;
-let isFlipped = false;
+let states={},domain='all',mode='all',deck=[],idx=0,flipped=false;
 
-// ─── LOCALSTORAGE ─────────────────────────────────────────────────────────────
-function saveProgress() {
-  localStorage.setItem('cissp_flashcard_states', JSON.stringify(cardStates));
-}
-function loadProgress() {
-  const saved = localStorage.getItem('cissp_flashcard_states');
-  if (saved) cardStates = JSON.parse(saved);
-}
-function resetAll() {
-  if (!confirm('Reset all progress? This cannot be undone.')) return;
-  cardStates = {};
-  saveProgress();
-  buildDeck();
-  showToast('Progress reset!', '');
+function save(){try{localStorage.setItem('cissp_fc_v3',JSON.stringify(states));}catch(e){}}
+function load(){try{const s=localStorage.getItem('cissp_fc_v3');if(s)states=JSON.parse(s);}catch(e){}}
+function resetAll(){if(!confirm('Reset all progress? This cannot be undone.'))return;states={};save();buildDeck();}
+
+function buildDeck(){
+  let c=CARDS;
+  if(domain!=='all')c=c.filter(x=>x.domain===domain);
+  if(mode==='review')c=c.filter(x=>states[x.id]==='review');
+  else if(mode==='known')c=c.filter(x=>states[x.id]==='known');
+  else if(mode==='unknown')c=c.filter(x=>!states[x.id]);
+  deck=c;idx=0;
+  if(!deck.length){showComplete();return;}
+  document.getElementById('completeScreen').classList.remove('show');
+  document.getElementById('cardArea').style.display='flex';
+  showCard();updateProgress();buildPips();
 }
 
-// ─── DECK BUILDING ────────────────────────────────────────────────────────────
-function buildDeck() {
-  let cards = ALL_CARDS;
-  if (currentDomain !== 'all') cards = cards.filter(c => c.domain === currentDomain);
-  if (currentMode === 'review') cards = cards.filter(c => cardStates[c.id] === 'review');
-  else if (currentMode === 'known') cards = cards.filter(c => cardStates[c.id] === 'known');
-  else if (currentMode === 'unknown') cards = cards.filter(c => !cardStates[c.id] || cardStates[c.id] === 'unseen');
-  filteredCards = cards;
-  currentIdx = 0;
-  if (filteredCards.length === 0) {
-    showComplete();
-  } else {
-    document.getElementById('completeScreen').classList.remove('show');
-    document.getElementById('cardArea').style.display = 'flex';
-    showCard();
-  }
-  updateProgress();
-  buildPips();
-}
-
-// ─── SHOW CARD ────────────────────────────────────────────────────────────────
-function showCard() {
-  if (filteredCards.length === 0) { showComplete(); return; }
-  const card = filteredCards[currentIdx];
-  isFlipped = false;
-  const fc = document.getElementById('flashcard');
-  fc.classList.remove('flipped');
-  document.getElementById('cardDomain').textContent = card.domain + ' · ' + card.domainName;
-  document.getElementById('cardDomainBack').textContent = card.domain + ' · ' + card.domainName;
-  document.getElementById('cardQuestion').textContent = card.q;
-  document.getElementById('cardAnswer').innerHTML = card.a;
-  document.getElementById('cardNum').textContent = currentIdx + 1;
-  document.getElementById('cardTotal').textContent = filteredCards.length;
-  document.getElementById('actionBtns').style.display = 'none';
-  updateNavBtns();
+function showCard(){
+  if(!deck.length){showComplete();return;}
+  flipped=false;
+  document.getElementById('cardInner').classList.remove('flipped');
+  document.getElementById('actionRow').style.display='none';
+  const c=deck[idx];
+  const label=c.domain+' · '+c.dn;
+  document.getElementById('cardBadgeFront').textContent=label;
+  document.getElementById('cardBadgeBack').textContent=label;
+  document.getElementById('cardQ').textContent=c.q;
+  document.getElementById('cardA').innerHTML=c.a;
+  document.getElementById('cardNum').textContent=idx+1;
+  document.getElementById('cardTotal').textContent=deck.length;
+  document.getElementById('prevBtn').disabled=idx===0;
+  document.getElementById('nextBtn').disabled=idx===deck.length-1;
   updatePips();
 }
 
-function flipCard() {
-  isFlipped = !isFlipped;
-  document.getElementById('flashcard').classList.toggle('flipped', isFlipped);
-  document.getElementById('actionBtns').style.display = isFlipped ? 'flex' : 'none';
+function flipCard(){
+  flipped=!flipped;
+  document.getElementById('cardInner').classList.toggle('flipped',flipped);
+  document.getElementById('actionRow').style.display=flipped?'flex':'none';
 }
 
-function markCard(status) {
-  const card = filteredCards[currentIdx];
-  cardStates[card.id] = status;
-  saveProgress();
-  updateProgress();
-  updatePips();
-  showToast(status === 'known' ? '✅ Marked as Known!' : '🔁 Added to Review!', status === 'known' ? 'green' : 'gold');
-  setTimeout(() => nextCard(), 400);
+function markCard(s){states[deck[idx].id]=s;save();updateProgress();updatePips();updateNavStats();setTimeout(nextCard,300);}
+function nextCard(){if(idx<deck.length-1){idx++;showCard();}else showComplete();}
+function prevCard(){if(idx>0){idx--;showCard();}}
+
+function updateProgress(){
+  const base=CARDS.filter(c=>domain==='all'||c.domain===domain);
+  const tot=base.length;
+  const k=base.filter(c=>states[c.id]==='known').length;
+  const r=base.filter(c=>states[c.id]==='review').length;
+  const u=tot-k-r;
+  document.getElementById('pcKnown').textContent=k;
+  document.getElementById('pcReview').textContent=r;
+  document.getElementById('pcUnseen').textContent=u;
+  document.getElementById('ptKnown').style.width=(k/tot*100)+'%';
+  document.getElementById('ptReview').style.width=(r/tot*100)+'%';
+  const pct=Math.round((k+r)/tot*100);
+  document.getElementById('progressTitle').textContent=`${pct}% covered — ${k} known, ${r} to review, ${u} unseen`;
+  updateNavStats();
 }
 
-function nextCard() {
-  if (currentIdx < filteredCards.length - 1) {
-    currentIdx++;
-    showCard();
-  } else {
-    showComplete();
+function updateNavStats(){
+  document.getElementById('nsKnown').textContent=Object.values(states).filter(v=>v==='known').length;
+  document.getElementById('nsReview').textContent=Object.values(states).filter(v=>v==='review').length;
+  document.getElementById('nsTotal').textContent=CARDS.length;
+}
+
+function buildPips(){
+  const row=document.getElementById('pipRow');
+  const max=Math.min(deck.length,40);
+  row.innerHTML='';
+  for(let i=0;i<max;i++){
+    const p=document.createElement('div');
+    p.className='pip';
+    p.onclick=(j=>()=>{idx=j;showCard();})(i);
+    row.appendChild(p);
   }
-}
-
-function prevCard() {
-  if (currentIdx > 0) { currentIdx--; showCard(); }
-}
-
-// ─── PROGRESS ─────────────────────────────────────────────────────────────────
-function updateProgress() {
-  const total = ALL_CARDS.filter(c => currentDomain === 'all' || c.domain === currentDomain).length;
-  const known = ALL_CARDS.filter(c => (currentDomain === 'all' || c.domain === currentDomain) && cardStates[c.id] === 'known').length;
-  const review = ALL_CARDS.filter(c => (currentDomain === 'all' || c.domain === currentDomain) && cardStates[c.id] === 'review').length;
-  const unseen = total - known - review;
-  document.getElementById('countKnown').textContent = known;
-  document.getElementById('countReview').textContent = review;
-  document.getElementById('countUnseen').textContent = unseen;
-  document.getElementById('navKnown').textContent = Object.values(cardStates).filter(v=>v==='known').length;
-  document.getElementById('navReview').textContent = Object.values(cardStates).filter(v=>v==='review').length;
-  document.getElementById('navTotal').textContent = ALL_CARDS.length;
-  document.getElementById('progKnown').style.width = (known/total*100) + '%';
-  document.getElementById('progReview').style.width = (review/total*100) + '%';
-  const pct = Math.round((known + review) / total * 100);
-  document.getElementById('progressTitle').textContent = `${pct}% of deck covered — ${known} known, ${review} to review`;
-}
-
-// ─── PIPS ──────────────────────────────────────────────────────────────────────
-function buildPips() {
-  const container = document.getElementById('statusPips');
-  const max = Math.min(filteredCards.length, 30);
-  container.innerHTML = '';
-  for (let i = 0; i < max; i++) {
-    const pip = document.createElement('div');
-    pip.className = 'status-pip';
-    pip.onclick = (()=>{const idx=i; return ()=>{currentIdx=idx;showCard();}})();
-    container.appendChild(pip);
-  }
-  if (filteredCards.length > 30) {
-    const more = document.createElement('span');
-    more.style.cssText = 'font-family:DM Mono,monospace;font-size:.65rem;color:var(--text3);margin-left:.25rem;';
-    more.textContent = '+' + (filteredCards.length - 30);
-    container.appendChild(more);
-  }
+  if(deck.length>40){const s=document.createElement('span');s.style.cssText='font-family:JetBrains Mono,monospace;font-size:.65rem;color:var(--text-light);padding-left:4px;';s.textContent=`+${deck.length-40}`;row.appendChild(s);}
   updatePips();
 }
 
-function updatePips() {
-  const pips = document.querySelectorAll('.status-pip');
-  pips.forEach((pip, i) => {
-    pip.className = 'status-pip';
-    if (i === currentIdx) pip.classList.add('current');
-    else if (filteredCards[i] && cardStates[filteredCards[i].id] === 'known') pip.classList.add('known');
-    else if (filteredCards[i] && cardStates[filteredCards[i].id] === 'review') pip.classList.add('review');
+function updatePips(){
+  document.querySelectorAll('.pip').forEach((p,i)=>{
+    p.className='pip';
+    if(i===idx)p.classList.add('current');
+    else if(deck[i]&&states[deck[i].id]==='known')p.classList.add('known');
+    else if(deck[i]&&states[deck[i].id]==='review')p.classList.add('review');
   });
 }
 
-function updateNavBtns() {
-  document.getElementById('prevBtn').disabled = currentIdx === 0;
-  document.getElementById('nextBtn').disabled = currentIdx === filteredCards.length - 1;
+function showComplete(){
+  document.getElementById('cardArea').style.display='none';
+  document.getElementById('completeScreen').classList.add('show');
+  const base=CARDS.filter(c=>domain==='all'||c.domain===domain);
+  const k=base.filter(c=>states[c.id]==='known').length;
+  const r=base.filter(c=>states[c.id]==='review').length;
+  const pct=Math.round(k/base.length*100);
+  document.getElementById('csKnown').textContent=k;
+  document.getElementById('csReview').textContent=r;
+  document.getElementById('csPct').textContent=pct+'%';
+  document.getElementById('completeIcon').textContent=pct>=80?'🏆':pct>=50?'📚':'💪';
+  document.getElementById('completeTitle').textContent=pct>=80?'Excellent work!':pct>=50?'Good progress!':'Keep going!';
+  document.getElementById('completeSub').textContent=`${k} of ${base.length} cards marked known (${pct}%).${r>0?` ${r} cards need review.`:' No review cards — great job!'}`;
 }
 
-// ─── COMPLETE ──────────────────────────────────────────────────────────────────
-function showComplete() {
-  document.getElementById('cardArea').style.display = 'none';
-  const sc = document.getElementById('completeScreen');
-  sc.classList.add('show');
-  const domCards = ALL_CARDS.filter(c => currentDomain === 'all' || c.domain === currentDomain);
-  const known = domCards.filter(c => cardStates[c.id] === 'known').length;
-  const review = domCards.filter(c => cardStates[c.id] === 'review').length;
-  const pct = Math.round(known / domCards.length * 100);
-  document.getElementById('csKnown').textContent = known;
-  document.getElementById('csReview').textContent = review;
-  document.getElementById('csPct').textContent = pct + '%';
-  document.getElementById('completeEmoji').textContent = pct >= 80 ? '🏆' : pct >= 50 ? '📚' : '💪';
-  document.getElementById('completeTitle').textContent = pct >= 80 ? 'Excellent Work!' : pct >= 50 ? 'Good Progress!' : 'Keep Going!';
-  document.getElementById('completeSub').textContent = `You marked ${known} cards as known (${pct}%). ${review > 0 ? `${review} cards need more review.` : 'No cards need review — great job!'}`;
-}
-
-// ─── FILTERS ───────────────────────────────────────────────────────────────────
-function filterDomain(domain, btn) {
-  currentDomain = domain;
-  document.querySelectorAll('.domain-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  buildDeck();
-}
-
-function setMode(mode, btn) {
-  currentMode = mode;
-  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+function setMode(m,btn){
+  mode=m;
+  document.querySelectorAll('.mode-group .ctrl-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('completeScreen').classList.remove('show');
-  document.getElementById('cardArea').style.display = 'flex';
+  document.getElementById('cardArea').style.display='flex';
   buildDeck();
 }
 
-// ─── TOAST ────────────────────────────────────────────────────────────────────
-let toastTimer;
-function showToast(msg, type) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast ' + type;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+function filterDomain(d,btn){
+  domain=d;
+  document.querySelectorAll('.domain-group .ctrl-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  buildDeck();
 }
 
-// ─── KEYBOARD ─────────────────────────────────────────────────────────────────
-document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-  if (e.code === 'Space') { e.preventDefault(); flipCard(); }
-  else if (e.code === 'ArrowRight') nextCard();
-  else if (e.code === 'ArrowLeft') prevCard();
-  else if (e.key === 'k' || e.key === 'K') { if (isFlipped) markCard('known'); }
-  else if (e.key === 'r' || e.key === 'R') { if (isFlipped) markCard('review'); }
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  if(e.code==='Space'){e.preventDefault();flipCard();}
+  else if(e.code==='ArrowRight')nextCard();
+  else if(e.code==='ArrowLeft')prevCard();
+  else if((e.key==='k'||e.key==='K')&&flipped)markCard('known');
+  else if((e.key==='r'||e.key==='R')&&flipped)markCard('review');
 });
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-loadProgress();
-buildDeck();
+load();buildDeck();
 </script>
 </body>
 </html>
