@@ -50,6 +50,16 @@
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:1.5;min-height:100vh;}
 
+/* ── COLLAPSIBLE SECTIONS ── */
+.section-toggle{width:100%;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:0;font-family:inherit;text-align:left;}
+.section-toggle:hover .section-title{color:var(--blue);}
+.toggle-icon{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--text-muted);transition:all .25s;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-weight:600;}
+.toggle-icon.open{background:var(--blue);color:#fff;border-color:var(--blue);transform:rotate(45deg);}
+.section-collapsible{overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease;max-height:0;opacity:0;}
+.section-collapsible.open{max-height:9999px;opacity:1;}
+.section-header{margin-bottom:0;}
+.section-header.has-toggle{margin-bottom:0;padding-bottom:.75rem;}
+
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:8px;}
 ::-webkit-scrollbar-track{background:var(--bg-subtle);}
@@ -217,9 +227,17 @@ h1 span{color:var(--blue);}
 
 /* ── FOOTER ── */
 footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2rem 1.5rem;}
-.footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1.5rem;}
 .footer-logo{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.85rem;color:var(--text);}
 .footer-note{font-size:.75rem;color:var(--text-muted);}
+.footer-about{max-width:320px;}
+.footer-about-title{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.35rem;}
+.footer-links{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;}
+.footer-link-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:600;padding:5px 12px;border-radius:var(--radius);text-decoration:none;transition:all .15s;}
+.footer-link-btn.linkedin{background:#0a66c2;color:#fff;}
+.footer-link-btn.linkedin:hover{background:#004182;}
+.footer-link-btn.blog{background:#2962ff;color:#fff;}
+.footer-link-btn.blog:hover{background:#0039cb;}
 
 /* ── NEWS SECTION ── */
 .news-section{background:var(--bg);border-bottom:1px solid var(--border);}
@@ -270,6 +288,8 @@ footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2r
   .domain-tabs{gap:.3rem;}
   .domain-tab{font-size:.7rem;padding:4px 10px;}
   .footer-inner{flex-direction:column;text-align:center;}
+  .footer-about{max-width:100%;}
+  .footer-links{justify-content:center;}
 }
 @media(max-width:480px){
   .exam-grid{grid-template-columns:1fr;}
@@ -296,6 +316,7 @@ footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2r
       <li><a href="cissp-flashcards.html">Flashcards</a></li>
       <li><a href="cissp-exam-prep.html" style="color:var(--red);font-weight:600;">Exam Prep Tests</a></li>
       <li><a href="#news">Security News</a></li>
+      <li><a href="https://hashnode.com/@su19bs92" target="_blank" rel="noopener" style="color:var(--purple);font-weight:600;">📝 My Blog</a></li>
     </ul>
     <div class="nav-right">
       <span class="nav-badge">2024 Updated</span>
@@ -316,6 +337,7 @@ footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2r
   <a href="cissp-flashcards.html">Flashcards</a>
   <a href="cissp-exam-prep.html" style="color:var(--red);font-weight:600;">Exam Prep Tests</a>
   <a href="#news" onclick="closeMenu()">Security News</a>
+  <a href="https://hashnode.com/@su19bs92" target="_blank" rel="noopener">📝 My Blog</a>
 </div>
 
 <!-- HERO -->
@@ -363,11 +385,18 @@ footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2r
 <!-- EXAM OVERVIEW -->
 <section class="section exam-section" id="overview">
   <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">// exam_overview</div>
-      <div class="section-title">Everything you need to know</div>
-      <div class="section-desc">Updated April 15, 2024 — CAT format now applies to all languages.</div>
+    <div class="section-header has-toggle">
+      <button class="section-toggle" onclick="toggleSection('exam-body',this)">
+        <div>
+          <div class="section-eyebrow">// exam_overview</div>
+          <div class="section-title">Everything you need to know</div>
+          <div class="section-desc" style="margin-top:.25rem;">Updated April 15, 2024 — CAT format now applies to all languages.</div>
+        </div>
+        <span class="toggle-icon" id="icon-exam-body">+</span>
+      </button>
     </div>
+    <div class="section-collapsible" id="exam-body">
+    <div style="height:.75rem;"></div>
     <div class="exam-grid">
       <div class="exam-card"><div class="exam-card-icon">🎯</div><div class="exam-card-label">Format</div><div class="exam-card-value">CAT</div><div class="exam-card-sub">Computerized Adaptive Testing — difficulty adjusts to your answers in real-time</div></div>
       <div class="exam-card"><div class="exam-card-icon">📝</div><div class="exam-card-label">Questions</div><div class="exam-card-value">100–150</div><div class="exam-card-sub">Multiple choice + advanced innovative items. Some questions are unscored pre-test items</div></div>
@@ -379,17 +408,25 @@ footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2r
       <div class="exam-card"><div class="exam-card-icon">🌐</div><div class="exam-card-label">Languages</div><div class="exam-card-value">CAT All</div><div class="exam-card-sub">English, Chinese, German, Japanese, Spanish — all now delivered in CAT format</div></div>
     </div>
     <div class="tip-box" style="margin-top:1.25rem;">💡 <strong>CAT Tip:</strong> Higher-difficulty questions carry more weight. Focus on deep understanding — the exam tests how you think like a senior security manager, not just recall of facts.</div>
+    </div><!-- end collapsible -->
   </div>
 </section>
 
 <!-- DOMAIN WEIGHTS -->
 <section class="section weights-section" id="weightage">
   <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">// domain_weights</div>
-      <div class="section-title">2024 updated exam weights</div>
-      <div class="section-desc">Domain weights changed April 15, 2024. Allocate your study time accordingly.</div>
+    <div class="section-header has-toggle">
+      <button class="section-toggle" onclick="toggleSection('weights-body',this)">
+        <div>
+          <div class="section-eyebrow">// domain_weights</div>
+          <div class="section-title">2024 updated exam weights</div>
+          <div class="section-desc" style="margin-top:.25rem;">Domain weights changed April 15, 2024. Allocate your study time accordingly.</div>
+        </div>
+        <span class="toggle-icon" id="icon-weights-body">+</span>
+      </button>
     </div>
+    <div class="section-collapsible" id="weights-body">
+    <div style="height:.75rem;"></div>
     <table class="weight-table">
       <thead><tr><th>#</th><th>Domain</th><th>Weight</th><th class="weight-bar-cell">Distribution</th></tr></thead>
       <tbody>
@@ -403,17 +440,25 @@ footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2r
         <tr><td><span class="domain-pill" style="background:#fbefff;color:#8250df;">D8</span></td><td>Software Development Security</td><td class="weight-pct">10%</td><td class="weight-bar-cell"><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:10%;background:#8250df;"></div></div></td></tr>
       </tbody>
     </table>
+    </div><!-- end collapsible -->
   </div>
 </section>
 
 <!-- STUDY GUIDE -->
 <section class="section study-section" id="study">
   <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">// study_guide</div>
-      <div class="section-title">All 8 domains — deep dive</div>
-      <div class="section-desc">Based on the Sybex CISSP Study Guide and official ISC² exam outline. Click any topic to expand.</div>
+    <div class="section-header has-toggle">
+      <button class="section-toggle" onclick="toggleSection('study-body',this)">
+        <div>
+          <div class="section-eyebrow">// study_guide</div>
+          <div class="section-title">All 8 domains — deep dive</div>
+          <div class="section-desc" style="margin-top:.25rem;">Based on the Sybex CISSP Study Guide and official ISC² exam outline. Click any topic to expand.</div>
+        </div>
+        <span class="toggle-icon" id="icon-study-body">+</span>
+      </button>
     </div>
+    <div class="section-collapsible" id="study-body">
+    <div style="height:.75rem;"></div>
     <div class="domain-tabs">
       <button class="domain-tab active" onclick="showDomain(1,this)">D1 · Risk</button>
       <button class="domain-tab" onclick="showDomain(2,this)">D2 · Asset</button>
@@ -956,17 +1001,25 @@ footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2r
         </div>
       </div>
     </div>
+    </div><!-- end collapsible -->
   </div>
 </section>
 
 <!-- CHEAT SHEET -->
 <section class="section cheat-section" id="cheatsheet">
   <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">// cheat_sheet</div>
-      <div class="section-title">Critical concepts &amp; memory aids</div>
-      <div class="section-desc">Formulas, mnemonics, and always-tested facts. Based on Sybex key takeaways.</div>
+    <div class="section-header has-toggle">
+      <button class="section-toggle" onclick="toggleSection('cheat-body',this)">
+        <div>
+          <div class="section-eyebrow">// cheat_sheet</div>
+          <div class="section-title">Critical concepts &amp; memory aids</div>
+          <div class="section-desc" style="margin-top:.25rem;">Formulas, mnemonics, and always-tested facts. Based on Sybex key takeaways.</div>
+        </div>
+        <span class="toggle-icon" id="icon-cheat-body">+</span>
+      </button>
     </div>
+    <div class="section-collapsible" id="cheat-body">
+    <div style="height:.75rem;"></div>
     <div class="cheat-tabs">
       <button class="cheat-tab active" onclick="showCheat('formulas',this)">Formulas</button>
       <button class="cheat-tab" onclick="showCheat('models',this)">Security Models</button>
@@ -1068,17 +1121,25 @@ A — Advance (the profession)</div><div class="cheat-item"><em>Mnemonic: "She H
       <div class="cheat-card"><h4>Security Standards</h4><div class="cheat-item"><strong>PCI-DSS:</strong> <em>Payment card data. 12 requirements. Any org processing cards.</em></div><div class="cheat-item"><strong>ISO 27001:</strong> <em>ISMS certification standard (requirements).</em></div><div class="cheat-item"><strong>ISO 27002:</strong> <em>Implementation guidance for 27001.</em></div><div class="cheat-item"><strong>NIST CSF:</strong> <em>Identify → Protect → Detect → Respond → Recover.</em></div><div class="cheat-item"><strong>NIST SP 800-53:</strong> <em>Security controls for federal systems.</em></div></div>
       <div class="cheat-card"><h4>Types of Laws</h4><div class="cheat-item"><strong>Criminal:</strong> <em>Government prosecutes. Beyond reasonable doubt. Imprisonment.</em></div><div class="cheat-item"><strong>Civil (Tort):</strong> <em>Private disputes. Preponderance of evidence. Monetary damages.</em></div><div class="cheat-item"><strong>Administrative:</strong> <em>Government agencies. Compliance fines. Licenses.</em></div><div class="cheat-item"><strong>Due Care:</strong> <em>Doing what a reasonable person would do.</em></div><div class="cheat-item"><strong>Due Diligence:</strong> <em>Ongoing research to maintain due care.</em></div></div>
     </div>
+    </div><!-- end collapsible -->
   </div>
 </section>
 
 <!-- PRACTICE TEST -->
 <section class="section practice-section" id="practice">
   <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">// practice_tests</div>
-      <div class="section-title">Test your knowledge</div>
-      <div class="section-desc">CISSP-style questions with detailed explanations. Select a domain to focus your practice.</div>
+    <div class="section-header has-toggle">
+      <button class="section-toggle" onclick="toggleSection('practice-body',this)">
+        <div>
+          <div class="section-eyebrow">// practice_tests</div>
+          <div class="section-title">Test your knowledge</div>
+          <div class="section-desc" style="margin-top:.25rem;">CISSP-style questions with detailed explanations. Select a domain to focus your practice.</div>
+        </div>
+        <span class="toggle-icon" id="icon-practice-body">+</span>
+      </button>
     </div>
+    <div class="section-collapsible" id="practice-body">
+    <div style="height:.75rem;"></div>
     <div class="quiz-filters" id="quizFilters">
       <button class="quiz-filter-btn active" onclick="loadQuiz('all',this)">All Domains</button>
       <button class="quiz-filter-btn" onclick="loadQuiz('d1',this)">D1 · Risk</button>
@@ -1115,18 +1176,25 @@ A — Advance (the profession)</div><div class="cheat-item"><em>Mnemonic: "She H
         </div>
       </div>
     </div>
+    </div><!-- end collapsible -->
   </div>
 </section>
 
 <!-- SECURITY NEWS -->
 <section class="section news-section" id="news">
   <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">// live_security_news</div>
-      <div class="section-title">Latest Security Breaches &amp; Threats</div>
-      <div class="section-desc">Live feed from The Hacker News — updated automatically. Click any headline to read the full story.</div>
+    <div class="section-header has-toggle">
+      <button class="section-toggle" onclick="toggleSection('news-body',this)">
+        <div>
+          <div class="section-eyebrow">// live_security_news</div>
+          <div class="section-title">Latest Security Breaches &amp; Threats</div>
+          <div class="section-desc" style="margin-top:.25rem;">Live feed from The Hacker News — updated automatically. Click any headline to read the full story.</div>
+        </div>
+        <span class="toggle-icon" id="icon-news-body">+</span>
+      </button>
     </div>
-
+    <div class="section-collapsible" id="news-body">
+    <div style="height:.75rem;"></div>
     <div class="news-toolbar">
       <div class="news-status" id="newsStatus">
         <span class="news-live-dot"></span> Loading feed...
@@ -1148,6 +1216,7 @@ A — Advance (the profession)</div><div class="cheat-item"><em>Mnemonic: "She H
       <span class="news-source-credit">Source: <a href="https://thehackernews.com" target="_blank" rel="noopener">The Hacker News</a> via RSS · <a href="https://feeds.feedburner.com/TheHackersNews" target="_blank" rel="noopener">RSS Feed</a></span>
       <span id="newsLastUpdated" style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-light);"></span>
     </div>
+    </div><!-- end collapsible -->
   </div>
 </section>
 
@@ -1157,8 +1226,22 @@ A — Advance (the profession)</div><div class="cheat-item"><em>Mnemonic: "She H
     <div>
       <div class="footer-logo">CISSP MasterGuide</div>
       <div class="footer-note" style="margin-top:.25rem;">Based on ISC² Official Exam Outline (April 2024) &amp; Sybex CISSP Study Guide</div>
+      <div class="footer-note" style="margin-top:.5rem;">Not affiliated with ISC² · For educational purposes only</div>
     </div>
-    <div class="footer-note">Not affiliated with ISC² · For educational purposes only<br>Always verify with the official exam outline at isc2.org</div>
+    <div class="footer-about">
+      <div class="footer-about-title">About the Author</div>
+      <div class="footer-note" style="margin-bottom:.6rem;">Built by a cybersecurity professional pursuing CISSP — sharing resources freely with the community.</div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/subbaiah-ak-71801a79/" target="_blank" rel="noopener" class="footer-link-btn linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://hashnode.com/@su19bs92" target="_blank" rel="noopener" class="footer-link-btn blog">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.351 8.019l-6.37-6.37a5.63 5.63 0 00-7.962 0l-6.37 6.37a5.63 5.63 0 000 7.962l6.37 6.37a5.63 5.63 0 007.962 0l6.37-6.37a5.63 5.63 0 000-7.962zM12 15.953a3.953 3.953 0 110-7.906 3.953 3.953 0 010 7.906z"/></svg>
+          Blog
+        </a>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -1167,6 +1250,16 @@ A — Advance (the profession)</div><div class="cheat-item"><em>Mnemonic: "She H
 function toggleMenu(){const m=document.getElementById('mobileMenu'),b=document.getElementById('hamburger');m.classList.toggle('open');b.classList.toggle('open');}
 function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');}
 document.addEventListener('click',e=>{const m=document.getElementById('mobileMenu'),b=document.getElementById('hamburger');if(!m.contains(e.target)&&!b.contains(e.target))closeMenu();});
+
+// ── COLLAPSIBLE SECTIONS ──
+function toggleSection(id, btn){
+  const body = document.getElementById(id);
+  const icon = document.getElementById('icon-'+id);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  icon.classList.toggle('open', !isOpen);
+  icon.textContent = isOpen ? '+' : '+';
+}
 
 // ── DOMAIN TABS ──
 function showDomain(n,btn){
