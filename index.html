@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISSP MasterGuide — Complete Self-Study Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0969da">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="CISSP Guide">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #f6f8fa;
+  --bg-inset: #f0f4f8;
+  --border: #d0d7de;
+  --border-muted: #e6eaef;
+  --text: #1f2328;
+  --text-muted: #656d76;
+  --text-light: #9198a1;
+  --blue: #0969da;
+  --blue-light: #ddf4ff;
+  --blue-border: #54aeff;
+  --blue-dark: #0550ae;
+  --green: #1a7f37;
+  --green-light: #dafbe1;
+  --red: #cf222e;
+  --red-light: #ffebe9;
+  --orange: #bc4c00;
+  --orange-light: #fff1e5;
+  --purple: #8250df;
+  --purple-light: #fbefff;
+  --shadow-sm: 0 1px 3px rgba(31,35,40,.12), 0 1px 2px rgba(31,35,40,.06);
+  --shadow: 0 3px 6px rgba(31,35,40,.12), 0 1px 4px rgba(31,35,40,.08);
+  --radius: 6px;
+  --radius-lg: 12px;
+  --d1:#0969da;--d2:#1a7f37;--d3:#8250df;--d4:#bc4c00;
+  --d5:#cf222e;--d6:#0969da;--d7:#1a7f37;--d8:#8250df;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:1.5;min-height:100vh;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:var(--bg-subtle);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:var(--text-light);}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;padding:0 1.5rem;}
+.nav-inner{max-width:1280px;margin:0 auto;width:100%;display:flex;align-items:center;gap:1.5rem;}
+.logo{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.95rem;color:var(--text);display:flex;align-items:center;gap:.5rem;text-decoration:none;white-space:nowrap;}
+.logo-icon{width:28px;height:28px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:700;}
+.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:.82rem;font-weight:500;padding:5px 10px;border-radius:var(--radius);transition:all .15s;white-space:nowrap;}
+.nav-links a:hover{color:var(--text);background:var(--bg-subtle);}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:.75rem;}
+.nav-badge{background:var(--blue-light);color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;padding:2px 8px;border-radius:20px;border:1px solid var(--blue-border);white-space:nowrap;}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:6px;border:1px solid var(--border);background:var(--bg);border-radius:var(--radius);}
+.hamburger span{display:block;width:18px;height:2px;background:var(--text-muted);border-radius:2px;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px);}
+.mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);z-index:99;padding:.75rem 1.5rem 1rem;flex-direction:column;gap:.25rem;box-shadow:var(--shadow);}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-size:.88rem;font-weight:500;color:var(--text-muted);text-decoration:none;padding:.6rem .75rem;border-radius:var(--radius);display:flex;justify-content:space-between;align-items:center;transition:all .15s;}
+.mobile-menu a:hover{background:var(--bg-subtle);color:var(--text);}
+.mobile-menu a::after{content:'→';color:var(--blue);font-size:.8rem;}
+
+/* ── HERO ── */
+.hero{padding:96px 1.5rem 4rem;background:var(--bg-subtle);border-bottom:1px solid var(--border);}
+.hero-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 340px;gap:4rem;align-items:center;}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--blue);background:var(--blue-light);border:1px solid var(--blue-border);padding:3px 10px;border-radius:20px;margin-bottom:1.25rem;}
+.hero-tag::before{content:'●';font-size:.5rem;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+h1{font-size:2.25rem;font-weight:700;line-height:1.2;letter-spacing:-.03em;margin-bottom:1rem;color:var(--text);}
+h1 span{color:var(--blue);}
+.hero-desc{font-size:.95rem;color:var(--text-muted);line-height:1.7;max-width:560px;margin-bottom:1.75rem;}
+.hero-buttons{display:flex;gap:.75rem;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:600;padding:7px 16px;border-radius:var(--radius);border:1px solid transparent;cursor:pointer;text-decoration:none;transition:all .15s;font-family:inherit;white-space:nowrap;}
+.btn-primary{background:var(--blue);color:#fff;border-color:var(--blue);}
+.btn-primary:hover{background:var(--blue-dark);border-color:var(--blue-dark);}
+.btn-secondary{background:var(--bg);color:var(--text);border-color:var(--border);}
+.btn-secondary:hover{background:var(--bg-subtle);border-color:var(--text-light);}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.stat-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;box-shadow:var(--shadow-sm);}
+.stat-num{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:1.5rem;color:var(--text);line-height:1;}
+.stat-label{font-size:.75rem;color:var(--text-muted);margin-top:.25rem;}
+
+/* ── SECTION ── */
+.section{padding:3rem 1.5rem;}
+.section-inner{max-width:1280px;margin:0 auto;}
+.section-header{margin-bottom:1.5rem;}
+.section-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--blue);font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem;}
+.section-title{font-size:1.25rem;font-weight:700;color:var(--text);letter-spacing:-.02em;}
+.section-desc{font-size:.88rem;color:var(--text-muted);margin-top:.4rem;line-height:1.6;}
+
+/* ── EXAM OVERVIEW ── */
+.exam-section{background:var(--bg);border-bottom:1px solid var(--border);}
+.exam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;}
+.exam-card{background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;transition:border-color .15s,box-shadow .15s;}
+.exam-card:hover{border-color:var(--blue-border);box-shadow:var(--shadow-sm);}
+.exam-card-icon{font-size:1.25rem;margin-bottom:.5rem;}
+.exam-card-label{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-light);text-transform:uppercase;letter-spacing:.06em;}
+.exam-card-value{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:1.1rem;color:var(--text);margin-top:.1rem;}
+.exam-card-sub{font-size:.78rem;color:var(--text-muted);margin-top:.25rem;line-height:1.4;}
+
+/* ── DOMAIN WEIGHTS ── */
+.weights-section{background:var(--bg-subtle);border-bottom:1px solid var(--border);}
+.weight-table{width:100%;border-collapse:collapse;}
+.weight-table th{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-light);padding:.5rem .75rem;text-align:left;border-bottom:1px solid var(--border);}
+.weight-table td{padding:.6rem .75rem;border-bottom:1px solid var(--border-muted);font-size:.85rem;}
+.weight-table tr:last-child td{border-bottom:none;}
+.weight-table tr:hover td{background:var(--bg);}
+.domain-pill{display:inline-flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;padding:2px 8px;border-radius:20px;}
+.weight-bar-cell{width:160px;}
+.weight-bar-bg{background:var(--border-muted);border-radius:100px;height:6px;overflow:hidden;}
+.weight-bar-fill{height:100%;border-radius:100px;}
+.weight-pct{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;color:var(--text);text-align:right;width:40px;}
+.tip-box{background:var(--blue-light);border:1px solid var(--blue-border);border-radius:var(--radius-lg);padding:1rem 1.25rem;font-size:.85rem;color:var(--text);margin-top:1.25rem;line-height:1.6;}
+.tip-box strong{color:var(--blue);}
+
+/* ── STUDY GUIDE ── */
+.study-section{background:var(--bg);border-bottom:1px solid var(--border);}
+.domain-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
+.domain-tab{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:500;padding:5px 12px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg-subtle);color:var(--text-muted);cursor:pointer;transition:all .15s;}
+.domain-tab:hover{border-color:var(--blue-border);color:var(--blue);}
+.domain-tab.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+.domain-panel{display:none;}
+.domain-panel.active{display:block;animation:fadeUp .2s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.domain-header{display:flex;align-items:flex-start;gap:1rem;padding:1.25rem;background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:1.25rem;}
+.domain-icon{width:44px;height:44px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.9rem;color:#fff;flex-shrink:0;}
+.domain-info h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.25rem;}
+.domain-info p{font-size:.82rem;color:var(--text-muted);line-height:1.5;}
+.domain-chip{display:inline-flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--blue);background:var(--blue-light);border:1px solid var(--blue-border);padding:1px 8px;border-radius:20px;margin-top:.4rem;}
+.topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.75rem;}
+.topic-card{background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem;cursor:pointer;transition:all .15s;user-select:none;}
+.topic-card:hover{border-color:var(--blue-border);box-shadow:var(--shadow-sm);}
+.topic-card.expanded{border-color:var(--blue);background:var(--bg);}
+.topic-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;}
+.topic-card h4{font-size:.85rem;font-weight:600;color:var(--text);line-height:1.4;}
+.topic-expand-icon{width:18px;height:18px;border-radius:50%;border:1px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7rem;color:var(--text-muted);transition:all .2s;font-family:'JetBrains Mono',monospace;font-weight:600;}
+.topic-card.expanded .topic-expand-icon{background:var(--blue);color:#fff;border-color:var(--blue);transform:rotate(45deg);}
+.topic-card p{font-size:.8rem;color:var(--text-muted);margin-top:.4rem;line-height:1.5;}
+.topic-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.6rem;}
+.topic-tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:1px 7px;border-radius:20px;background:var(--bg);border:1px solid var(--border);color:var(--text-muted);}
+.topic-details{display:none;margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border-muted);animation:fadeUp .2s ease;}
+.topic-card.expanded .topic-details{display:block;}
+.detail-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:.3rem;margin-top:.6rem;}
+.detail-label:first-child{margin-top:0;}
+.detail-points{list-style:none;padding:0;}
+.detail-points li{font-size:.8rem;color:var(--text-muted);line-height:1.55;padding:.15rem 0 .15rem 1rem;position:relative;}
+.detail-points li::before{content:'·';position:absolute;left:.2rem;color:var(--blue);font-weight:700;font-size:1rem;line-height:1.3;}
+.detail-points li strong{color:var(--text);font-weight:600;}
+.exam-tip-box{background:var(--orange-light);border:1px solid #f9c04a;border-radius:var(--radius);padding:.6rem .85rem;font-size:.78rem;color:var(--orange);line-height:1.5;margin-top:.6rem;}
+.exam-tip-box::before{content:'💡 Exam tip: ';font-weight:600;}
+
+/* ── CHEAT SHEET ── */
+.cheat-section{background:var(--bg-subtle);border-bottom:1px solid var(--border);}
+.cheat-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem;}
+.cheat-tab{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:500;padding:5px 12px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg);color:var(--text-muted);cursor:pointer;transition:all .15s;}
+.cheat-tab:hover{border-color:var(--blue-border);color:var(--blue);}
+.cheat-tab.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+.cheat-panel{display:none;}
+.cheat-panel.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.75rem;}
+.cheat-card{background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:var(--radius-lg);padding:1rem 1.1rem;}
+.cheat-card h4{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:.65rem;}
+.cheat-item{display:flex;gap:.5rem;margin-bottom:.4rem;font-size:.8rem;line-height:1.5;}
+.cheat-item::before{content:'›';color:var(--blue);font-weight:700;flex-shrink:0;margin-top:1px;}
+.cheat-item strong{color:var(--text);font-weight:600;}
+.cheat-item em{color:var(--text-muted);font-style:normal;}
+.code-block{background:var(--bg-inset);border:1px solid var(--border);border-radius:var(--radius);padding:.65rem .85rem;margin-top:.6rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text);line-height:1.6;white-space:pre-wrap;}
+
+/* ── PRACTICE TEST ── */
+.practice-section{background:var(--bg);border-bottom:1px solid var(--border);}
+.quiz-filters{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem;}
+.quiz-filter-btn{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;padding:4px 12px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg-subtle);color:var(--text-muted);cursor:pointer;transition:all .15s;}
+.quiz-filter-btn:hover{border-color:var(--blue-border);color:var(--blue);}
+.quiz-filter-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+.quiz-wrap{max-width:680px;}
+.quiz-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;}
+.quiz-progress-bar{flex:1;height:4px;background:var(--border-muted);border-radius:100px;overflow:hidden;}
+.quiz-progress-fill{height:100%;background:var(--blue);border-radius:100px;transition:width .3s;}
+.quiz-progress-text{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-muted);white-space:nowrap;}
+.quiz-card{background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow-sm);}
+.quiz-qnum{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-light);margin-bottom:.6rem;}
+.quiz-question{font-size:.92rem;font-weight:500;line-height:1.6;color:var(--text);margin-bottom:1.1rem;}
+.quiz-options{display:flex;flex-direction:column;gap:.5rem;}
+.quiz-option{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:.75rem 1rem;cursor:pointer;font-size:.85rem;color:var(--text);transition:all .15s;display:flex;align-items:flex-start;gap:.65rem;text-align:left;}
+.quiz-option:hover:not(:disabled){border-color:var(--blue-border);background:var(--blue-light);}
+.quiz-option.correct{border-color:var(--green);background:var(--green-light);color:var(--green);}
+.quiz-option.incorrect{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.quiz-option.revealed{border-color:var(--green);background:var(--green-light);}
+.opt-key{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-light);flex-shrink:0;margin-top:2px;background:var(--bg-subtle);border:1px solid var(--border);border-radius:3px;padding:0 5px;line-height:1.6;}
+.quiz-explanation{background:var(--green-light);border:1px solid #82cfaf;border-radius:var(--radius);padding:.75rem 1rem;margin-top:.75rem;font-size:.82rem;line-height:1.6;display:none;color:var(--text);}
+.quiz-explanation.show{display:block;}
+.quiz-explanation strong{color:var(--green);}
+.quiz-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;}
+.quiz-feedback{font-family:'JetBrains Mono',monospace;font-size:.78rem;}
+.quiz-score-card{background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;text-align:center;display:none;box-shadow:var(--shadow-sm);}
+.quiz-score-card.show{display:block;}
+.score-ring{width:80px;height:80px;margin:0 auto 1rem;border-radius:50%;background:conic-gradient(var(--blue) 0%,var(--border-muted) 0%);display:flex;align-items:center;justify-content:center;border:2px solid var(--border);}
+.score-ring span{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;color:var(--text);}
+.score-title{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.4rem;}
+.score-msg{font-size:.82rem;color:var(--text-muted);margin-bottom:1.25rem;line-height:1.5;}
+
+/* ── FOOTER ── */
+footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2rem 1.5rem;}
+.footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.85rem;color:var(--text);}
+.footer-note{font-size:.75rem;color:var(--text-muted);}
+
+/* ── NEWS SECTION ── */
+.news-section{background:var(--bg);border-bottom:1px solid var(--border);}
+.news-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.news-status{display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-muted);}
+.news-live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livePulse 2s infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.85);}}
+.news-refresh-btn{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;padding:4px 10px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg-subtle);color:var(--text-muted);cursor:pointer;transition:all .15s;}
+.news-refresh-btn:hover{border-color:var(--blue-border);color:var(--blue);}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.75rem;margin-bottom:1rem;}
+.news-card{background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.1rem;text-decoration:none;display:flex;flex-direction:column;gap:.5rem;transition:all .15s;animation:fadeUp .3s ease;}
+.news-card:hover{border-color:var(--blue-border);box-shadow:var(--shadow-sm);background:var(--bg);}
+.news-card-tag{display:inline-flex;align-items:center;gap:.3rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:500;padding:2px 7px;border-radius:20px;width:fit-content;}
+.news-card-tag.breach{background:var(--red-light);color:var(--red);border:1px solid #f5c6cb;}
+.news-card-tag.malware{background:var(--orange-light);color:var(--orange);border:1px solid #fcd7b0;}
+.news-card-tag.vuln{background:var(--purple-light);color:var(--purple);border:1px solid #d8b4fe;}
+.news-card-tag.news{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-border);}
+.news-card-title{font-size:.85rem;font-weight:600;color:var(--text);line-height:1.45;}
+.news-card-desc{font-size:.78rem;color:var(--text-muted);line-height:1.55;flex:1;}
+.news-card-meta{display:flex;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-light);margin-top:.25rem;}
+.news-card-arrow{color:var(--blue);font-size:.75rem;}
+.news-skeleton{background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.1rem;height:140px;animation:shimmer 1.5s infinite linear;}
+@keyframes shimmer{0%{opacity:.6;}50%{opacity:1;}100%{opacity:.6;}}
+.news-error{background:var(--red-light);border:1px solid #f5c6cb;border-radius:var(--radius-lg);padding:1rem 1.25rem;font-size:.85rem;color:var(--red);grid-column:1/-1;}
+.news-footer-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;font-size:.75rem;color:var(--text-muted);}
+.news-footer-bar a{color:var(--blue);text-decoration:none;}
+.news-footer-bar a:hover{text-decoration:underline;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;gap:2rem;}
+  .hero-stats{grid-template-columns:repeat(4,1fr);}
+}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .hero{padding:80px 1.25rem 2.5rem;}
+  h1{font-size:1.75rem;}
+  .hero-stats{grid-template-columns:1fr 1fr;gap:.5rem;}
+  .stat-num{font-size:1.2rem;}
+  .hero-buttons{flex-direction:column;}
+  .hero-buttons .btn{width:100%;justify-content:center;}
+  .section{padding:2rem 1.25rem;}
+  .exam-grid{grid-template-columns:1fr 1fr;}
+  .weight-bar-cell{display:none;}
+  .topics-grid{grid-template-columns:1fr;}
+  .cheat-panel.active{grid-template-columns:1fr;}
+  .domain-tabs{gap:.3rem;}
+  .domain-tab{font-size:.7rem;padding:4px 10px;}
+  .footer-inner{flex-direction:column;text-align:center;}
+}
+@media(max-width:480px){
+  .exam-grid{grid-template-columns:1fr;}
+  h1{font-size:1.5rem;}
+  .hero-stats{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <div class="logo-icon">C²</div>
+      CISSP MasterGuide
+    </a>
+    <ul class="nav-links">
+      <li><a href="#overview">Exam Info</a></li>
+      <li><a href="#weightage">Domains</a></li>
+      <li><a href="#study">Study Guide</a></li>
+      <li><a href="#cheatsheet">Cheat Sheet</a></li>
+      <li><a href="#practice">Practice Tests</a></li>
+      <li><a href="cissp-flashcards.html">Flashcards</a></li>
+      <li><a href="cissp-exam-prep.html" style="color:var(--red);font-weight:600;">Exam Prep Tests</a></li>
+      <li><a href="#news">Security News</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-badge">2024 Updated</span>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#overview" onclick="closeMenu()">Exam Info</a>
+  <a href="#weightage" onclick="closeMenu()">Domain Weights</a>
+  <a href="#study" onclick="closeMenu()">Study Guide</a>
+  <a href="#cheatsheet" onclick="closeMenu()">Cheat Sheet</a>
+  <a href="#practice" onclick="closeMenu()">Practice Tests</a>
+  <a href="cissp-flashcards.html">Flashcards</a>
+  <a href="cissp-exam-prep.html" style="color:var(--red);font-weight:600;">Exam Prep Tests</a>
+  <a href="#news" onclick="closeMenu()">Security News</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">ISC² Official · April 2024 · Sybex Aligned</div>
+      <h1>Your complete guide to<br><span>CISSP certification</span></h1>
+      <p class="hero-desc">All 8 domains covered in depth. Practice questions, cheat sheets, and flashcards — aligned to the official ISC² exam outline and Sybex Study Guide. Free, forever.</p>
+      <div class="hero-buttons">
+        <a href="#study" class="btn btn-primary">Start studying →</a>
+        <a href="#practice" class="btn btn-secondary">Take practice test</a>
+        <a href="cissp-flashcards.html" class="btn btn-secondary">Open flashcards</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Domains</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">150</div>
+        <div class="stat-label">Max questions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">700</div>
+        <div class="stat-label">Passing score</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3h</div>
+        <div class="stat-label">Time limit</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">$749</div>
+        <div class="stat-label">Exam fee</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5yr</div>
+        <div class="stat-label">Experience req.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAM OVERVIEW -->
+<section class="section exam-section" id="overview">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">// exam_overview</div>
+      <div class="section-title">Everything you need to know</div>
+      <div class="section-desc">Updated April 15, 2024 — CAT format now applies to all languages.</div>
+    </div>
+    <div class="exam-grid">
+      <div class="exam-card"><div class="exam-card-icon">🎯</div><div class="exam-card-label">Format</div><div class="exam-card-value">CAT</div><div class="exam-card-sub">Computerized Adaptive Testing — difficulty adjusts to your answers in real-time</div></div>
+      <div class="exam-card"><div class="exam-card-icon">📝</div><div class="exam-card-label">Questions</div><div class="exam-card-value">100–150</div><div class="exam-card-sub">Multiple choice + advanced innovative items. Some questions are unscored pre-test items</div></div>
+      <div class="exam-card"><div class="exam-card-icon">⏱️</div><div class="exam-card-label">Time Limit</div><div class="exam-card-value">3 Hours</div><div class="exam-card-sub">Reduced from 4h as of April 2024. Plan ~72 seconds per question</div></div>
+      <div class="exam-card"><div class="exam-card-icon">✅</div><div class="exam-card-label">Passing Score</div><div class="exam-card-value">700 / 1000</div><div class="exam-card-sub">Weighted scaled score. You must demonstrate competency across all domains</div></div>
+      <div class="exam-card"><div class="exam-card-icon">💰</div><div class="exam-card-label">Exam Fee</div><div class="exam-card-value">$749 USD</div><div class="exam-card-sub">Administered at Pearson VUE testing centers worldwide</div></div>
+      <div class="exam-card"><div class="exam-card-icon">🏆</div><div class="exam-card-label">Experience</div><div class="exam-card-value">5 Years</div><div class="exam-card-sub">In 2+ of 8 domains. 1 year waivable with degree or ISC²-approved credential</div></div>
+      <div class="exam-card"><div class="exam-card-icon">🔄</div><div class="exam-card-label">Renewal</div><div class="exam-card-value">3 Years</div><div class="exam-card-sub">120 CPE credits + Annual Maintenance Fee required to keep certification active</div></div>
+      <div class="exam-card"><div class="exam-card-icon">🌐</div><div class="exam-card-label">Languages</div><div class="exam-card-value">CAT All</div><div class="exam-card-sub">English, Chinese, German, Japanese, Spanish — all now delivered in CAT format</div></div>
+    </div>
+    <div class="tip-box" style="margin-top:1.25rem;">💡 <strong>CAT Tip:</strong> Higher-difficulty questions carry more weight. Focus on deep understanding — the exam tests how you think like a senior security manager, not just recall of facts.</div>
+  </div>
+</section>
+
+<!-- DOMAIN WEIGHTS -->
+<section class="section weights-section" id="weightage">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">// domain_weights</div>
+      <div class="section-title">2024 updated exam weights</div>
+      <div class="section-desc">Domain weights changed April 15, 2024. Allocate your study time accordingly.</div>
+    </div>
+    <table class="weight-table">
+      <thead><tr><th>#</th><th>Domain</th><th>Weight</th><th class="weight-bar-cell">Distribution</th></tr></thead>
+      <tbody>
+        <tr><td><span class="domain-pill" style="background:#ddf4ff;color:#0969da;">D1</span></td><td>Security &amp; Risk Management</td><td class="weight-pct">16%</td><td class="weight-bar-cell"><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:16%;background:#0969da;"></div></div></td></tr>
+        <tr><td><span class="domain-pill" style="background:#dafbe1;color:#1a7f37;">D2</span></td><td>Asset Security</td><td class="weight-pct">10%</td><td class="weight-bar-cell"><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:10%;background:#1a7f37;"></div></div></td></tr>
+        <tr><td><span class="domain-pill" style="background:#fbefff;color:#8250df;">D3</span></td><td>Security Architecture &amp; Engineering</td><td class="weight-pct">13%</td><td class="weight-bar-cell"><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:13%;background:#8250df;"></div></div></td></tr>
+        <tr><td><span class="domain-pill" style="background:#fff1e5;color:#bc4c00;">D4</span></td><td>Communication &amp; Network Security</td><td class="weight-pct">13%</td><td class="weight-bar-cell"><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:13%;background:#bc4c00;"></div></div></td></tr>
+        <tr><td><span class="domain-pill" style="background:#ffebe9;color:#cf222e;">D5</span></td><td>Identity &amp; Access Management (IAM)</td><td class="weight-pct">13%</td><td class="weight-bar-cell"><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:13%;background:#cf222e;"></div></div></td></tr>
+        <tr><td><span class="domain-pill" style="background:#ddf4ff;color:#0969da;">D6</span></td><td>Security Assessment &amp; Testing</td><td class="weight-pct">12%</td><td class="weight-bar-cell"><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:12%;background:#0969da;"></div></div></td></tr>
+        <tr><td><span class="domain-pill" style="background:#dafbe1;color:#1a7f37;">D7</span></td><td>Security Operations</td><td class="weight-pct">13%</td><td class="weight-bar-cell"><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:13%;background:#1a7f37;"></div></div></td></tr>
+        <tr><td><span class="domain-pill" style="background:#fbefff;color:#8250df;">D8</span></td><td>Software Development Security</td><td class="weight-pct">10%</td><td class="weight-bar-cell"><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:10%;background:#8250df;"></div></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- STUDY GUIDE -->
+<section class="section study-section" id="study">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">// study_guide</div>
+      <div class="section-title">All 8 domains — deep dive</div>
+      <div class="section-desc">Based on the Sybex CISSP Study Guide and official ISC² exam outline. Click any topic to expand.</div>
+    </div>
+    <div class="domain-tabs">
+      <button class="domain-tab active" onclick="showDomain(1,this)">D1 · Risk</button>
+      <button class="domain-tab" onclick="showDomain(2,this)">D2 · Asset</button>
+      <button class="domain-tab" onclick="showDomain(3,this)">D3 · Architecture</button>
+      <button class="domain-tab" onclick="showDomain(4,this)">D4 · Network</button>
+      <button class="domain-tab" onclick="showDomain(5,this)">D5 · IAM</button>
+      <button class="domain-tab" onclick="showDomain(6,this)">D6 · Assessment</button>
+      <button class="domain-tab" onclick="showDomain(7,this)">D7 · Operations</button>
+      <button class="domain-tab" onclick="showDomain(8,this)">D8 · Software</button>
+    </div>
+
+    <!-- D1 -->
+    <div class="domain-panel active" id="domain-1">
+      <div class="domain-header">
+        <div class="domain-icon" style="background:#0969da;">D1</div>
+        <div class="domain-info">
+          <h3>Security &amp; Risk Management</h3>
+          <p>The largest domain. Covers foundational security concepts, risk frameworks, legal/regulatory compliance, personnel security, and business continuity. Think like a CISO.</p>
+          <span class="domain-chip">▲ 16% of exam · Updated 2024</span>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔒 CIA Triad &amp; Security Concepts</h4><span class="topic-expand-icon">+</span></div>
+          <p>The three foundational pillars of information security.</p>
+          <div class="topic-tags"><span class="topic-tag">foundational</span><span class="topic-tag">always-tested</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Key Points</div>
+            <ul class="detail-points"><li><strong>Confidentiality</strong> — prevent unauthorized disclosure. Controls: encryption, access control, classification.</li><li><strong>Integrity</strong> — prevent unauthorized modification. Controls: hashing, digital signatures, version control.</li><li><strong>Availability</strong> — ensure authorized access when needed. Controls: redundancy, backups, DDoS protection.</li><li><strong>Non-repudiation</strong> — cannot deny performing an action. Achieved via digital signatures.</li></ul>
+            <div class="exam-tip-box">CISSP questions often ask which CIA component is violated. Disclosure = Confidentiality. Modification = Integrity. Denial of access = Availability.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📊 Risk Management</h4><span class="topic-expand-icon">+</span></div>
+          <p>Identifying, assessing and responding to risks using qualitative or quantitative methods.</p>
+          <div class="topic-tags"><span class="topic-tag">quantitative</span><span class="topic-tag">core</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Risk Formula</div>
+            <ul class="detail-points"><li><strong>Risk = Threat × Vulnerability × Asset Value</strong></li><li><strong>SLE = Asset Value × Exposure Factor (EF)</strong></li><li><strong>ALE = SLE × ARO</strong> (Annual Rate of Occurrence)</li><li><strong>Countermeasure Value = ALE(before) – ALE(after) – Annual Cost</strong></li></ul>
+            <div class="detail-label">Risk Responses</div>
+            <ul class="detail-points"><li><strong>Accept</strong> — acknowledge and live with the risk.</li><li><strong>Transfer</strong> — shift to third party (insurance, contracts).</li><li><strong>Avoid</strong> — eliminate the activity causing the risk.</li><li><strong>Mitigate</strong> — reduce likelihood or impact with controls.</li></ul>
+            <div class="exam-tip-box">Qualitative = subjective (High/Med/Low). Quantitative = dollar values (ALE, SLE). Know when to use each.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>⚖️ Security Governance</h4><span class="topic-expand-icon">+</span></div>
+          <p>Aligning security with business strategy through policies, standards, and oversight.</p>
+          <div class="topic-tags"><span class="topic-tag">management</span><span class="topic-tag">high-priority</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Policy Hierarchy</div>
+            <ul class="detail-points"><li><strong>Policy</strong> — high-level mandatory management statements.</li><li><strong>Standards</strong> — specific mandatory requirements supporting policies.</li><li><strong>Guidelines</strong> — recommended but optional best practices.</li><li><strong>Procedures</strong> — step-by-step instructions to implement policies.</li></ul>
+            <div class="detail-label">Key Concepts</div>
+            <ul class="detail-points"><li><strong>Due Care</strong> — doing what a reasonable person would do (minimum standard).</li><li><strong>Due Diligence</strong> — ongoing research to maintain due care.</li></ul>
+            <div class="exam-tip-box">Security function exists to SUPPORT the business. Always choose answers that align security with business objectives.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🏢 Business Continuity (BCP)</h4><span class="topic-expand-icon">+</span></div>
+          <p>Planning to maintain business operations during and after a significant disruption.</p>
+          <div class="topic-tags"><span class="topic-tag">BCP/DR</span><span class="topic-tag">high-priority</span></div>
+          <div class="topic-details">
+            <div class="detail-label">BCP vs DRP</div>
+            <ul class="detail-points"><li><strong>BCP</strong> — maintains business operations. Long-term, business-wide scope.</li><li><strong>DRP</strong> — restores IT systems. Tactical, IT-focused. Subset of BCP.</li></ul>
+            <div class="detail-label">Key Terms</div>
+            <ul class="detail-points"><li><strong>MTD</strong> — Maximum Tolerable Downtime. Business limit before unacceptable damage.</li><li><strong>RTO</strong> — Recovery Time Objective. Must be less than MTD.</li><li><strong>RPO</strong> — Recovery Point Objective. How much data loss is acceptable.</li><li><strong>Hot/Warm/Cold Site</strong> — immediate / hours / days to activate.</li></ul>
+            <div class="exam-tip-box">RTO must always be less than MTD. BIA is always performed FIRST before writing BCP.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📜 Legal, Regulations &amp; Ethics</h4><span class="topic-expand-icon">+</span></div>
+          <p>Laws, regulations, IP frameworks, and the ISC² Code of Ethics.</p>
+          <div class="topic-tags"><span class="topic-tag">regulatory</span><span class="topic-tag">always-tested</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Key Regulations</div>
+            <ul class="detail-points"><li><strong>GDPR</strong> — EU privacy. 72-hr breach notification. Up to 4% global revenue fine.</li><li><strong>HIPAA</strong> — US healthcare data (PHI).</li><li><strong>SOX</strong> — Public companies, financial reporting integrity.</li><li><strong>PCI-DSS</strong> — Payment card data. 12 requirements.</li></ul>
+            <div class="detail-label">ISC² Code of Ethics (priority order)</div>
+            <ul class="detail-points"><li><strong>1.</strong> Protect society and the common good.</li><li><strong>2.</strong> Act honorably, honestly, justly.</li><li><strong>3.</strong> Provide competent service.</li><li><strong>4.</strong> Advance the profession.</li></ul>
+            <div class="exam-tip-box">Society ALWAYS wins over employer interest. If employer asks you to cover up a breach — Ethics Canon 1 overrides Canon 3.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>👥 Personnel Security</h4><span class="topic-expand-icon">+</span></div>
+          <p>People-focused controls from hiring through termination to reduce insider threats.</p>
+          <div class="topic-tags"><span class="topic-tag">HR</span><span class="topic-tag">operational</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Key Controls</div>
+            <ul class="detail-points"><li><strong>Separation of Duties</strong> — no single person controls entire critical process.</li><li><strong>Least Privilege</strong> — minimum access needed for job function.</li><li><strong>Mandatory Vacation</strong> — detects fraud (someone must cover your role).</li><li><strong>Job Rotation</strong> — cross-training and fraud detection.</li></ul>
+            <div class="detail-label">Termination</div>
+            <ul class="detail-points"><li><strong>Hostile</strong> — disable access FIRST, then inform the employee.</li><li><strong>Friendly</strong> — exit interview, return assets, disable accounts.</li></ul>
+            <div class="exam-tip-box">For hostile terminations: disable access FIRST. Sequence matters in exam questions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D2 -->
+    <div class="domain-panel" id="domain-2">
+      <div class="domain-header">
+        <div class="domain-icon" style="background:#1a7f37;">D2</div>
+        <div class="domain-info">
+          <h3>Asset Security</h3>
+          <p>Classifying information, determining ownership, handling data throughout its lifecycle, and applying appropriate protection measures.</p>
+          <span class="domain-chip">10% of exam</span>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🏷️ Data Classification</h4><span class="topic-expand-icon">+</span></div>
+          <p>Labeling data based on sensitivity to determine protection levels.</p>
+          <div class="topic-tags"><span class="topic-tag">classification</span><span class="topic-tag">core</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Government Levels</div>
+            <ul class="detail-points"><li><strong>Top Secret</strong> — grave damage to national security.</li><li><strong>Secret</strong> — serious damage.</li><li><strong>Confidential</strong> — damage.</li><li><strong>Unclassified</strong> — no damage expected.</li></ul>
+            <div class="detail-label">Commercial Levels</div>
+            <ul class="detail-points"><li><strong>Confidential/Proprietary → Private → Sensitive → Public</strong></li></ul>
+            <div class="exam-tip-box">Data Owner sets the classification. Data Custodian implements controls. Never confuse these roles.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>👤 Data Ownership Roles</h4><span class="topic-expand-icon">+</span></div>
+          <p>Roles and responsibilities for managing data throughout its lifecycle.</p>
+          <div class="topic-tags"><span class="topic-tag">roles</span><span class="topic-tag">always-tested</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Key Roles</div>
+            <ul class="detail-points"><li><strong>Data Owner</strong> — senior business manager. Accountable. Sets classification.</li><li><strong>Data Custodian</strong> — IT department. Implements technical controls. Not accountable.</li><li><strong>Data Processor (GDPR)</strong> — processes data on behalf of the controller.</li><li><strong>Data Controller (GDPR)</strong> — determines purpose and means of processing.</li></ul>
+            <div class="exam-tip-box">Owner = accountability. Custodian = responsibility for implementation.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔒 Data States</h4><span class="topic-expand-icon">+</span></div>
+          <p>The three states data exists in and appropriate protection for each.</p>
+          <div class="topic-tags"><span class="topic-tag">data-states</span><span class="topic-tag">core</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Three States</div>
+            <ul class="detail-points"><li><strong>Data at Rest</strong> — stored on disk/DB. Controls: AES encryption, access controls.</li><li><strong>Data in Transit</strong> — moving across network. Controls: TLS 1.3, VPN, HTTPS.</li><li><strong>Data in Use</strong> — in RAM/CPU. Controls: DRM, trusted execution environments.</li></ul>
+            <div class="exam-tip-box">Data in Use is the hardest to protect. Cold boot attacks target data in use by dumping RAM.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🗑️ Data Destruction</h4><span class="topic-expand-icon">+</span></div>
+          <p>Methods for permanently and verifiably destroying data.</p>
+          <div class="topic-tags"><span class="topic-tag">destruction</span></div>
+          <div class="topic-details">
+            <div class="detail-label">NIST SP 800-88 Methods</div>
+            <ul class="detail-points"><li><strong>Clear</strong> — overwrite. Protects against simple recovery.</li><li><strong>Purge</strong> — degaussing or secure erase. Protects against lab attacks.</li><li><strong>Destroy</strong> — shred/incinerate. Highest assurance.</li><li><strong>Crypto-shredding</strong> — delete encryption keys. Best for cloud/SSD.</li></ul>
+            <div class="exam-tip-box">Degaussing only works on magnetic media — NOT SSDs. Use crypto-shredding for cloud data.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔐 Privacy Protection</h4><span class="topic-expand-icon">+</span></div>
+          <p>Protecting personal information in compliance with global privacy regulations.</p>
+          <div class="topic-tags"><span class="topic-tag">privacy</span><span class="topic-tag">GDPR</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Key Definitions</div>
+            <ul class="detail-points"><li><strong>PII</strong> — Personally Identifiable Information (name, SSN, email).</li><li><strong>PHI</strong> — Protected Health Information (medical records).</li></ul>
+            <div class="detail-label">GDPR Principles</div>
+            <ul class="detail-points"><li><strong>Data minimization</strong> — collect only what's necessary.</li><li><strong>Purpose limitation</strong> — use only for stated purpose.</li><li><strong>Right to erasure</strong> — "right to be forgotten".</li><li><strong>Privacy by design</strong> — build privacy in from the start.</li></ul>
+            <div class="exam-tip-box">GDPR applies to ANY org processing EU residents' data regardless of location. Fines: up to €20M or 4% of global revenue.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D3 -->
+    <div class="domain-panel" id="domain-3">
+      <div class="domain-header">
+        <div class="domain-icon" style="background:#8250df;">D3</div>
+        <div class="domain-info">
+          <h3>Security Architecture &amp; Engineering</h3>
+          <p>Secure design principles, security models, cryptography, physical security, and vulnerability assessment. The most technically deep domain.</p>
+          <span class="domain-chip">13% of exam</span>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🏛️ Secure Design Principles</h4><span class="topic-expand-icon">+</span></div>
+          <p>Core principles every security architect must apply.</p>
+          <div class="topic-tags"><span class="topic-tag">principles</span><span class="topic-tag">core</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Key Principles</div>
+            <ul class="detail-points"><li><strong>Least Privilege</strong> — minimum access needed.</li><li><strong>Defense in Depth</strong> — multiple independent layers of controls.</li><li><strong>Fail Secure</strong> — default to denied state on failure.</li><li><strong>Separation of Privilege</strong> — require multiple conditions to grant access.</li><li><strong>Economy of Mechanism</strong> — keep security simple; complexity = risk.</li><li><strong>Zero Trust</strong> — never trust, always verify. Assume breach.</li></ul>
+            <div class="exam-tip-box">Defense in Depth = multiple independent layers. If one fails, others remain. Like an onion.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔐 Security Models</h4><span class="topic-expand-icon">+</span></div>
+          <p>Formal frameworks defining rules for access control and data protection.</p>
+          <div class="topic-tags"><span class="topic-tag">models</span><span class="topic-tag">always-tested</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Confidentiality Models</div>
+            <ul class="detail-points"><li><strong>Bell-LaPadula</strong> — No Read Up, No Write Down. Military confidentiality.</li></ul>
+            <div class="detail-label">Integrity Models</div>
+            <ul class="detail-points"><li><strong>Biba</strong> — No Read Down, No Write Up. Opposite of BLP.</li><li><strong>Clark-Wilson</strong> — Integrity via well-formed transactions (CDI, TP, IVP).</li></ul>
+            <div class="detail-label">Other Models</div>
+            <ul class="detail-points"><li><strong>Brewer-Nash (Chinese Wall)</strong> — prevents conflict of interest.</li><li><strong>State Machine</strong> — must be secure in all possible states.</li></ul>
+            <div class="exam-tip-box">BLP = Confidentiality. Biba = Integrity. They have opposite rules. BLP prevents leaks DOWN; Biba prevents corruption from BELOW.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔑 Cryptography Fundamentals</h4><span class="topic-expand-icon">+</span></div>
+          <p>Symmetric, asymmetric, and hashing algorithms — the backbone of security.</p>
+          <div class="topic-tags"><span class="topic-tag">crypto</span><span class="topic-tag">core</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Symmetric (same key)</div>
+            <ul class="detail-points"><li><strong>AES</strong> — 128/192/256-bit. Current gold standard. FIPS 197.</li><li><strong>3DES</strong> — Being phased out. Slow.</li><li><strong>RC4</strong> — BROKEN. Used in WEP (why WEP is broken).</li></ul>
+            <div class="detail-label">Asymmetric (key pairs)</div>
+            <ul class="detail-points"><li><strong>RSA</strong> — prime factorization. 2048+ bits recommended.</li><li><strong>ECC</strong> — smaller keys, same security. 256-bit ECC ≈ 3072-bit RSA.</li><li><strong>Diffie-Hellman</strong> — key EXCHANGE only, not encryption.</li></ul>
+            <div class="detail-label">Hash Functions</div>
+            <ul class="detail-points"><li><strong>MD5/SHA-1</strong> — BROKEN/WEAK. Never use for security.</li><li><strong>SHA-256/512</strong> — Current standard. Use these.</li><li><strong>HMAC</strong> — Hash + secret key = integrity AND authentication.</li></ul>
+            <div class="exam-tip-box">Hybrid = asymmetric for key exchange, symmetric for bulk data. This is how TLS works.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📜 PKI &amp; Digital Certificates</h4><span class="topic-expand-icon">+</span></div>
+          <p>Infrastructure for managing digital certificates and public/private key pairs.</p>
+          <div class="topic-tags"><span class="topic-tag">PKI</span><span class="topic-tag">high-priority</span></div>
+          <div class="topic-details">
+            <div class="detail-label">PKI Components</div>
+            <ul class="detail-points"><li><strong>CA</strong> — Certificate Authority. Issues and signs certificates.</li><li><strong>X.509</strong> — certificate format used in TLS/HTTPS.</li><li><strong>CRL</strong> — Certificate Revocation List. Batch, periodic.</li><li><strong>OCSP</strong> — Online Certificate Status Protocol. Real-time revocation.</li></ul>
+            <div class="detail-label">Digital Signatures</div>
+            <ul class="detail-points"><li><strong>Signing</strong> — encrypt hash with YOUR PRIVATE key.</li><li><strong>Verification</strong> — decrypt with sender's PUBLIC key.</li><li><strong>Encryption</strong> — encrypt with recipient's PUBLIC key.</li></ul>
+            <div class="exam-tip-box">Signatures use PRIVATE key (only you can sign). Encryption uses recipient's PUBLIC key. Memorize this — always tested.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🛡️ Physical Security</h4><span class="topic-expand-icon">+</span></div>
+          <p>Protecting physical assets, facilities, and personnel.</p>
+          <div class="topic-tags"><span class="topic-tag">physical</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Defense Layers (outside in)</div>
+            <ul class="detail-points"><li><strong>Perimeter</strong> — fences, walls, lighting, CCTV, guards.</li><li><strong>Outer</strong> — building exterior, badge readers.</li><li><strong>Inner</strong> — mantraps, biometrics.</li><li><strong>Target</strong> — server room, vault, data center.</li></ul>
+            <div class="detail-label">Key Controls</div>
+            <ul class="detail-points"><li><strong>Mantrap</strong> — two-door entry, prevents tailgating.</li><li><strong>CPTED</strong> — Crime Prevention Through Environmental Design.</li><li><strong>FM-200/Halon</strong> — clean agent fire suppression for data centers.</li></ul>
+            <div class="exam-tip-box">No technical control matters if an attacker has physical access to your servers.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D4 -->
+    <div class="domain-panel" id="domain-4">
+      <div class="domain-header">
+        <div class="domain-icon" style="background:#bc4c00;">D4</div>
+        <div class="domain-info">
+          <h3>Communication &amp; Network Security</h3>
+          <p>Network architecture, protocols, secure communications, and protection against network attacks. Know the OSI model cold.</p>
+          <span class="domain-chip">13% of exam</span>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🌐 OSI &amp; TCP/IP Models</h4><span class="topic-expand-icon">+</span></div>
+          <p>Layered networking models that define how data moves across networks.</p>
+          <div class="topic-tags"><span class="topic-tag">models</span><span class="topic-tag">always-tested</span></div>
+          <div class="topic-details">
+            <div class="detail-label">OSI 7 Layers (top → bottom)</div>
+            <ul class="detail-points"><li><strong>7 Application</strong> — HTTP, DNS, SMTP, FTP.</li><li><strong>6 Presentation</strong> — Encryption, compression.</li><li><strong>5 Session</strong> — Sessions, NetBIOS.</li><li><strong>4 Transport</strong> — TCP (reliable), UDP (fast). Ports here.</li><li><strong>3 Network</strong> — IP, ICMP, routing.</li><li><strong>2 Data Link</strong> — MAC, ARP, switches.</li><li><strong>1 Physical</strong> — Cables, hubs, bits.</li></ul>
+            <div class="exam-tip-box">Mnemonic: All People Seem To Need Data Processing. Firewalls = L3/L4. WAFs = L7.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔒 Wireless Security</h4><span class="topic-expand-icon">+</span></div>
+          <p>Wireless protocols from WEP (broken) to WPA3 (current standard).</p>
+          <div class="topic-tags"><span class="topic-tag">wireless</span><span class="topic-tag">core</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Protocol Evolution</div>
+            <ul class="detail-points"><li><strong>WEP</strong> — BROKEN. RC4 misuse. Crack in minutes. Never use.</li><li><strong>WPA</strong> — TKIP. Weak. Deprecated.</li><li><strong>WPA2</strong> — AES/CCMP. Strong. Use Enterprise (802.1X) mode for corporate.</li><li><strong>WPA3</strong> — SAE handshake. Forward secrecy. Current gold standard.</li></ul>
+            <div class="exam-tip-box">Only WPA2 and WPA3 are acceptable. 802.1X + RADIUS = enterprise wireless auth.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🛡️ IDS/IPS</h4><span class="topic-expand-icon">+</span></div>
+          <p>Systems that monitor network traffic to detect and optionally block attacks.</p>
+          <div class="topic-tags"><span class="topic-tag">IDS/IPS</span></div>
+          <div class="topic-details">
+            <div class="detail-label">IDS vs IPS</div>
+            <ul class="detail-points"><li><strong>IDS</strong> — detects and alerts only. Passive. Out-of-band.</li><li><strong>IPS</strong> — detects and blocks. Active. Inline deployment.</li></ul>
+            <div class="detail-label">Detection Methods</div>
+            <ul class="detail-points"><li><strong>Signature-based</strong> — matches known patterns. Fast, can't detect zero-days.</li><li><strong>Anomaly-based</strong> — detects deviations from baseline. Finds new attacks, high false positives.</li></ul>
+            <div class="exam-tip-box">False positive = legitimate traffic flagged. False negative = real attack missed (dangerous).</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>⚡ Network Attacks</h4><span class="topic-expand-icon">+</span></div>
+          <p>Common attacks targeting network infrastructure and communications.</p>
+          <div class="topic-tags"><span class="topic-tag">attacks</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Attacks &amp; Mitigations</div>
+            <ul class="detail-points"><li><strong>DoS/DDoS</strong> — overwhelm resources. Mitigate: rate limiting, CDN.</li><li><strong>ARP Poisoning</strong> — associate attacker MAC with legitimate IP. Mitigate: dynamic ARP inspection.</li><li><strong>MITM</strong> — intercept communications. Mitigate: TLS, mutual authentication.</li><li><strong>Replay Attack</strong> — resend captured auth data. Mitigate: timestamps, nonces.</li></ul>
+            <div class="exam-tip-box">For every attack know the countermeasure. CISSP tests "what would you do" not just "what is this."</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔑 Critical Port Numbers</h4><span class="topic-expand-icon">+</span></div>
+          <p>Essential ports every CISSP candidate must know.</p>
+          <div class="topic-tags"><span class="topic-tag">ports</span><span class="topic-tag">memorize</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Must-Know Ports</div>
+            <ul class="detail-points"><li><strong>22</strong> — SSH/SFTP/SCP (secure)</li><li><strong>23</strong> — Telnet (INSECURE — replace with SSH)</li><li><strong>53</strong> — DNS (UDP queries, TCP zone transfers)</li><li><strong>80/443</strong> — HTTP / HTTPS</li><li><strong>389/636</strong> — LDAP / LDAPS (secure)</li><li><strong>1812/1813</strong> — RADIUS</li><li><strong>3389</strong> — RDP (high risk — always restrict)</li><li><strong>88</strong> — Kerberos</li></ul>
+            <div class="exam-tip-box">Always choose the encrypted alternative. TLS 1.2 acceptable, TLS 1.3 preferred. SSL and TLS 1.0/1.1 are broken.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D5 -->
+    <div class="domain-panel" id="domain-5">
+      <div class="domain-header">
+        <div class="domain-icon" style="background:#cf222e;">D5</div>
+        <div class="domain-info">
+          <h3>Identity &amp; Access Management (IAM)</h3>
+          <p>How users, devices, and services are identified, authenticated, and granted access. The first line of defense.</p>
+          <span class="domain-chip">13% of exam</span>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🪪 Identification, Authentication, Authorization</h4><span class="topic-expand-icon">+</span></div>
+          <p>The three fundamental steps of access control.</p>
+          <div class="topic-tags"><span class="topic-tag">core</span><span class="topic-tag">always-tested</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Four Steps</div>
+            <ul class="detail-points"><li><strong>Identification</strong> — claiming an identity (username).</li><li><strong>Authentication</strong> — proving identity (password, MFA).</li><li><strong>Authorization</strong> — what actions are permitted (ACLs, roles).</li><li><strong>Accountability</strong> — logging all actions (audit trail, non-repudiation).</li></ul>
+            <div class="exam-tip-box">All four must be present for complete access control. Missing accountability = no audit trail.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔐 Authentication Factors</h4><span class="topic-expand-icon">+</span></div>
+          <p>The categories of evidence used to prove identity.</p>
+          <div class="topic-tags"><span class="topic-tag">authentication</span><span class="topic-tag">core</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Three Primary Factors</div>
+            <ul class="detail-points"><li><strong>Something you Know</strong> — password, PIN, passphrase.</li><li><strong>Something you Have</strong> — token, smart card, OTP app.</li><li><strong>Something you Are</strong> — biometrics: fingerprint, iris, facial.</li></ul>
+            <div class="detail-label">MFA Rule</div>
+            <ul class="detail-points"><li>MFA requires 2+ DIFFERENT factor TYPES.</li><li>Password + PIN = NOT MFA (both are "know").</li><li>Password + OTP app = MFA (know + have). ✅</li></ul>
+            <div class="exam-tip-box">Two passwords = Single Factor. MFA requires factors from DIFFERENT categories. Common trick question.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📏 Access Control Models</h4><span class="topic-expand-icon">+</span></div>
+          <p>Frameworks governing how access decisions are made.</p>
+          <div class="topic-tags"><span class="topic-tag">access-control</span><span class="topic-tag">high-priority</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Model Comparison</div>
+            <ul class="detail-points"><li><strong>DAC</strong> — Discretionary. Owner controls. Most flexible. Least secure.</li><li><strong>MAC</strong> — Mandatory. System enforces via labels. Most secure. Government.</li><li><strong>RBAC</strong> — Role-Based. Access by job role. Most common in enterprise.</li><li><strong>ABAC</strong> — Attribute-Based. Dynamic policies. Most flexible/complex.</li></ul>
+            <div class="exam-tip-box">DAC = owner decides. MAC = system decides via labels. RBAC = most common in business.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🧬 Biometrics</h4><span class="topic-expand-icon">+</span></div>
+          <p>Using physical or behavioral characteristics for authentication.</p>
+          <div class="topic-tags"><span class="topic-tag">biometrics</span><span class="topic-tag">memorize</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Error Rates</div>
+            <ul class="detail-points"><li><strong>FAR (Type II)</strong> — False Acceptance Rate. Unauthorized ACCEPTED. Security risk!</li><li><strong>FRR (Type I)</strong> — False Rejection Rate. Authorized REJECTED. Usability issue.</li><li><strong>CER/EER</strong> — Crossover Error Rate. Where FAR = FRR. Lower = better.</li></ul>
+            <div class="exam-tip-box">FAR = security concern. FRR = usability concern. CER compares biometric systems — choose lowest CER.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🌐 Federation &amp; SSO</h4><span class="topic-expand-icon">+</span></div>
+          <p>Technologies enabling single sign-on and cross-org identity trust.</p>
+          <div class="topic-tags"><span class="topic-tag">federation</span><span class="topic-tag">core</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Key Protocols</div>
+            <ul class="detail-points"><li><strong>SAML 2.0</strong> — XML-based. Enterprise SSO between IdP and SP.</li><li><strong>OAuth 2.0</strong> — Authorization delegation. NOT authentication.</li><li><strong>OpenID Connect</strong> — Authentication layer on top of OAuth 2.0.</li><li><strong>Kerberos</strong> — Ticket-based SSO. KDC issues TGT. Port 88.</li><li><strong>RADIUS</strong> — UDP 1812/1813. AAA for network access.</li><li><strong>TACACS+</strong> — TCP 49. Encrypts entire payload. Cisco networks.</li></ul>
+            <div class="exam-tip-box">OAuth = Authorization. OpenID Connect = Authentication. They're often confused. SAML = enterprise SSO standard.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D6 -->
+    <div class="domain-panel" id="domain-6">
+      <div class="domain-header">
+        <div class="domain-icon" style="background:#0969da;">D6</div>
+        <div class="domain-info">
+          <h3>Security Assessment &amp; Testing</h3>
+          <p>Validating security controls through assessments, audits, vulnerability scanning, penetration testing, and logging.</p>
+          <span class="domain-chip">12% of exam</span>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔍 Vulnerability Assessment vs Pen Testing</h4><span class="topic-expand-icon">+</span></div>
+          <p>Two complementary approaches to finding security weaknesses.</p>
+          <div class="topic-tags"><span class="topic-tag">testing</span><span class="topic-tag">always-tested</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Key Differences</div>
+            <ul class="detail-points"><li><strong>Vulnerability Assessment</strong> — identifies weaknesses. Non-destructive. No exploitation.</li><li><strong>Penetration Test</strong> — actively exploits. Simulates real attacker. Demonstrates impact.</li><li><strong>Both require</strong> — written authorization and Rules of Engagement.</li></ul>
+            <div class="detail-label">Testing Knowledge Levels</div>
+            <ul class="detail-points"><li><strong>Black Box</strong> — no prior knowledge. Most realistic.</li><li><strong>White Box</strong> — full knowledge. Most thorough.</li><li><strong>Gray Box</strong> — partial knowledge. Most common in real engagements.</li></ul>
+            <div class="exam-tip-box">VA = what vulnerabilities exist. PT = which are exploitable. Both are needed.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📊 Security Metrics</h4><span class="topic-expand-icon">+</span></div>
+          <p>Quantitative measures to track security program effectiveness.</p>
+          <div class="topic-tags"><span class="topic-tag">metrics</span><span class="topic-tag">memorize</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Key Metrics</div>
+            <ul class="detail-points"><li><strong>MTTD</strong> — Mean Time To Detect.</li><li><strong>MTTR</strong> — Mean Time To Repair/Restore.</li><li><strong>MTBF</strong> — Mean Time Between Failures (reliability).</li><li><strong>MTTF</strong> — Mean Time To Failure (non-repairable).</li><li><strong>Availability = MTBF ÷ (MTBF + MTTR)</strong></li></ul>
+            <div class="exam-tip-box">Five 9s = 99.999% = ~5.26 minutes downtime/year. Improve availability: increase MTBF or decrease MTTR.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>📋 Security Audits &amp; SOC Reports</h4><span class="topic-expand-icon">+</span></div>
+          <p>Formal evaluations of security controls, policies, and compliance.</p>
+          <div class="topic-tags"><span class="topic-tag">auditing</span><span class="topic-tag">high-priority</span></div>
+          <div class="topic-details">
+            <div class="detail-label">SOC Report Types</div>
+            <ul class="detail-points"><li><strong>SOC 1</strong> — financial reporting controls.</li><li><strong>SOC 2 Type I</strong> — control design at a point in time. Weaker assurance.</li><li><strong>SOC 2 Type II</strong> — operating effectiveness over 6-12 months. Strongest.</li><li><strong>SOC 3</strong> — public version of SOC 2. Marketing use.</li></ul>
+            <div class="exam-tip-box">SOC 2 Type II is what customers ask cloud providers for. Type II = sustained period = strong assurance.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🎯 Red / Blue / Purple Teams</h4><span class="topic-expand-icon">+</span></div>
+          <p>Structured adversarial exercises to test and improve security.</p>
+          <div class="topic-tags"><span class="topic-tag">teams</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Team Roles</div>
+            <ul class="detail-points"><li><strong>Red Team</strong> — offensive. Simulates real attackers.</li><li><strong>Blue Team</strong> — defensive. Detects, responds, recovers.</li><li><strong>Purple Team</strong> — both working together. Maximizes learning.</li></ul>
+            <div class="detail-label">Exercise Types</div>
+            <ul class="detail-points"><li><strong>Tabletop Exercise (TTX)</strong> — discussion-based. No live systems. Tests plans.</li><li><strong>Live Fire</strong> — real systems, real attacks. Tests actual capabilities.</li></ul>
+            <div class="exam-tip-box">Tabletop exercises are cheapest and safest way to test IR. Live exercises are realistic but carry unintended damage risk.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D7 -->
+    <div class="domain-panel" id="domain-7">
+      <div class="domain-header">
+        <div class="domain-icon" style="background:#1a7f37;">D7</div>
+        <div class="domain-info">
+          <h3>Security Operations</h3>
+          <p>Day-to-day management: incident response, disaster recovery, change management, and investigations. The most procedural domain.</p>
+          <span class="domain-chip">13% of exam</span>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🚨 Incident Response (PICERL)</h4><span class="topic-expand-icon">+</span></div>
+          <p>The structured 6-phase NIST SP 800-61 incident response process.</p>
+          <div class="topic-tags"><span class="topic-tag">IR</span><span class="topic-tag">always-tested</span></div>
+          <div class="topic-details">
+            <div class="detail-label">NIST SP 800-61 Phases</div>
+            <ul class="detail-points"><li><strong>1. Preparation</strong> — IR plan, team, tools, training.</li><li><strong>2. Identification</strong> — confirm incident, scope, severity.</li><li><strong>3. Containment</strong> — FIRST PRIORITY. Stop the spread.</li><li><strong>4. Eradication</strong> — remove malware, close vulnerabilities.</li><li><strong>5. Recovery</strong> — restore systems, verify operation.</li><li><strong>6. Lessons Learned</strong> — post-incident review.</li></ul>
+            <div class="exam-tip-box">Containment is ALWAYS the first active step. "People In California Eat Real Lemons" = PICERL mnemonic.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔬 Digital Forensics</h4><span class="topic-expand-icon">+</span></div>
+          <p>Scientifically collecting digital evidence for legal proceedings.</p>
+          <div class="topic-tags"><span class="topic-tag">forensics</span><span class="topic-tag">high-priority</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Order of Volatility (collect first)</div>
+            <ul class="detail-points"><li><strong>1.</strong> CPU registers and cache (most volatile).</li><li><strong>2.</strong> RAM — processes, connections, encryption keys.</li><li><strong>3.</strong> Swap/page file.</li><li><strong>4.</strong> Disk storage.</li><li><strong>5.</strong> Remote/cloud logs (least volatile).</li></ul>
+            <div class="detail-label">Key Principles</div>
+            <ul class="detail-points"><li><strong>Chain of custody</strong> — document all evidence handling.</li><li><strong>Write blocker</strong> — prevents modification of evidence.</li><li><strong>Forensic copy</strong> — bit-for-bit. Never work on originals.</li></ul>
+            <div class="exam-tip-box">NEVER work on original evidence. Breaking chain of custody = inadmissible in court.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>💾 Disaster Recovery</h4><span class="topic-expand-icon">+</span></div>
+          <p>Technical plans to restore IT systems after a disaster.</p>
+          <div class="topic-tags"><span class="topic-tag">DR</span><span class="topic-tag">core</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Recovery Sites</div>
+            <ul class="detail-points"><li><strong>Hot Site</strong> — fully operational. Minutes. Most expensive.</li><li><strong>Warm Site</strong> — partially configured. Hours. Medium cost.</li><li><strong>Cold Site</strong> — empty space + power. Days/weeks. Cheapest.</li></ul>
+            <div class="detail-label">Backup Types</div>
+            <ul class="detail-points"><li><strong>Full</strong> — all data. Slowest backup, fastest restore.</li><li><strong>Incremental</strong> — since last backup. Fastest backup, slowest restore.</li><li><strong>Differential</strong> — since last FULL. Medium backup, medium restore.</li><li><strong>3-2-1 Rule</strong> — 3 copies, 2 media types, 1 offsite.</li></ul>
+            <div class="exam-tip-box">RTO must be less than MTD. RPO determines backup frequency.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🛡️ Security Operations Center (SOC)</h4><span class="topic-expand-icon">+</span></div>
+          <p>Centralized team monitoring and responding to security events 24/7.</p>
+          <div class="topic-tags"><span class="topic-tag">SOC</span><span class="topic-tag">2024</span></div>
+          <div class="topic-details">
+            <div class="detail-label">SOC Tiers</div>
+            <ul class="detail-points"><li><strong>Tier 1</strong> — alert triage, initial investigation, escalation.</li><li><strong>Tier 2</strong> — deeper investigation, incident handling.</li><li><strong>Tier 3</strong> — threat hunting, malware analysis. Highest skill.</li></ul>
+            <div class="detail-label">Key Tools</div>
+            <ul class="detail-points"><li><strong>SIEM</strong> — centralized logging and correlation.</li><li><strong>SOAR</strong> — Security Orchestration Automation and Response.</li><li><strong>Playbook</strong> — step-by-step response procedure.</li></ul>
+            <div class="exam-tip-box">SOAR automates repetitive SOC tasks (block IP, create ticket, notify team). Reduces analyst fatigue.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D8 -->
+    <div class="domain-panel" id="domain-8">
+      <div class="domain-header">
+        <div class="domain-icon" style="background:#8250df;">D8</div>
+        <div class="domain-info">
+          <h3>Software Development Security</h3>
+          <p>Integrating security throughout the SDLC. Secure coding, software vulnerabilities, and third-party software security.</p>
+          <span class="domain-chip">▼ 10% of exam · Updated 2024</span>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🔄 Secure SDLC</h4><span class="topic-expand-icon">+</span></div>
+          <p>Embedding security at every phase of the development lifecycle.</p>
+          <div class="topic-tags"><span class="topic-tag">SDLC</span><span class="topic-tag">core</span></div>
+          <div class="topic-details">
+            <div class="detail-label">SDLC Phases + Security</div>
+            <ul class="detail-points"><li><strong>Requirements</strong> — define security requirements early.</li><li><strong>Design</strong> — threat modeling (STRIDE), secure architecture review.</li><li><strong>Coding</strong> — secure coding practices, code review.</li><li><strong>Testing</strong> — SAST, DAST, pen testing.</li><li><strong>Deployment</strong> — hardened configs, secrets management.</li><li><strong>Maintenance</strong> — patch management, vulnerability monitoring.</li></ul>
+            <div class="exam-tip-box">Shift-left = fix security earlier = cheaper. A bug found in requirements costs 1x to fix; in production costs 100x.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🐛 OWASP Top 10</h4><span class="topic-expand-icon">+</span></div>
+          <p>The most prevalent and dangerous software security weaknesses.</p>
+          <div class="topic-tags"><span class="topic-tag">OWASP</span><span class="topic-tag">always-tested</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Key Vulnerabilities</div>
+            <ul class="detail-points"><li><strong>Injection (A03)</strong> — SQL, XSS, command. Fix: parameterized queries.</li><li><strong>Broken Access Control (A01)</strong> — users exceed permissions. Fix: deny by default.</li><li><strong>Cryptographic Failures (A02)</strong> — weak/no encryption. Fix: TLS, strong algorithms.</li><li><strong>Security Misconfiguration (A05)</strong> — default credentials. Fix: hardening.</li><li><strong>SSRF (A10)</strong> — server makes attacker-controlled requests.</li></ul>
+            <div class="exam-tip-box">Injection is the classic OWASP vulnerability. Parameterized queries are the primary defense. Never concatenate user input into SQL.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🧪 SAST vs DAST vs IAST</h4><span class="topic-expand-icon">+</span></div>
+          <p>Application security testing methodologies.</p>
+          <div class="topic-tags"><span class="topic-tag">testing</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Testing Types</div>
+            <ul class="detail-points"><li><strong>SAST</strong> — static analysis. No execution. Find early. False positive prone.</li><li><strong>DAST</strong> — dynamic analysis. Running app. Finds runtime issues.</li><li><strong>IAST</strong> — agent inside running app. Best coverage.</li><li><strong>Fuzzing</strong> — random input to find crashes.</li></ul>
+            <div class="exam-tip-box">SAST = finds issues in code before running. DAST = finds issues in running app. Both needed.</div>
+          </div>
+        </div>
+        <div class="topic-card" onclick="toggleTopic(this)">
+          <div class="topic-card-header"><h4>🚀 DevSecOps</h4><span class="topic-expand-icon">+</span></div>
+          <p>Integrating security into DevOps CI/CD pipelines.</p>
+          <div class="topic-tags"><span class="topic-tag">DevSecOps</span><span class="topic-tag">2024</span></div>
+          <div class="topic-details">
+            <div class="detail-label">Pipeline Security</div>
+            <ul class="detail-points"><li><strong>Secrets management</strong> — never hardcode credentials. Use vaults.</li><li><strong>SAST in pipeline</strong> — automated code scanning on every commit.</li><li><strong>Container scanning</strong> — check images for vulnerabilities before deploy.</li><li><strong>SBOM</strong> — Software Bill of Materials. Inventory all dependencies.</li></ul>
+            <div class="exam-tip-box">Hardcoded secrets in repos = #1 DevSecOps mistake. Use HashiCorp Vault, AWS Secrets Manager, etc.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEAT SHEET -->
+<section class="section cheat-section" id="cheatsheet">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">// cheat_sheet</div>
+      <div class="section-title">Critical concepts &amp; memory aids</div>
+      <div class="section-desc">Formulas, mnemonics, and always-tested facts. Based on Sybex key takeaways.</div>
+    </div>
+    <div class="cheat-tabs">
+      <button class="cheat-tab active" onclick="showCheat('formulas',this)">Formulas</button>
+      <button class="cheat-tab" onclick="showCheat('models',this)">Security Models</button>
+      <button class="cheat-tab" onclick="showCheat('crypto',this)">Cryptography</button>
+      <button class="cheat-tab" onclick="showCheat('protocols',this)">Protocols &amp; Ports</button>
+      <button class="cheat-tab" onclick="showCheat('mnemonics',this)">Mnemonics</button>
+      <button class="cheat-tab" onclick="showCheat('laws',this)">Laws &amp; Regs</button>
+    </div>
+
+    <div class="cheat-panel active" id="cheat-formulas">
+      <div class="cheat-card"><h4>Risk Quantification</h4><div class="code-block">SLE = Asset Value × Exposure Factor (EF)
+ALE = SLE × ARO
+Countermeasure = ALE(before) − ALE(after) − Annual Cost
+Risk = Threat × Vulnerability × Asset Value</div><div class="cheat-item"><strong>EF:</strong> <em>% of asset destroyed per incident (0–1)</em></div><div class="cheat-item"><strong>ARO:</strong> <em>Times per year (0.5 = once every 2 years)</em></div><div class="cheat-item"><strong>Example:</strong> <em>$500K server × 40% EF × 0.5 ARO = $100K ALE/year</em></div></div>
+      <div class="cheat-card"><h4>Recovery &amp; Availability</h4><div class="code-block">Availability = MTBF / (MTBF + MTTR)
+WRT = MTD − RTO</div><div class="cheat-item"><strong>MTBF:</strong> <em>Mean Time Between Failures</em></div><div class="cheat-item"><strong>MTTR:</strong> <em>Mean Time To Repair/Restore</em></div><div class="cheat-item"><strong>MTD:</strong> <em>Maximum Tolerable Downtime — RTO must be LESS than this</em></div><div class="cheat-item"><strong>RPO:</strong> <em>How much data loss is acceptable — determines backup frequency</em></div></div>
+      <div class="cheat-card"><h4>Biometric Error Rates</h4><div class="code-block">FAR = False Acceptance Rate (Type II)
+FRR = False Rejection Rate (Type I)
+CER/EER = where FAR equals FRR (lower = better)</div><div class="cheat-item"><strong>FAR:</strong> <em>Unauthorized user accepted — SECURITY RISK</em></div><div class="cheat-item"><strong>FRR:</strong> <em>Authorized user rejected — usability issue</em></div></div>
+      <div class="cheat-card"><h4>Backup Recovery</h4><div class="code-block">Full:         Restore needs → 1 tape (fastest)
+Differential: Restore needs → Full + latest diff
+Incremental:  Restore needs → Full + ALL incrementals (slowest)</div><div class="cheat-item"><strong>Incremental:</strong> <em>fastest to backup, slowest to restore</em></div><div class="cheat-item"><strong>Differential:</strong> <em>slower backup, faster restore than incremental</em></div><div class="cheat-item"><strong>3-2-1 Rule:</strong> <em>3 copies, 2 media types, 1 offsite</em></div></div>
+    </div>
+
+    <div class="cheat-panel" id="cheat-models">
+      <div class="cheat-card"><h4>Bell-LaPadula — Confidentiality</h4><div class="code-block">No Read Up   (Simple Security Property)
+No Write Down (Star Property *)</div><div class="cheat-item"><strong>Goal:</strong> <em>Prevent classified info flowing to lower levels. Military.</em></div><div class="cheat-item"><strong>Mnemonic:</strong> <em>"BLP = Be Leaking Prevention"</em></div></div>
+      <div class="cheat-card"><h4>Biba — Integrity</h4><div class="code-block">No Read Down  (Simple Integrity Axiom)
+No Write Up   (Star Integrity Property *)</div><div class="cheat-item"><strong>Goal:</strong> <em>Prevent data corruption from low-integrity sources.</em></div><div class="cheat-item"><strong>Note:</strong> <em>Opposite of Bell-LaPadula. BLP = Confidentiality. Biba = Integrity.</em></div></div>
+      <div class="cheat-card"><h4>Clark-Wilson — Integrity</h4><div class="cheat-item"><strong>CDI:</strong> <em>Constrained Data Item — must maintain integrity</em></div><div class="cheat-item"><strong>TP:</strong> <em>Transformation Procedure — only authorized way to change CDI</em></div><div class="cheat-item"><strong>IVP:</strong> <em>Integrity Verification Procedure — checks CDI validity</em></div><div class="cheat-item"><strong>Use:</strong> <em>Commercial environments. Separation of duties built in.</em></div></div>
+      <div class="cheat-card"><h4>Access Control Quick Reference</h4><div class="cheat-item"><strong>DAC:</strong> <em>Owner controls (Windows ACLs) — most flexible</em></div><div class="cheat-item"><strong>MAC:</strong> <em>Labels enforced by system — most secure (government)</em></div><div class="cheat-item"><strong>RBAC:</strong> <em>Access by job role — most common in enterprise</em></div><div class="cheat-item"><strong>ABAC:</strong> <em>Dynamic attribute-based policies — most flexible/complex</em></div><div class="cheat-item"><strong>Brewer-Nash:</strong> <em>Chinese Wall — prevents conflict of interest</em></div></div>
+    </div>
+
+    <div class="cheat-panel" id="cheat-crypto">
+      <div class="cheat-card"><h4>Symmetric Algorithms</h4><div class="cheat-item"><strong>AES:</strong> <em>128/192/256-bit. Block cipher. Current standard. FIPS 197. ✅</em></div><div class="cheat-item"><strong>3DES:</strong> <em>112-168-bit. Being phased out. Slow.</em></div><div class="cheat-item"><strong>RC4:</strong> <em>Stream cipher. BROKEN. Used in WEP. ❌</em></div><div class="cheat-item"><strong>DES:</strong> <em>56-bit. BROKEN. Do not use. ❌</em></div></div>
+      <div class="cheat-card"><h4>Asymmetric Algorithms</h4><div class="cheat-item"><strong>RSA:</strong> <em>2048+ bits. Prime factorization. Key exchange + signatures.</em></div><div class="cheat-item"><strong>ECC:</strong> <em>Smaller key = same security. 256-bit ECC ≈ 3072-bit RSA. Mobile/IoT.</em></div><div class="cheat-item"><strong>DH:</strong> <em>Key EXCHANGE ONLY. Not encryption.</em></div><div class="cheat-item"><strong>DSA:</strong> <em>Signatures ONLY. NOT encryption.</em></div></div>
+      <div class="cheat-card"><h4>Hash Functions</h4><div class="cheat-item"><strong>MD5:</strong> <em>128-bit. BROKEN (collision attacks). ❌</em></div><div class="cheat-item"><strong>SHA-1:</strong> <em>160-bit. WEAK. Deprecated. ❌</em></div><div class="cheat-item"><strong>SHA-256/512:</strong> <em>Current standard. Use these. ✅</em></div><div class="cheat-item"><strong>HMAC:</strong> <em>Hash + secret key = integrity AND authentication.</em></div></div>
+      <div class="cheat-card"><h4>Digital Signatures &amp; PKI</h4><div class="code-block">Sign:   encrypt hash with YOUR PRIVATE key
+Verify: decrypt with sender's PUBLIC key
+Encrypt: use recipient's PUBLIC key</div><div class="cheat-item"><strong>CRL:</strong> <em>Certificate Revocation List — periodic batch check</em></div><div class="cheat-item"><strong>OCSP:</strong> <em>Online Certificate Status — real-time check</em></div><div class="cheat-item"><strong>Key Escrow:</strong> <em>Copy of private key held by third party for recovery</em></div></div>
+    </div>
+
+    <div class="cheat-panel" id="cheat-protocols">
+      <div class="cheat-card"><h4>Critical Port Numbers</h4><div class="code-block">22    SSH/SFTP/SCP      (secure ✅)
+23    Telnet            (INSECURE ❌)
+53    DNS               (UDP/TCP)
+80    HTTP              (INSECURE ❌)
+88    Kerberos
+389   LDAP              (INSECURE ❌)
+443   HTTPS             (secure ✅)
+636   LDAPS             (secure ✅)
+1812  RADIUS
+3389  RDP               (high risk ⚠️)</div></div>
+      <div class="cheat-card"><h4>Authentication Protocols</h4><div class="cheat-item"><strong>Kerberos:</strong> <em>Ticket-based SSO. KDC → TGT → service ticket. Port 88.</em></div><div class="cheat-item"><strong>RADIUS:</strong> <em>UDP 1812/1813. Encrypts only password. Network access AAA.</em></div><div class="cheat-item"><strong>TACACS+:</strong> <em>TCP 49. Encrypts entire payload. Separates A-A-A. Cisco.</em></div><div class="cheat-item"><strong>SAML:</strong> <em>XML-based. Enterprise SSO/Federation. IdP issues assertions.</em></div><div class="cheat-item"><strong>OAuth:</strong> <em>Authorization delegation. NOT authentication.</em></div></div>
+      <div class="cheat-card"><h4>Wireless Security</h4><div class="code-block">WEP  → BROKEN (RC4 + weak IV) ❌
+WPA  → TKIP — deprecated ❌
+WPA2 → AES/CCMP — strong ✅
+WPA3 → SAE + forward secrecy ✅</div><div class="cheat-item"><strong>802.1X:</strong> <em>Port-based NAC. Supplicant → Authenticator → RADIUS.</em></div></div>
+      <div class="cheat-card"><h4>IPSec Components</h4><div class="cheat-item"><strong>AH:</strong> <em>Authentication Header — auth + integrity ONLY. No encryption.</em></div><div class="cheat-item"><strong>ESP:</strong> <em>Encapsulating Security Payload — auth + integrity + encryption. ✅</em></div><div class="cheat-item"><strong>Tunnel mode:</strong> <em>gateway-to-gateway (encrypts entire IP packet)</em></div><div class="cheat-item"><strong>Transport mode:</strong> <em>host-to-host (encrypts payload only)</em></div></div>
+    </div>
+
+    <div class="cheat-panel" id="cheat-mnemonics">
+      <div class="cheat-card"><h4>OSI Layers</h4><div class="code-block">All People Seem To Need Data Processing
+(Application → Physical, top to bottom)
+
+Bottom-up:
+Please Do Not Throw Sausage Pizza Away</div></div>
+      <div class="cheat-card"><h4>Incident Response — PICERL</h4><div class="code-block">P — Preparation
+I — Identification / Detection
+C — Containment  ← FIRST ACTIVE STEP
+E — Eradication
+R — Recovery
+L — Lessons Learned
+
+"People In California Eat Real Lemons"</div></div>
+      <div class="cheat-card"><h4>Recovery Sites</h4><div class="code-block">Hot  → Ready NOW        💰💰💰 (expensive)
+Warm → Hours to days    💰💰   (medium)
+Cold → Days to weeks    💰     (cheapest)</div><div class="cheat-item"><em>"Hot price = Hot response"</em></div></div>
+      <div class="cheat-card"><h4>Ethics Priority Order</h4><div class="code-block">1. Protect SOCIETY      ← always wins
+2. Act HONORABLY
+3. Provide COMPETENT service
+4. Advance the PROFESSION</div><div class="cheat-item"><em>Society before employer, ALWAYS.</em></div></div>
+      <div class="cheat-card"><h4>Bell-LaPadula vs Biba</h4><div class="code-block">Bell-LaPadula = CONFIDENTIALITY
+  No Read UP, No Write DOWN
+
+Biba = INTEGRITY
+  No Read DOWN, No Write UP
+
+They are exact opposites.</div></div>
+      <div class="cheat-card"><h4>ISC² Code of Ethics</h4><div class="code-block">S — Society (protect the common good)
+H — Honorably (act honestly and justly)
+C — Competent (provide quality service)
+A — Advance (the profession)</div><div class="cheat-item"><em>Mnemonic: "She Has Competent Abilities"</em></div></div>
+    </div>
+
+    <div class="cheat-panel" id="cheat-laws">
+      <div class="cheat-card"><h4>US Privacy Laws</h4><div class="cheat-item"><strong>HIPAA:</strong> <em>Healthcare data (PHI). Privacy + Security Rules.</em></div><div class="cheat-item"><strong>GLBA:</strong> <em>Financial institutions. Non-Public Personal Info (NPI).</em></div><div class="cheat-item"><strong>SOX:</strong> <em>Public companies. Financial reporting integrity. CEO/CFO accountability.</em></div><div class="cheat-item"><strong>COPPA:</strong> <em>Children under 13. Parental consent required.</em></div><div class="cheat-item"><strong>FERPA:</strong> <em>Student education records.</em></div><div class="cheat-item"><strong>FISMA:</strong> <em>US federal agencies information security.</em></div></div>
+      <div class="cheat-card"><h4>International Regulations</h4><div class="cheat-item"><strong>GDPR:</strong> <em>EU. 72-hr breach notification. Right to erasure. Up to 4% global revenue or €20M fine.</em></div><div class="cheat-item"><strong>PIPEDA:</strong> <em>Canada. Commercial activities privacy law.</em></div><div class="cheat-item"><strong>APEC CBPR:</strong> <em>Asia-Pacific cross-border privacy rules.</em></div></div>
+      <div class="cheat-card"><h4>Security Standards</h4><div class="cheat-item"><strong>PCI-DSS:</strong> <em>Payment card data. 12 requirements. Any org processing cards.</em></div><div class="cheat-item"><strong>ISO 27001:</strong> <em>ISMS certification standard (requirements).</em></div><div class="cheat-item"><strong>ISO 27002:</strong> <em>Implementation guidance for 27001.</em></div><div class="cheat-item"><strong>NIST CSF:</strong> <em>Identify → Protect → Detect → Respond → Recover.</em></div><div class="cheat-item"><strong>NIST SP 800-53:</strong> <em>Security controls for federal systems.</em></div></div>
+      <div class="cheat-card"><h4>Types of Laws</h4><div class="cheat-item"><strong>Criminal:</strong> <em>Government prosecutes. Beyond reasonable doubt. Imprisonment.</em></div><div class="cheat-item"><strong>Civil (Tort):</strong> <em>Private disputes. Preponderance of evidence. Monetary damages.</em></div><div class="cheat-item"><strong>Administrative:</strong> <em>Government agencies. Compliance fines. Licenses.</em></div><div class="cheat-item"><strong>Due Care:</strong> <em>Doing what a reasonable person would do.</em></div><div class="cheat-item"><strong>Due Diligence:</strong> <em>Ongoing research to maintain due care.</em></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICE TEST -->
+<section class="section practice-section" id="practice">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">// practice_tests</div>
+      <div class="section-title">Test your knowledge</div>
+      <div class="section-desc">CISSP-style questions with detailed explanations. Select a domain to focus your practice.</div>
+    </div>
+    <div class="quiz-filters" id="quizFilters">
+      <button class="quiz-filter-btn active" onclick="loadQuiz('all',this)">All Domains</button>
+      <button class="quiz-filter-btn" onclick="loadQuiz('d1',this)">D1 · Risk</button>
+      <button class="quiz-filter-btn" onclick="loadQuiz('d2',this)">D2 · Asset</button>
+      <button class="quiz-filter-btn" onclick="loadQuiz('d3',this)">D3 · Architecture</button>
+      <button class="quiz-filter-btn" onclick="loadQuiz('d4',this)">D4 · Network</button>
+      <button class="quiz-filter-btn" onclick="loadQuiz('d5',this)">D5 · IAM</button>
+      <button class="quiz-filter-btn" onclick="loadQuiz('d6',this)">D6 · Assessment</button>
+      <button class="quiz-filter-btn" onclick="loadQuiz('d7',this)">D7 · Operations</button>
+      <button class="quiz-filter-btn" onclick="loadQuiz('d8',this)">D8 · Software</button>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-meta">
+        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizFill" style="width:0%"></div></div>
+        <div class="quiz-progress-text" id="quizMeta">Q 1 of 10</div>
+      </div>
+      <div class="quiz-card" id="quizCard">
+        <div class="quiz-qnum" id="quizQNum">Question 1</div>
+        <div class="quiz-question" id="quizQ">Loading...</div>
+        <div class="quiz-options" id="quizOpts"></div>
+        <div class="quiz-explanation" id="quizExp"></div>
+        <div class="quiz-footer">
+          <div class="quiz-feedback" id="quizFeedback"></div>
+          <button class="btn btn-primary" id="quizNext" onclick="nextQ()" style="display:none">Next question →</button>
+        </div>
+      </div>
+      <div class="quiz-score-card" id="quizScore">
+        <div class="score-ring" id="scoreRing"><span id="scoreNum">0%</span></div>
+        <div class="score-title" id="scoreTitle">Quiz Complete!</div>
+        <div class="score-msg" id="scoreMsg"></div>
+        <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="restartQuiz()">Try again ↺</button>
+          <button class="btn btn-secondary" onclick="loadQuiz('all',document.querySelector('.quiz-filter-btn'))">All domains</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY NEWS -->
+<section class="section news-section" id="news">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">// live_security_news</div>
+      <div class="section-title">Latest Security Breaches &amp; Threats</div>
+      <div class="section-desc">Live feed from The Hacker News — updated automatically. Click any headline to read the full story.</div>
+    </div>
+
+    <div class="news-toolbar">
+      <div class="news-status" id="newsStatus">
+        <span class="news-live-dot"></span> Loading feed...
+      </div>
+      <button class="news-refresh-btn" onclick="loadNews()">↺ Refresh</button>
+    </div>
+
+    <div class="news-grid" id="newsGrid">
+      <!-- skeleton placeholders -->
+      <div class="news-skeleton"></div>
+      <div class="news-skeleton"></div>
+      <div class="news-skeleton"></div>
+      <div class="news-skeleton"></div>
+      <div class="news-skeleton"></div>
+      <div class="news-skeleton"></div>
+    </div>
+
+    <div class="news-footer-bar">
+      <span class="news-source-credit">Source: <a href="https://thehackernews.com" target="_blank" rel="noopener">The Hacker News</a> via RSS · <a href="https://feeds.feedburner.com/TheHackersNews" target="_blank" rel="noopener">RSS Feed</a></span>
+      <span id="newsLastUpdated" style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-light);"></span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">CISSP MasterGuide</div>
+      <div class="footer-note" style="margin-top:.25rem;">Based on ISC² Official Exam Outline (April 2024) &amp; Sybex CISSP Study Guide</div>
+    </div>
+    <div class="footer-note">Not affiliated with ISC² · For educational purposes only<br>Always verify with the official exam outline at isc2.org</div>
+  </div>
+</footer>
+
+<script>
+// ── HAMBURGER ──
+function toggleMenu(){const m=document.getElementById('mobileMenu'),b=document.getElementById('hamburger');m.classList.toggle('open');b.classList.toggle('open');}
+function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');}
+document.addEventListener('click',e=>{const m=document.getElementById('mobileMenu'),b=document.getElementById('hamburger');if(!m.contains(e.target)&&!b.contains(e.target))closeMenu();});
+
+// ── DOMAIN TABS ──
+function showDomain(n,btn){
+  document.querySelectorAll('.domain-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.domain-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('domain-'+n).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── TOPIC CARDS ──
+function toggleTopic(card){
+  const open=card.classList.contains('expanded');
+  card.closest('.topics-grid').querySelectorAll('.topic-card.expanded').forEach(c=>c.classList.remove('expanded'));
+  if(!open)card.classList.add('expanded');
+}
+
+// ── CHEAT SHEET ──
+function showCheat(id,btn){
+  document.querySelectorAll('.cheat-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.cheat-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('cheat-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── QUIZ DATA ──
+const QDB={
+  d1:[
+    {q:"A company's server is valued at $500,000. A fire could damage 40% of it. What is the SLE?",o:["$200,000","$500,000","$125,000","$40,000"],a:0,e:"SLE = Asset Value × Exposure Factor. $500,000 × 0.40 = $200,000."},
+    {q:"Which BEST describes 'due diligence' in security management?",o:["Implementing minimum required controls","Continuously researching to maintain due care","Signing security policies","Purchasing cyber insurance"],a:1,e:"Due diligence = ongoing research and planning to ensure security practices remain appropriate. Due care = doing what a reasonable person would do."},
+    {q:"ISC² Code of Ethics — which canon has the HIGHEST priority?",o:["Act honorably and justly","Provide competent service","Protect society and the common good","Advance the security profession"],a:2,e:"Priority order: (1) Protect society, (2) Act honorably, (3) Provide competent service, (4) Advance profession. Society always comes first."},
+    {q:"Which framework uses: Identify, Protect, Detect, Respond, Recover?",o:["ISO 27001","COBIT","NIST Cybersecurity Framework","ITIL"],a:2,e:"NIST CSF organizes security into 5 core functions: Identify, Protect, Detect, Respond, Recover."},
+    {q:"What is the PRIMARY difference between BCP and DRP?",o:["BCP = IT systems; DRP = business","BCP = maintains operations; DRP = restores IT","BCP is tested; DRP is not","BCP covers fire; DRP covers floods"],a:1,e:"BCP maintains business operations during disruption (long-term, business-wide). DRP restores IT systems (tactical, IT-focused). DRP is a subset of BCP."},
+  ],
+  d2:[
+    {q:"Who is PRIMARILY responsible for determining data classification level?",o:["Data Custodian","IT Administrator","Data Owner","CISO"],a:2,e:"The Data Owner (senior business manager) determines classification. The Data Custodian (IT) implements the technical controls required by the owner."},
+    {q:"Which data destruction method provides HIGHEST assurance?",o:["Overwriting 7 times","Degaussing","Physical destruction (shredding)","Formatting"],a:2,e:"Physical destruction (shredding, incineration) provides highest assurance. Degaussing only works on magnetic media. Overwriting is effective for HDDs but not SSDs."},
+    {q:"Under GDPR, organizations must report a breach within what timeframe?",o:["24 hours","48 hours","72 hours","7 days"],a:2,e:"GDPR Article 33 requires notification within 72 hours of becoming aware of a personal data breach."},
+    {q:"'Crypto-shredding' is used primarily for what purpose?",o:["Physically destroying encrypted drives","Rendering encrypted data unrecoverable by destroying keys","Shredding documents with encryption keys","Secure key exchange"],a:1,e:"Crypto-shredding renders data unrecoverable by deleting the encryption keys. Especially useful for cloud where physical destruction isn't possible."},
+  ],
+  d3:[
+    {q:"Bell-LaPadula protects CONFIDENTIALITY. Which rule prevents writing to lower levels?",o:["Simple Security Property","Star Property (*)","Strong Star Property","Discretionary Security Property"],a:1,e:"The Star Property (*) = 'No Write Down'. Prevents writing classified information to lower classification levels. Simple Security Property = 'No Read Up'."},
+    {q:"What is the PRIMARY advantage of ECC over RSA?",o:["ECC is faster in software","ECC provides same security with smaller keys","ECC supports more modes","ECC is quantum-resistant"],a:1,e:"ECC provides equivalent security to RSA with much smaller key sizes. 256-bit ECC ≈ 3072-bit RSA. Ideal for mobile, IoT, and constrained environments."},
+    {q:"A system defaults to 'access denied' when it fails. Which principle is this?",o:["Separation of privilege","Least common mechanism","Fail Secure","Economy of mechanism"],a:2,e:"Fail Secure ensures a system defaults to a denied/locked state when it fails. This prevents a system failure from inadvertently granting unauthorized access."},
+    {q:"Common Criteria EAL7 means what?",o:["Functionally tested","Methodically tested","Formally verified (mathematical proof)","Highest commercially feasible"],a:2,e:"EAL7 = highest assurance level in Common Criteria. Requires formal mathematical verification. EAL4 is the highest commercially feasible level."},
+  ],
+  d4:[
+    {q:"Which wireless encryption is BROKEN and should never be used?",o:["WPA2-AES","WPA3","WPA2-TKIP","WEP"],a:3,e:"WEP is completely broken due to RC4 misuse and weak IV. Can be cracked in minutes. Always use WPA2-AES or WPA3."},
+    {q:"What does 802.1X provide?",o:["Wireless data encryption","Port-based Network Access Control","VPN tunneling","DNS security"],a:1,e:"IEEE 802.1X provides port-based NAC. Uses EAP to authenticate supplicants to an authentication server (RADIUS) via an authenticator (switch/AP)."},
+    {q:"An attacker intercepts traffic and forwards it later to gain access. What is this?",o:["Man-in-the-Middle","Replay attack","Session hijacking","DoS"],a:1,e:"Replay attack = capturing valid authentication data and replaying it later. Prevention: timestamps, nonces, sequence numbers."},
+    {q:"IPSec ESP provides which of the following?",o:["Authentication only","Encryption only","Authentication + integrity + encryption","Key exchange only"],a:2,e:"ESP provides encryption + authentication + integrity. AH provides only authentication and integrity (no encryption). Use ESP when you need confidentiality."},
+  ],
+  d5:[
+    {q:"A fingerprint scanner rejects the correct user 15% of the time. This is the:",o:["FAR","CER","FRR","EER"],a:2,e:"FRR (False Rejection Rate) = Type I Error = legitimate user incorrectly rejected. FAR = unauthorized user accepted. FRR is a usability issue; FAR is the security concern."},
+    {q:"Password + PIN = is this MFA?",o:["Yes, because two factors are used","No, both are 'something you know'","Yes, because they are different inputs","No, MFA requires biometrics"],a:1,e:"MFA requires factors from DIFFERENT categories. Password and PIN are both 'something you know' = single factor. Password + OTP token = MFA (know + have)."},
+    {q:"Which access control model uses system-enforced sensitivity labels?",o:["DAC","RBAC","MAC","ABAC"],a:2,e:"MAC (Mandatory Access Control) uses system-enforced labels. Users cannot override. Used in government/military. Most secure, least flexible."},
+    {q:"What is Kerberos used for?",o:["Encrypting network traffic","Ticket-based Single Sign-On authentication","Digital certificate management","Wireless authentication"],a:1,e:"Kerberos is a ticket-based SSO protocol. KDC issues TGT, which is used to get service tickets. Port 88. Used in Active Directory environments."},
+  ],
+  d6:[
+    {q:"What is the key difference between vulnerability scanning and pen testing?",o:["VA uses vendor tools; PT doesn't","VA identifies weaknesses; PT actively exploits them","PT is automated; VA is manual","VA tests physical; PT tests logical"],a:1,e:"Vulnerability scanning identifies potential weaknesses (non-invasive). Penetration testing actively exploits vulnerabilities to demonstrate real impact."},
+    {q:"A tester is given full knowledge of systems before starting. What type of test?",o:["Black box","Gray box","White box","Double-blind"],a:2,e:"White box (crystal box) = full prior knowledge. Most thorough and efficient. Black box = no knowledge. Gray box = partial knowledge."},
+    {q:"What does MTTR measure?",o:["Time between failures","Time to detect an incident","Time to repair/restore a system","Time to complete a test"],a:2,e:"MTTR = Mean Time To Repair/Restore. The average time needed to restore a system after failure. Availability = MTBF ÷ (MTBF + MTTR)."},
+    {q:"SOC 2 Type II is MOST appropriate when assessing what?",o:["Financial statement accuracy","Control design at a point in time","Operating effectiveness of controls over time","Physical security of a data center"],a:2,e:"SOC 2 Type II evaluates the operating effectiveness of controls over a period (6-12 months). Type I only evaluates design at a point in time."},
+  ],
+  d7:[
+    {q:"During incident response, what is the FIRST priority after detecting an incident?",o:["Collect forensic evidence","Notify law enforcement","Contain the incident","Identify the attacker"],a:2,e:"Containment is the immediate priority — stop the damage from spreading. Evidence collection is important but secondary to stopping the incident."},
+    {q:"What is 'order of volatility' in digital forensics?",o:["Order to notify stakeholders","Priority to collect evidence from most to least volatile","Order to patch vulnerabilities","Sequence to restore systems"],a:1,e:"Order of volatility = collect most volatile evidence first: CPU registers → RAM → swap → disk → remote logs. Most volatile data disappears fastest."},
+    {q:"Hot site vs Cold site — what is the PRIMARY difference?",o:["Hot sites are more secure","Hot site = immediate availability; cold site = days/weeks","Cold sites are cheaper and not worth using","Hot sites don't need testing"],a:1,e:"Hot site = fully operational, immediate failover, most expensive. Cold site = just space + power, days/weeks to activate, cheapest."},
+    {q:"What is the purpose of chain of custody?",o:["Speed up forensic analysis","Document who handled evidence and when","Encrypt evidence during transport","Verify forensic tool accuracy"],a:1,e:"Chain of custody documents every person who handles evidence and when. Required for evidence admissibility in legal proceedings."},
+  ],
+  d8:[
+    {q:"Which OWASP vulnerability occurs when user input is treated as code?",o:["Broken Authentication","Injection","Security Misconfiguration","SSRF"],a:1,e:"Injection (SQL, XSS, command) occurs when untrusted data is sent to an interpreter as part of a command. Prevention: parameterized queries, input validation."},
+    {q:"A developer provides random malformed input to find vulnerabilities. This is:",o:["Regression testing","Unit testing","Fuzzing","Mutation testing"],a:2,e:"Fuzzing = providing random/unexpected/malformed input to discover crashes and vulnerabilities. Effective at finding input validation flaws and buffer overflows."},
+    {q:"Which tests SOURCE CODE without executing it?",o:["DAST","IAST","SAST","Pen testing"],a:2,e:"SAST (Static Application Security Testing) analyzes source code without executing it. DAST tests the running application. SAST finds issues earlier and cheaper."},
+    {q:"'Shift-left' in DevSecOps means:",o:["Moving security to a different team","Integrating security earlier in the SDLC","Moving security testing to production","Security is less important in early phases"],a:1,e:"Shift-left = integrate security earlier (to the left on the timeline). Finding bugs during design/coding is 100x cheaper than finding them in production."},
+  ]
+};
+QDB.all=[...QDB.d1,...QDB.d2,...QDB.d3,...QDB.d4,...QDB.d5,...QDB.d6,...QDB.d7,...QDB.d8].sort(()=>Math.random()-.5).slice(0,15);
+
+let currQ=0,score=0,answered=false,currSet=[];
+
+function loadQuiz(domain,btn){
+  document.querySelectorAll('.quiz-filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  currSet=[...(QDB[domain]||QDB.all)].sort(()=>Math.random()-.5);
+  currQ=0;score=0;answered=false;
+  document.getElementById('quizScore').classList.remove('show');
+  document.getElementById('quizCard').style.display='block';
+  renderQ();
+}
+
+function renderQ(){
+  if(currQ>=currSet.length){showScore();return;}
+  answered=false;
+  const q=currSet[currQ];
+  document.getElementById('quizQNum').textContent=`Question ${currQ+1}`;
+  document.getElementById('quizQ').textContent=q.q;
+  document.getElementById('quizOpts').innerHTML=q.o.map((o,i)=>`<button class="quiz-option" onclick="selectA(${i})" data-i="${i}"><span class="opt-key">${'ABCD'[i]}</span>${o}</button>`).join('');
+  document.getElementById('quizExp').classList.remove('show');
+  document.getElementById('quizExp').innerHTML='';
+  document.getElementById('quizFeedback').textContent='';
+  document.getElementById('quizNext').style.display='none';
+  document.getElementById('quizFill').style.width=(currQ/currSet.length*100)+'%';
+  document.getElementById('quizMeta').textContent=`Q ${currQ+1} of ${currSet.length}`;
+}
+
+function selectA(i){
+  if(answered)return;
+  answered=true;
+  const q=currSet[currQ],opts=document.querySelectorAll('.quiz-option');
+  opts.forEach(o=>o.disabled=true);
+  opts[i].classList.add(i===q.a?'correct':'incorrect');
+  if(i!==q.a)opts[q.a].classList.add('revealed');
+  const fb=document.getElementById('quizFeedback');
+  if(i===q.a){score++;fb.textContent='✓ Correct';fb.style.color='var(--green)';}
+  else{fb.textContent='✗ Incorrect';fb.style.color='var(--red)';}
+  const exp=document.getElementById('quizExp');
+  exp.innerHTML=`<strong>Explanation:</strong> ${q.e}`;
+  exp.classList.add('show');
+  document.getElementById('quizNext').style.display='inline-flex';
+}
+
+function nextQ(){currQ++;renderQ();}
+
+function showScore(){
+  document.getElementById('quizCard').style.display='none';
+  const sc=document.getElementById('quizScore');
+  sc.classList.add('show');
+  const pct=Math.round(score/currSet.length*100);
+  document.getElementById('scoreNum').textContent=pct+'%';
+  document.getElementById('scoreRing').style.background=`conic-gradient(${pct>=70?'var(--green)':'var(--red)'} ${pct}%, var(--border-muted) 0%)`;
+  document.getElementById('scoreTitle').textContent=pct>=80?'Excellent work! 🏆':pct>=60?'Good progress! 📚':'Keep studying! 💪';
+  document.getElementById('scoreMsg').textContent=`You answered ${score} of ${currSet.length} questions correctly (${pct}%).${pct<70?' Review the explanations for missed questions and try again.':' You are on track for this domain.'}`;
+}
+
+function restartQuiz(){
+  document.getElementById('quizScore').classList.remove('show');
+  document.getElementById('quizCard').style.display='block';
+  currSet=[...currSet].sort(()=>Math.random()-.5);
+  currQ=0;score=0;
+  renderQ();
+}
+
+// ── SECURITY NEWS FEED ──
+// Three fallback APIs to handle CORS in all environments (local preview, GitHub Pages, etc.)
+const THN_RSS = 'https://feeds.feedburner.com/TheHackersNews';
+
+const NEWS_APIS = [
+  // API 1: rss2json — most reliable, no CORS issues
+  {
+    url: `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(THN_RSS)}&count=12`,
+    parse: async (res) => {
+      const d = await res.json();
+      if(d.status !== 'ok' || !d.items?.length) throw new Error('bad');
+      return d.items.map(i => ({title:i.title, link:i.link, desc:i.description||'', date:i.pubDate}));
+    }
+  },
+  // API 2: allorigins proxy — CORS-safe XML proxy
+  {
+    url: `https://api.allorigins.win/get?url=${encodeURIComponent(THN_RSS)}`,
+    parse: async (res) => {
+      const d = await res.json();
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(d.contents, 'text/xml');
+      const items = [...xml.querySelectorAll('item')];
+      if(!items.length) throw new Error('bad');
+      return items.slice(0,12).map(i => ({
+        title: i.querySelector('title')?.textContent || '',
+        link: i.querySelector('link')?.textContent || '',
+        desc: i.querySelector('description')?.textContent || '',
+        date: i.querySelector('pubDate')?.textContent || ''
+      }));
+    }
+  },
+  // API 3: corsproxy.io — another public CORS proxy
+  {
+    url: `https://corsproxy.io/?${encodeURIComponent(THN_RSS)}`,
+    parse: async (res) => {
+      const text = await res.text();
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(text, 'text/xml');
+      const items = [...xml.querySelectorAll('item')];
+      if(!items.length) throw new Error('bad');
+      return items.slice(0,12).map(i => ({
+        title: i.querySelector('title')?.textContent || '',
+        link: i.querySelector('link')?.textContent || '',
+        desc: i.querySelector('description')?.textContent || '',
+        date: i.querySelector('pubDate')?.textContent || ''
+      }));
+    }
+  }
+];
+
+function tagFromTitle(title){
+  const t = title.toLowerCase();
+  if(t.includes('breach')||t.includes('leak')||t.includes('stolen')||t.includes('exposed')||t.includes('hack'))return{label:'Breach',cls:'breach'};
+  if(t.includes('malware')||t.includes('ransomware')||t.includes('trojan')||t.includes('backdoor')||t.includes('rat '))return{label:'Malware',cls:'malware'};
+  if(t.includes('vulnerabilit')||t.includes('cve')||t.includes('zero-day')||t.includes('patch')||t.includes('flaw'))return{label:'Vulnerability',cls:'vuln'};
+  return{label:'News',cls:'news'};
+}
+
+function timeAgo(dateStr){
+  const diff=Math.floor((Date.now()-new Date(dateStr))/1000);
+  if(diff<60)return 'just now';
+  if(diff<3600)return Math.floor(diff/60)+'m ago';
+  if(diff<86400)return Math.floor(diff/3600)+'h ago';
+  return Math.floor(diff/86400)+'d ago';
+}
+
+function stripHtml(html){
+  const t=document.createElement('div');
+  t.innerHTML=html;
+  return (t.textContent||t.innerText||'').trim();
+}
+
+function renderNewsItems(items){
+  const grid=document.getElementById('newsGrid');
+  const status=document.getElementById('newsStatus');
+  grid.innerHTML='';
+  items.forEach(item=>{
+    const tag=tagFromTitle(item.title);
+    const desc=stripHtml(item.desc).substring(0,130)+'…';
+    const card=document.createElement('a');
+    card.className='news-card';
+    card.href=item.link;
+    card.target='_blank';
+    card.rel='noopener noreferrer';
+    card.innerHTML=`
+      <div class="news-card-tag ${tag.cls}">${tag.label}</div>
+      <div class="news-card-title">${item.title}</div>
+      <div class="news-card-desc">${desc}</div>
+      <div class="news-card-meta">
+        <span>${item.date ? timeAgo(item.date) : ''}</span>
+        <span class="news-card-arrow">Read →</span>
+      </div>`;
+    grid.appendChild(card);
+  });
+  status.innerHTML='<span class="news-live-dot"></span> Live · '+items.length+' stories loaded';
+  document.getElementById('newsLastUpdated').textContent='Updated '+new Date().toLocaleTimeString();
+}
+
+async function loadNews(){
+  const grid=document.getElementById('newsGrid');
+  const status=document.getElementById('newsStatus');
+  grid.innerHTML='<div class="news-skeleton"></div>'.repeat(6);
+  status.innerHTML='<span class="news-live-dot"></span> Fetching latest stories...';
+
+  // Try each API in order until one works
+  for(let i=0; i<NEWS_APIS.length; i++){
+    try{
+      const res = await fetch(NEWS_APIS[i].url, {cache:'no-cache'});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const items = await NEWS_APIS[i].parse(res);
+      renderNewsItems(items);
+      return; // success — stop trying
+    }catch(e){
+      console.warn('News API '+(i+1)+' failed:', e.message);
+      // continue to next API
+    }
+  }
+
+  // All APIs failed — show friendly fallback with embedded headlines
+  const fallbackHeadlines = [
+    {title:'Visit The Hacker News for latest security breach news', link:'https://thehackernews.com', tag:'news'},
+    {title:'CISA Known Exploited Vulnerabilities Catalog', link:'https://www.cisa.gov/known-exploited-vulnerabilities-catalog', tag:'vuln'},
+    {title:'Krebs on Security — latest breach coverage', link:'https://krebsonsecurity.com', tag:'breach'},
+    {title:'Bleeping Computer — ransomware and malware news', link:'https://bleepingcomputer.com', tag:'malware'},
+    {title:'Dark Reading — enterprise security news', link:'https://darkreading.com', tag:'news'},
+    {title:'SecurityWeek — information security news', link:'https://securityweek.com', tag:'news'},
+  ];
+  grid.innerHTML='';
+  fallbackHeadlines.forEach(h=>{
+    const card=document.createElement('a');
+    card.className='news-card';
+    card.href=h.link;
+    card.target='_blank';
+    card.rel='noopener noreferrer';
+    card.innerHTML=`
+      <div class="news-card-tag ${h.tag}">${h.tag.charAt(0).toUpperCase()+h.tag.slice(1)}</div>
+      <div class="news-card-title">${h.title}</div>
+      <div class="news-card-desc">Click to visit this security news source directly for the latest stories.</div>
+      <div class="news-card-meta"><span>External link</span><span class="news-card-arrow">Visit →</span></div>`;
+    grid.appendChild(card);
+  });
+  const dot='<span style="width:7px;height:7px;border-radius:50%;background:var(--orange);display:inline-block;"></span>';
+  status.innerHTML=dot+' Live feed unavailable — showing direct links';
+  document.getElementById('newsLastUpdated').textContent='Tip: feed loads fully on GitHub Pages';
+}
+
+loadNews();
+setInterval(loadNews, 5*60*1000); // auto-refresh every 5 minutes
+
+loadQuiz('all',null);
+
+// ── KEYBOARD SHORTCUTS ──
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  if(['a','b','c','d'].includes(e.key.toLowerCase())&&!answered){
+    const i='abcd'.indexOf(e.key.toLowerCase());
+    const opts=document.querySelectorAll('.quiz-option');
+    if(opts[i]&&!opts[i].disabled)selectA(i);
+  }
+  if(e.key==='Enter'&&answered)nextQ();
+});
+</script>
+
+<!-- iOS Install Banner -->
+<div id="iosBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#1f2328;color:#fff;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;box-shadow:0 -4px 20px rgba(0,0,0,.25);">
+  <div style="display:flex;align-items:center;gap:.75rem;">
+    <img src="icons/icon-96.png" width="40" height="40" style="border-radius:10px;" alt="App icon">
+    <div>
+      <div style="font-family:Inter,sans-serif;font-weight:600;font-size:.88rem;">Install CISSP MasterGuide</div>
+      <div style="font-family:JetBrains Mono,monospace;font-size:.72rem;color:#9198a1;margin-top:2px;">Tap <strong style="color:#54aeff;">Share</strong> → <strong style="color:#54aeff;">Add to Home Screen</strong></div>
+    </div>
+  </div>
+  <button onclick="document.getElementById('iosBanner').style.display='none';localStorage.setItem('pwa_banner_dismissed','1');" style="background:transparent;border:1px solid #444;color:#9198a1;padding:4px 12px;border-radius:6px;cursor:pointer;font-family:Inter,sans-serif;font-size:.78rem;white-space:nowrap;flex-shrink:0;">✕ Dismiss</button>
+</div>
+
+<!-- PWA Service Worker Registration -->
+<script>
+// Register service worker
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('[PWA] Service worker registered:', reg.scope))
+      .catch(err => console.log('[PWA] Registration failed:', err));
+  });
+}
+
+// Android — show native install prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Show a custom install button if you want — optional
+  const btn = document.createElement('button');
+  btn.textContent = '📲 Install App';
+  btn.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:9999;background:#0969da;color:#fff;border:none;padding:10px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;box-shadow:0 4px 12px rgba(9,105,218,.4);';
+  btn.id = 'androidInstallBtn';
+  btn.onclick = () => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(result => {
+      console.log('[PWA] Install result:', result.outcome);
+      btn.remove();
+    });
+  };
+  document.body.appendChild(btn);
+});
+
+// iOS — show banner if not already installed and not dismissed
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+const dismissed = localStorage.getItem('pwa_banner_dismissed');
+
+if(isIOS && !isStandalone && !dismissed){
+  const banner = document.getElementById('iosBanner');
+  if(banner) setTimeout(() => banner.style.display='flex', 2000);
+}
+</script>
+</body>
+</html>
