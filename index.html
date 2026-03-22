@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CISSP MasterGuide — Complete Self-Study Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0969da">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="CISSP Guide">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
 <style>
 :root {
   --bg: #ffffff;
@@ -210,6 +221,33 @@ footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2r
 .footer-logo{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.85rem;color:var(--text);}
 .footer-note{font-size:.75rem;color:var(--text-muted);}
 
+/* ── NEWS SECTION ── */
+.news-section{background:var(--bg);border-bottom:1px solid var(--border);}
+.news-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.news-status{display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-muted);}
+.news-live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livePulse 2s infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.85);}}
+.news-refresh-btn{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;padding:4px 10px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg-subtle);color:var(--text-muted);cursor:pointer;transition:all .15s;}
+.news-refresh-btn:hover{border-color:var(--blue-border);color:var(--blue);}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.75rem;margin-bottom:1rem;}
+.news-card{background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.1rem;text-decoration:none;display:flex;flex-direction:column;gap:.5rem;transition:all .15s;animation:fadeUp .3s ease;}
+.news-card:hover{border-color:var(--blue-border);box-shadow:var(--shadow-sm);background:var(--bg);}
+.news-card-tag{display:inline-flex;align-items:center;gap:.3rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:500;padding:2px 7px;border-radius:20px;width:fit-content;}
+.news-card-tag.breach{background:var(--red-light);color:var(--red);border:1px solid #f5c6cb;}
+.news-card-tag.malware{background:var(--orange-light);color:var(--orange);border:1px solid #fcd7b0;}
+.news-card-tag.vuln{background:var(--purple-light);color:var(--purple);border:1px solid #d8b4fe;}
+.news-card-tag.news{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-border);}
+.news-card-title{font-size:.85rem;font-weight:600;color:var(--text);line-height:1.45;}
+.news-card-desc{font-size:.78rem;color:var(--text-muted);line-height:1.55;flex:1;}
+.news-card-meta{display:flex;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-light);margin-top:.25rem;}
+.news-card-arrow{color:var(--blue);font-size:.75rem;}
+.news-skeleton{background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.1rem;height:140px;animation:shimmer 1.5s infinite linear;}
+@keyframes shimmer{0%{opacity:.6;}50%{opacity:1;}100%{opacity:.6;}}
+.news-error{background:var(--red-light);border:1px solid #f5c6cb;border-radius:var(--radius-lg);padding:1rem 1.25rem;font-size:.85rem;color:var(--red);grid-column:1/-1;}
+.news-footer-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;font-size:.75rem;color:var(--text-muted);}
+.news-footer-bar a{color:var(--blue);text-decoration:none;}
+.news-footer-bar a:hover{text-decoration:underline;}
+
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
   .hero-inner{grid-template-columns:1fr;gap:2rem;}
@@ -257,6 +295,7 @@ footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2r
       <li><a href="#practice">Practice Tests</a></li>
       <li><a href="cissp-flashcards.html">Flashcards</a></li>
       <li><a href="cissp-exam-prep.html" style="color:var(--red);font-weight:600;">Exam Prep Tests</a></li>
+      <li><a href="#news">Security News</a></li>
     </ul>
     <div class="nav-right">
       <span class="nav-badge">2024 Updated</span>
@@ -276,6 +315,7 @@ footer{background:var(--bg-subtle);border-top:1px solid var(--border);padding:2r
   <a href="#practice" onclick="closeMenu()">Practice Tests</a>
   <a href="cissp-flashcards.html">Flashcards</a>
   <a href="cissp-exam-prep.html" style="color:var(--red);font-weight:600;">Exam Prep Tests</a>
+  <a href="#news" onclick="closeMenu()">Security News</a>
 </div>
 
 <!-- HERO -->
@@ -1078,6 +1118,39 @@ A — Advance (the profession)</div><div class="cheat-item"><em>Mnemonic: "She H
   </div>
 </section>
 
+<!-- SECURITY NEWS -->
+<section class="section news-section" id="news">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">// live_security_news</div>
+      <div class="section-title">Latest Security Breaches &amp; Threats</div>
+      <div class="section-desc">Live feed from The Hacker News — updated automatically. Click any headline to read the full story.</div>
+    </div>
+
+    <div class="news-toolbar">
+      <div class="news-status" id="newsStatus">
+        <span class="news-live-dot"></span> Loading feed...
+      </div>
+      <button class="news-refresh-btn" onclick="loadNews()">↺ Refresh</button>
+    </div>
+
+    <div class="news-grid" id="newsGrid">
+      <!-- skeleton placeholders -->
+      <div class="news-skeleton"></div>
+      <div class="news-skeleton"></div>
+      <div class="news-skeleton"></div>
+      <div class="news-skeleton"></div>
+      <div class="news-skeleton"></div>
+      <div class="news-skeleton"></div>
+    </div>
+
+    <div class="news-footer-bar">
+      <span class="news-source-credit">Source: <a href="https://thehackernews.com" target="_blank" rel="noopener">The Hacker News</a> via RSS · <a href="https://feeds.feedburner.com/TheHackersNews" target="_blank" rel="noopener">RSS Feed</a></span>
+      <span id="newsLastUpdated" style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-light);"></span>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -1236,6 +1309,155 @@ function restartQuiz(){
   renderQ();
 }
 
+// ── SECURITY NEWS FEED ──
+// Three fallback APIs to handle CORS in all environments (local preview, GitHub Pages, etc.)
+const THN_RSS = 'https://feeds.feedburner.com/TheHackersNews';
+
+const NEWS_APIS = [
+  // API 1: rss2json — most reliable, no CORS issues
+  {
+    url: `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(THN_RSS)}&count=12`,
+    parse: async (res) => {
+      const d = await res.json();
+      if(d.status !== 'ok' || !d.items?.length) throw new Error('bad');
+      return d.items.map(i => ({title:i.title, link:i.link, desc:i.description||'', date:i.pubDate}));
+    }
+  },
+  // API 2: allorigins proxy — CORS-safe XML proxy
+  {
+    url: `https://api.allorigins.win/get?url=${encodeURIComponent(THN_RSS)}`,
+    parse: async (res) => {
+      const d = await res.json();
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(d.contents, 'text/xml');
+      const items = [...xml.querySelectorAll('item')];
+      if(!items.length) throw new Error('bad');
+      return items.slice(0,12).map(i => ({
+        title: i.querySelector('title')?.textContent || '',
+        link: i.querySelector('link')?.textContent || '',
+        desc: i.querySelector('description')?.textContent || '',
+        date: i.querySelector('pubDate')?.textContent || ''
+      }));
+    }
+  },
+  // API 3: corsproxy.io — another public CORS proxy
+  {
+    url: `https://corsproxy.io/?${encodeURIComponent(THN_RSS)}`,
+    parse: async (res) => {
+      const text = await res.text();
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(text, 'text/xml');
+      const items = [...xml.querySelectorAll('item')];
+      if(!items.length) throw new Error('bad');
+      return items.slice(0,12).map(i => ({
+        title: i.querySelector('title')?.textContent || '',
+        link: i.querySelector('link')?.textContent || '',
+        desc: i.querySelector('description')?.textContent || '',
+        date: i.querySelector('pubDate')?.textContent || ''
+      }));
+    }
+  }
+];
+
+function tagFromTitle(title){
+  const t = title.toLowerCase();
+  if(t.includes('breach')||t.includes('leak')||t.includes('stolen')||t.includes('exposed')||t.includes('hack'))return{label:'Breach',cls:'breach'};
+  if(t.includes('malware')||t.includes('ransomware')||t.includes('trojan')||t.includes('backdoor')||t.includes('rat '))return{label:'Malware',cls:'malware'};
+  if(t.includes('vulnerabilit')||t.includes('cve')||t.includes('zero-day')||t.includes('patch')||t.includes('flaw'))return{label:'Vulnerability',cls:'vuln'};
+  return{label:'News',cls:'news'};
+}
+
+function timeAgo(dateStr){
+  const diff=Math.floor((Date.now()-new Date(dateStr))/1000);
+  if(diff<60)return 'just now';
+  if(diff<3600)return Math.floor(diff/60)+'m ago';
+  if(diff<86400)return Math.floor(diff/3600)+'h ago';
+  return Math.floor(diff/86400)+'d ago';
+}
+
+function stripHtml(html){
+  const t=document.createElement('div');
+  t.innerHTML=html;
+  return (t.textContent||t.innerText||'').trim();
+}
+
+function renderNewsItems(items){
+  const grid=document.getElementById('newsGrid');
+  const status=document.getElementById('newsStatus');
+  grid.innerHTML='';
+  items.forEach(item=>{
+    const tag=tagFromTitle(item.title);
+    const desc=stripHtml(item.desc).substring(0,130)+'…';
+    const card=document.createElement('a');
+    card.className='news-card';
+    card.href=item.link;
+    card.target='_blank';
+    card.rel='noopener noreferrer';
+    card.innerHTML=`
+      <div class="news-card-tag ${tag.cls}">${tag.label}</div>
+      <div class="news-card-title">${item.title}</div>
+      <div class="news-card-desc">${desc}</div>
+      <div class="news-card-meta">
+        <span>${item.date ? timeAgo(item.date) : ''}</span>
+        <span class="news-card-arrow">Read →</span>
+      </div>`;
+    grid.appendChild(card);
+  });
+  status.innerHTML='<span class="news-live-dot"></span> Live · '+items.length+' stories loaded';
+  document.getElementById('newsLastUpdated').textContent='Updated '+new Date().toLocaleTimeString();
+}
+
+async function loadNews(){
+  const grid=document.getElementById('newsGrid');
+  const status=document.getElementById('newsStatus');
+  grid.innerHTML='<div class="news-skeleton"></div>'.repeat(6);
+  status.innerHTML='<span class="news-live-dot"></span> Fetching latest stories...';
+
+  // Try each API in order until one works
+  for(let i=0; i<NEWS_APIS.length; i++){
+    try{
+      const res = await fetch(NEWS_APIS[i].url, {cache:'no-cache'});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const items = await NEWS_APIS[i].parse(res);
+      renderNewsItems(items);
+      return; // success — stop trying
+    }catch(e){
+      console.warn('News API '+(i+1)+' failed:', e.message);
+      // continue to next API
+    }
+  }
+
+  // All APIs failed — show friendly fallback with embedded headlines
+  const fallbackHeadlines = [
+    {title:'Visit The Hacker News for latest security breach news', link:'https://thehackernews.com', tag:'news'},
+    {title:'CISA Known Exploited Vulnerabilities Catalog', link:'https://www.cisa.gov/known-exploited-vulnerabilities-catalog', tag:'vuln'},
+    {title:'Krebs on Security — latest breach coverage', link:'https://krebsonsecurity.com', tag:'breach'},
+    {title:'Bleeping Computer — ransomware and malware news', link:'https://bleepingcomputer.com', tag:'malware'},
+    {title:'Dark Reading — enterprise security news', link:'https://darkreading.com', tag:'news'},
+    {title:'SecurityWeek — information security news', link:'https://securityweek.com', tag:'news'},
+  ];
+  grid.innerHTML='';
+  fallbackHeadlines.forEach(h=>{
+    const card=document.createElement('a');
+    card.className='news-card';
+    card.href=h.link;
+    card.target='_blank';
+    card.rel='noopener noreferrer';
+    card.innerHTML=`
+      <div class="news-card-tag ${h.tag}">${h.tag.charAt(0).toUpperCase()+h.tag.slice(1)}</div>
+      <div class="news-card-title">${h.title}</div>
+      <div class="news-card-desc">Click to visit this security news source directly for the latest stories.</div>
+      <div class="news-card-meta"><span>External link</span><span class="news-card-arrow">Visit →</span></div>`;
+    grid.appendChild(card);
+  });
+  const dot='<span style="width:7px;height:7px;border-radius:50%;background:var(--orange);display:inline-block;"></span>';
+  status.innerHTML=dot+' Live feed unavailable — showing direct links';
+  document.getElementById('newsLastUpdated').textContent='Tip: feed loads fully on GitHub Pages';
+}
+
+loadNews();
+setInterval(loadNews, 5*60*1000); // auto-refresh every 5 minutes
+
 loadQuiz('all',null);
 
 // ── KEYBOARD SHORTCUTS ──
@@ -1248,6 +1470,60 @@ document.addEventListener('keydown',e=>{
   }
   if(e.key==='Enter'&&answered)nextQ();
 });
+</script>
+
+<!-- iOS Install Banner -->
+<div id="iosBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#1f2328;color:#fff;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;box-shadow:0 -4px 20px rgba(0,0,0,.25);">
+  <div style="display:flex;align-items:center;gap:.75rem;">
+    <img src="icons/icon-96.png" width="40" height="40" style="border-radius:10px;" alt="App icon">
+    <div>
+      <div style="font-family:Inter,sans-serif;font-weight:600;font-size:.88rem;">Install CISSP MasterGuide</div>
+      <div style="font-family:JetBrains Mono,monospace;font-size:.72rem;color:#9198a1;margin-top:2px;">Tap <strong style="color:#54aeff;">Share</strong> → <strong style="color:#54aeff;">Add to Home Screen</strong></div>
+    </div>
+  </div>
+  <button onclick="document.getElementById('iosBanner').style.display='none';localStorage.setItem('pwa_banner_dismissed','1');" style="background:transparent;border:1px solid #444;color:#9198a1;padding:4px 12px;border-radius:6px;cursor:pointer;font-family:Inter,sans-serif;font-size:.78rem;white-space:nowrap;flex-shrink:0;">✕ Dismiss</button>
+</div>
+
+<!-- PWA Service Worker Registration -->
+<script>
+// Register service worker
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('[PWA] Service worker registered:', reg.scope))
+      .catch(err => console.log('[PWA] Registration failed:', err));
+  });
+}
+
+// Android — show native install prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Show a custom install button if you want — optional
+  const btn = document.createElement('button');
+  btn.textContent = '📲 Install App';
+  btn.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:9999;background:#0969da;color:#fff;border:none;padding:10px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;box-shadow:0 4px 12px rgba(9,105,218,.4);';
+  btn.id = 'androidInstallBtn';
+  btn.onclick = () => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(result => {
+      console.log('[PWA] Install result:', result.outcome);
+      btn.remove();
+    });
+  };
+  document.body.appendChild(btn);
+});
+
+// iOS — show banner if not already installed and not dismissed
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+const dismissed = localStorage.getItem('pwa_banner_dismissed');
+
+if(isIOS && !isStandalone && !dismissed){
+  const banner = document.getElementById('iosBanner');
+  if(banner) setTimeout(() => banner.style.display='flex', 2000);
+}
 </script>
 </body>
 </html>
